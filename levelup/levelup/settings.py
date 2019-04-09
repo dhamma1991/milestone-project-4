@@ -27,7 +27,8 @@ SECRET_KEY = 'u=c$91$odb_%@gqz8f*e!t@d^agj!xxg9znsdl%5gg5*)k7-z)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get('C9_HOSTNAME')]
+ALLOWED_HOSTS = [os.environ.get('C9_HOSTNAME'),
+                'simple-django-based-todo-app.herokuapp.com',]
 
 
 # Application definition
