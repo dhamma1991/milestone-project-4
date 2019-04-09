@@ -1,1 +1,1 @@
-web: gunicorn levelup.wsgi:application
+web: gunicorn levelup.levelup.wsgi:application
