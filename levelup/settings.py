@@ -14,6 +14,13 @@ import os
 # Allow parsing of database urls
 import dj_database_url
 
+# If there is a environment variable called development, create a variable called development and set it to true
+if os.environ.get('DEVELOPMENT'):
+    # This will tell the program it is in a dev environment. If that's the case, turn production settings, like the database url specific to heroku
+    development = True
+else:
+    development = False
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -28,7 +35,7 @@ SECRET_KEY = 'u=c$91$odb_%@gqz8f*e!t@d^agj!xxg9znsdl%5gg5*)k7-z)'
 DEBUG = True
 
 ALLOWED_HOSTS = [os.environ.get('C9_HOSTNAME'),
-                'simple-django-based-todo-app.herokuapp.com',]
+                'levelup-productivity.herokuapp.com',]
 
 
 # Application definition
@@ -77,6 +84,7 @@ WSGI_APPLICATION = 'levelup.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# # # OLD DATABASE CODE
 # # Development SQLite Database
 # DATABASES = {
 #     'default': {
@@ -85,11 +93,27 @@ WSGI_APPLICATION = 'levelup.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    # Paste in the database url as the arg into parse()
-    'default': dj_database_url.parse("postgres://uyvztqlqnbzhtr:233c369717ae411eed38e64474c02f7291065ba57658745c6a48d8e72da8cd17@ec2-54-195-252-243.eu-west-1.compute.amazonaws.com:5432/d6b7a12mcbnna0")
-}
+# DATABASES = {
+#     # Paste in the database url as the arg into parse()
+#     'default': dj_database_url.parse("postgres://uyvztqlqnbzhtr:233c369717ae411eed38e64474c02f7291065ba57658745c6a48d8e72da8cd17@ec2-54-195-252-243.eu-west-1.compute.amazonaws.com:5432/d6b7a12mcbnna0")
+# }
 
+# # # /OLD DATABASE CODE
+# If in development, use sqlite3
+if development:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+# Else use dj_database_url
+else:
+    DATABASES = {
+        # 'default' is a nested dictionary
+        # Paste in the database url as the arg into parse()
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
