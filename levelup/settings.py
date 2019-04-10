@@ -99,21 +99,22 @@ WSGI_APPLICATION = 'levelup.wsgi.application'
 # }
 
 # # # /OLD DATABASE CODE
-# If in development, use sqlite3
-if development:
+# If DATABASE_URL is in the environment, that means the deployment is production
+if "DATABASE_URL" in os.environ:
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-# Else use dj_database_url
-else:
-    DATABASES = {
-        # 'default' is a nested dictionary
-        # Paste in the database url as the arg into parse()
+        # This is for the benefit of heroku. This will parse in the config var of database url 
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
+# Else the database was not found in the production environment for some reason
+# or the deployment is in the development environment
+else:
+    print("Postgres URL not found, using sqlite instead")
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
