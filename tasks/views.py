@@ -1,17 +1,20 @@
+from django.http import Http404
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.template import loader
 from .models import Task
 
 # Create your views here.
 
 def index(request):
     task_list = Task.objects.order_by('-created_date')
-    template = loader.get_template('tasks/tasks.html')
     context = {
         'task_list': task_list,
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, 'tasks/tasks.html', context)
     
 def detail(request, task_id):
-    return HttpResponse("You're looking at task %s." % task_id)
+    try:
+        task = Task.objects.get(pk=task_id)
+    except Task.DoesNotExist:
+        raise Http404("The task you're trying to view does not exist")
+    return render(request, 'tasks/task_detail.html', {'task': task})
