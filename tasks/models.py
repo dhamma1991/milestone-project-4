@@ -7,6 +7,7 @@ class Task(models.Model):
     task_name = models.CharField(max_length=70)
     task_notes = models.TextField(max_length=400, blank=True)
     done_status = models.BooleanField(default=False)
+    task_difficulty = models.CharField(max_length=20, blank=True)
     created_date = models.DateTimeField(editable=False, default=timezone.now())
     
     def __str__(self):
