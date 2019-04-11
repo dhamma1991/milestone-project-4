@@ -4,6 +4,7 @@
     <ul>
     {% for task in task_list %}
         <li><a href="{% url 'tasks:detail' task.id %}">{{ task.task_name }}</a></li>
+        {{ task.done_status }}
     {% endfor %}
     </ul>
 {% else %}
