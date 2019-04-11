@@ -156,6 +156,7 @@ STATIC_URL = '/static/'
 
 # Configure Django App for Heroku.
 # Try to import django-heroku depending on Travis or Heroku
+# This prevents an error from occuring on Travis
 try:
     # Configure Django App for Heroku.
     import django_heroku
