@@ -8,7 +8,8 @@
         <ul>
         {% for task in task_list %}
             <li><a href="{% url 'tasks:detail' task.id %}">{{ task.task_name }}</a></li>
-            <td><form method="POST" action="done/{{ task.id }}">{% csrf_token %}<input type="submit" value="Done"></form></td>
+            <td><form method="POST" action="done/{{ task.id }}/">{% csrf_token %}<input type="submit" value="Done"></form></td>
+            <td><form method="POST" action="delete/{{ task.id }}/">{% csrf_token %}<input type="submit" value="Delete"></form></td>
             {% if task.done_status %}
                 &#9989;
             {% else %}

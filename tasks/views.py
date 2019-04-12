@@ -56,3 +56,8 @@ def toggle_done_status(request, task_id):
     task.done_status = not task.done_status
     task.save()
     return redirect('tasks:get_tasks')
+    
+def delete_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    task.delete()
+    return redirect('tasks:get_tasks')
