@@ -45,7 +45,7 @@ def create_task(request):
         form = AddTaskForm(request.POST)
         if form.is_valid():
             task = form.save()
-            return redirect('tasks:index')
+            return redirect('tasks:get_tasks')
     else:
         form = AddTaskForm()
         
