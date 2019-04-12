@@ -11,10 +11,8 @@
             <td><form method="POST" action="done/{{ task.id }}">{% csrf_token %}<input type="submit" value="Done"></form></td>
             {% if task.done_status %}
                 &#9989;
-                <p>Task is done</p>
             {% else %}
                 &#10005;
-                <p>Task is not done</p>
             {% endif %}
         {% endfor %}
         </ul>
