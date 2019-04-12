@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="{% url 'index' %}">Home</a>
+    <p>User currently logged in = <span>{{ request.user.username }}</span></p>
     {% block content %}
     {% endblock %}
 </body>

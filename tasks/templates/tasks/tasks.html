@@ -1,20 +1,25 @@
-<h1>Today's Tasks</h1>
-<p>User currently logged in = <span>{{ request.user.username }}</span></p>
-<a href="{% url 'tasks:create_task' %}">Add a Task</a>
-{% if task_list %}
-    <ul>
-    {% for task in task_list %}
-        <li><a href="{% url 'tasks:detail' task.id %}">{{ task.task_name }}</a></li>
-        <td><form method="POST" action="done/{{ task.id }}">{% csrf_token %}<input type="submit" value="Done"></form></td>
-        {% if task.done_status %}
-            &#9989;
-            <p>Task is done</p>
-        {% else %}
-            &#10005;
-            <p>Task is not done</p>
-        {% endif %}
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>You currently have no tasks!.</p>
-{% endif %}
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Today's Tasks</h1>
+    <a href="{% url 'tasks:create_task' %}">Add a Task</a>
+    {% if task_list %}
+        <ul>
+        {% for task in task_list %}
+            <li><a href="{% url 'tasks:detail' task.id %}">{{ task.task_name }}</a></li>
+            <td><form method="POST" action="done/{{ task.id }}">{% csrf_token %}<input type="submit" value="Done"></form></td>
+            {% if task.done_status %}
+                &#9989;
+                <p>Task is done</p>
+            {% else %}
+                &#10005;
+                <p>Task is not done</p>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You currently have no tasks!.</p>
+    {% endif %}
+    
+{% endblock %}

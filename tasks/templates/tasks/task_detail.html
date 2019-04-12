@@ -1,5 +1,11 @@
-{{ task.task_name }}
-<br>
-{{ task.task_notes }}
-<br>
-<a href="{% url 'tasks:index' %}">Back to Task List</a>
+{% extends "base.html" %}
+
+{% block content %}
+
+    {{ task.task_name }}
+    <br>
+    {{ task.task_notes }}
+    <br>
+    <a href="{% url 'tasks:index' %}">Back to Task List</a>
+    
+{% endblock %}
