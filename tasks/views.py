@@ -7,6 +7,9 @@ from .forms import AddTaskForm
 # Create your views here.
 
 def index(request):
+    return render(request, 'index.html')
+    
+def tasks(request):
     task_list = Task.objects.order_by('-created_date')
     context = {
         'task_list': task_list,
