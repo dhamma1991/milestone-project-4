@@ -50,3 +50,9 @@ def create_task(request):
         form = AddTaskForm()
         
     return render(request, 'tasks/add_task_form.html', {'form': form})
+    
+def toggle_done_status(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    task.done_status = not task.done_status
+    task.save()
+    return redirect('tasks:index')
