@@ -5,11 +5,8 @@ from .models import Task
 from .forms import AddTaskForm
 
 # Create your views here.
-
-def index(request):
-    return render(request, 'index.html')
     
-def tasks(request):
+def get_tasks(request):
     task_list = Task.objects.order_by('-created_date')
     context = {
         'task_list': task_list,
@@ -58,4 +55,4 @@ def toggle_done_status(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
     task.done_status = not task.done_status
     task.save()
-    return redirect('tasks:index')
+    return redirect('tasks:get_tasks')
