@@ -65,7 +65,7 @@ ROOT_URLCONF = 'levelup.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,21 +84,6 @@ WSGI_APPLICATION = 'levelup.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-# # # OLD DATABASE CODE
-# # Development SQLite Database
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
-# DATABASES = {
-#     # Paste in the database url as the arg into parse()
-#     'default': dj_database_url.parse("postgres://uyvztqlqnbzhtr:233c369717ae411eed38e64474c02f7291065ba57658745c6a48d8e72da8cd17@ec2-54-195-252-243.eu-west-1.compute.amazonaws.com:5432/d6b7a12mcbnna0")
-# }
-
-# # # /OLD DATABASE CODE
 # If DATABASE_URL is in the environment, that means the deployment is production
 if "DATABASE_URL" in os.environ:
     DATABASES = {
@@ -134,6 +119,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Where to take the user after a successful login
+LOGIN_REDIRECT_URL = 'tasks:index'
+
+# Send emails to the console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
