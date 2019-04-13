@@ -30,6 +30,7 @@
                         <li><a class="dropdown-button" href="#" data-activates="user-dropdown">{{ request.user.username }}<i class="material-icons right">arrow_drop_down</i></a></li>
                     {% else %}
                         <li><a href="{% url 'login' %}">Login</a></li>
+                        <li><a href="#">Create Account</a></li>
                     {% endif %}
                 </ul>
             
