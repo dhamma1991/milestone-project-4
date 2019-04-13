@@ -11,5 +11,9 @@
     <p>User currently logged in = <span>{{ request.user.username }}</span></p>
     {% block content %}
     {% endblock %}
+    
+    {% load static %}
+    <script src="{% static 'js/test.js' %}"></script>
+    <script src="{% static 'js/test2.js' %}"></script>
 </body>
 </html>
