@@ -121,6 +121,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Where to take the user after a successful login
 LOGIN_REDIRECT_URL = 'tasks:get_tasks'
+# And successful logout
+LOGOUT_REDIRECT_URL = 'index'
 
 # Send emails to the console
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
