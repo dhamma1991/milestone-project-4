@@ -7,21 +7,46 @@
     <title>Document</title>
     
     <!-- STYLESHEETS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <!-- Load static files for Django -->
+    {% load static %}
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" type="text/css" media="screen,projection" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" type="text/css" media="screen,projection" href="{% static 'css/style.css' %}">
     <!-- /STYLESHEETS -->
+    
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- /FONTS -->
 </head>
 <body>
-    <a href="{% url 'index' %}">Home</a>
-    <p>User currently logged in = <span>{{ request.user.username }}</span></p>
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="{% url 'index' %}" class="brand-logo">LEVELUP</a>
+                <ul class="right hide-on-med-and-down">
+                    {% if request.user.username %}
+                        <li><a href="#">{{ request.user.username }}</a></li>
+                    {% else %}
+                        <li><a href="#">Login</a></li>
+                    {% endif %}
+                </ul>
+            
+    
+            <ul id="nav-mobile" class="side-nav">
+                <li><a href="#">Navbar Link</a></li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
     {% block content %}
     {% endblock %}
     
-    {% load static %}
     <!-- SCRIPTS -->
     <!-- jQuery CDN -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <!-- Materialize js -->
+    <!-- Materialize JS -->
     <script src="{% static 'js/materialize.js' %}"></script>
+    <!-- Materialize Initialize -->
+    <script src="{% static 'js/init.js' %}"></script>
     <!-- /SCRIPTS -->
 </body>
 </html>
