@@ -1,15 +1,21 @@
-from django.shortcuts import render
-from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy
-from django.views import generic
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import AccountCreationForm
 
-# Create your views here.
-# Subclass the generic class-based view CreateView within SignUp
-class SignUp(generic.CreateView):
-    # Use built in UserCreationForm
-    form_class = UserCreationForm
-    # Use reverse_lazy instead of reverse
-    # because for all generic class-based views the urls do not load 
-    # when the file is imported, this is solved by reverse_lazy
-    success_url = reverse_lazy('login')
-    template_name = 'signup.html'
+def register(request):
+    if request.method == 'POST':
+        # Create an instance of UserCreationForm with user submitted data
+        form = AccountCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # Create 'username' variable from username cleaned input
+            username = form.cleaned_data.get('username')
+            
+            messages.success(request, 'Account created successfully! Please sign in.')
+            
+            return redirect('login')
+    else:
+        # Create a blank instance of the UserCreationForm called 'form'
+        form = AccountCreationForm()
+    return render(request, 'accounts/signup.html', {'form': form})
+    

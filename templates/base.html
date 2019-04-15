@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- Load static files for Django -->
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,8 +9,6 @@
     <title>Document</title>
     
     <!-- STYLESHEETS -->
-    <!-- Load static files for Django -->
-    {% load static %}
     <!-- Materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- Custom Stylesheet -->
@@ -32,7 +32,7 @@
                         <li><a class="dropdown-trigger" href="#" data-target="user-dropdown">{{ request.user.username }}<i class="material-icons right">arrow_drop_down</i></a></li>
                     {% else %}
                         <li><a href="{% url 'login' %}">Login</a></li>
-                        <li><a href="{% url 'signup' %}">Create Account</a></li>
+                        <li><a href="{% url 'sign_up' %}">Create Account</a></li>
                     {% endif %}
             </ul>
     
@@ -42,6 +42,12 @@
             <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         </div>
     </nav>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div>{{ message }}</div>
+        {% endfor %}
+    {% endif %}
     
     <main class="container">
         {% block content %}

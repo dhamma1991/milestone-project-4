@@ -151,6 +151,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),    
 ]
 
+# Needed to ensure messages display in dev environment
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+
 # Configure Django App for Heroku.
 # Try to import django-heroku depending on Travis or Heroku
 # This prevents an error from occuring on Travis

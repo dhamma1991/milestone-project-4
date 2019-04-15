@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from accounts import views as accounts_views
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -23,6 +24,7 @@ urlpatterns = [
     path('tasks/', include('tasks.urls')),
     # Since the accounts app path comes before the auth accounts path,
     # the accounts app path will be priority
-    path('accounts', include('accounts.urls')),
+    # path('accounts', include('accounts.urls')),
+    path('sign_up/', accounts_views.register, name='sign_up'),
     path('accounts/', include('django.contrib.auth.urls'))
 ]
