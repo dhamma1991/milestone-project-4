@@ -4,7 +4,7 @@
 Django
 [link here]
 
-Materialize 0.100.2
+Materialize 1.0.0
 https://materializecss.com/
 
 jQuery 3.2.1
