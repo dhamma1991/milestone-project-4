@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tasks.apps.TasksConfig',
     'accounts.apps.AccountsConfig',
+    'crispy_forms',
+    'crispy_forms_materialize',
 ]
 
 MIDDLEWARE = [
@@ -153,6 +155,9 @@ STATICFILES_DIRS = [
 
 # Needed to ensure messages display in dev environment
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+
+# Crispy Forms configuration
+CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
 
 # Configure Django App for Heroku.
 # Try to import django-heroku depending on Travis or Heroku
