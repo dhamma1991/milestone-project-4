@@ -6,6 +6,7 @@ from .forms import AddTaskForm
 
 # Create your views here.
     
+# Filter goes here to filter by user
 def get_tasks(request):
     task_list = Task.objects.order_by('-created_date')
     context = {
@@ -13,6 +14,7 @@ def get_tasks(request):
     }
     return render(request, 'tasks/tasks.html', context)
     
+# User filter will need to go here for security
 def detail(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
     return render(request, 'tasks/task_detail.html', {'task': task})
