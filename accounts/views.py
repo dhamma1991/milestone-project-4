@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .forms import AccountCreationForm
 
 def register(request):
@@ -18,4 +19,9 @@ def register(request):
         # Create a blank instance of the UserCreationForm called 'form'
         form = AccountCreationForm()
     return render(request, 'accounts/signup.html', {'form': form})
+  
+# Ensure a user is logged in to be able to view the profile page
+@login_required
+def profile(request):
+    return render(request, 'accounts/profile.html')
     

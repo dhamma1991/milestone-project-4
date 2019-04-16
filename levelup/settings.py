@@ -124,8 +124,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Where to take the user after a successful login
 LOGIN_REDIRECT_URL = 'tasks:get_tasks'
+# Set the url where Django looks for login functionality
+LOGIN_URL = 'login'
 # And successful logout
-LOGOUT_REDIRECT_URL = 'index'
+# LOGOUT_REDIRECT_URL = 'index'
 
 # Send emails to the console
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -152,6 +154,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),    
 ]
+
+# Path to the dir where Django stores uploaded files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# Public url of the media directory
+MEDIA_URL = '/media/'
 
 # Needed to ensure messages display in dev environment
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"

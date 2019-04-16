@@ -5,17 +5,17 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-     <h2>Sign up</h2>
+     <h2>Login</h2>
   
     <form method="POST">
         {% csrf_token %}
         <fieldset>
-            <legend>Join Today</legend>
+            <legend>Login</legend>
             {{ form | crispy }}
         </fieldset>
-        <button type="submit">Sign up</button>
+        <button type="submit">Login</button>
         <!--{{ form.as_p }}-->
     </form>
     
-    <small>Already have an account? <a href="{% url 'login' %}">Sign In</a></small>
+    <small>Don't have an account yet? <a href="{% url 'sign_up' %}">Sign Up</a></small>
 {% endblock %}
