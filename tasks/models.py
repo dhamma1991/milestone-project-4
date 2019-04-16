@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 # Create your models here.
 
@@ -8,7 +7,7 @@ class Task(models.Model):
     task_notes = models.TextField(max_length=400, blank=True)
     done_status = models.BooleanField(default=False)
     task_difficulty = models.CharField(max_length=20, blank=True)
-    created_date = models.DateTimeField(editable=False, default=timezone.now())
+    created_date = models.DateTimeField(editable=False, blank=True, auto_now_add=True)
     
     def __str__(self):
         return self.task_name
