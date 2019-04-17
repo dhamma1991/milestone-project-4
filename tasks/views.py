@@ -47,7 +47,9 @@ def toggle_done_status(request, task_id):
     task.done_status = not task.done_status
     task.save()
     
-    # user.profile.exp_points += xp_eas
+    user = request.user
+    user.profile.exp_points += xp_eas
+    user.profile.save()
     
     return redirect('tasks:get_tasks')
     
