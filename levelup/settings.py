@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tasks.apps.TasksConfig',
     'accounts.apps.AccountsConfig',
+    'level_system.apps.LevelSystemConfig',
     'crispy_forms',
     'crispy_forms_materialize',
 ]
