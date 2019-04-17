@@ -1,14 +1,3 @@
-// (function($){
-//   $(function(){
-
-//     $('.button-collapse').sidenav();
-//     $('.dropdown-button').dropdown({
-//         // belowOrigin: true
-//     });
-
-//   }); // end of document ready
-// })(jQuery); // end of jQuery name space
-
 (function($){
   $(function(){
 
@@ -16,6 +5,7 @@
     $('.dropdown-trigger').dropdown({
       coverTrigger: false
     });
+    $('select').formSelect();
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space
