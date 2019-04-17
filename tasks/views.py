@@ -5,12 +5,6 @@ from django.contrib.auth.models import User
 from accounts.models import Profile
 from .models import Task
 from .forms import AddTaskForm
-
-# Task Difficulty xp vars
-xp_eas = 10
-xp_med = 20
-xp_har = 30
-xp_amb = 40
     
 # Filter goes here to filter by user
 def get_tasks(request):
@@ -39,7 +33,7 @@ def create_task(request):
         
     return render(request, 'tasks/add_task_form.html', {'form': form})
     
-def toggle_done_status(request, task_id):
+def toggle_done_status(request, task_id, task_difficulty):
     """
     Update the task status from done if it is undone and undone if it is done
     """
@@ -47,8 +41,31 @@ def toggle_done_status(request, task_id):
     task.done_status = not task.done_status
     task.save()
     
+    # Task Difficulty xp amounts
+    # This gets passed through from the template when the user
+    
+    # Set the base xp amount
+    # Using a base amount allows multipliers to be applied to higher difficulties
+    # Makes this easier to change if I ever decide to change how xp rewards are calculated
+    base_xp = 10
+    
+    # If the task marked as done has a difficulty of 'Easy'
+    if task_difficulty == 'EA':
+        # XP gained is base XP
+        xp = base_xp
+    # Elif task difficulty medium
+    elif task_difficulty == 'ME':
+        xp = base_xp * 2
+    # Elif task difficulty hard
+    elif task_difficulty == 'HA':
+        xp = base_xp * 3
+    # Elif task difficulty ambitious
+    elif task_difficulty == 'AM':
+        xp = base_xp * 4
+    # No else statement to make this quicker to modify if I ever change the difficulty system
+    
     user = request.user
-    user.profile.exp_points += xp_eas
+    user.profile.exp_points += xp
     user.profile.save()
     
     return redirect('tasks:get_tasks')
