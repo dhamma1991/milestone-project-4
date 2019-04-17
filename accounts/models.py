@@ -12,6 +12,7 @@ class Profile(models.Model):
     image = models.ImageField(default = 'default.jpg', upload_to='profile_pics')
     hitpoints = models.IntegerField(default = 100)
     exp_points = models.IntegerField(default = 0)
+    user_level = models.IntegerField(default = 1)
     
     
     def __str__(self):
