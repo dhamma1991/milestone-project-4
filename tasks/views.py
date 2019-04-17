@@ -64,8 +64,18 @@ def toggle_done_status(request, task_id, task_difficulty):
         xp = base_xp * 4
     # No else statement to make this quicker to modify if I ever change the difficulty system
     
+    #  Get the current logged in user
     user = request.user
-    user.profile.exp_points += xp
+    
+    # The user can mark a task as done or not done
+    # If it's done, they gain xp
+    if task.done_status:
+        user.profile.exp_points += xp
+    # Else, they lose xp. This is here in case a user mistakingly marks a task as done
+    # Honesty is key but monitoring the user's activities is beyond the scope of this app!
+    else:
+        user.profile.exp_points -= xp
+        
     user.profile.save()
     
     return redirect('tasks:get_tasks')
