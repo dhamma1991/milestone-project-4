@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-
     <h1>Today's Tasks</h1>
+    
+    <p>{{ user.profile.hitpoints }}/100hp</p>
+    
     <a href="{% url 'tasks:create_task' %}">Add a Task</a>
+    <!-- If the user has tasks, display them -->
     {% if task_list %}
         <ul>
         {% for task in task_list %}
@@ -17,6 +20,7 @@
             {% endif %}
         {% endfor %}
         </ul>
+        <!-- Else, the user has no tasks -->
     {% else %}
         <p>You currently have no tasks!.</p>
     {% endif %}

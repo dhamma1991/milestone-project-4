@@ -10,6 +10,8 @@ class Profile(models.Model):
     account = models.OneToOneField(User, on_delete = models.CASCADE)
     # Allow users to upload a profile image
     image = models.ImageField(default = 'default.jpg', upload_to='profile_pics')
+    hitpoints = models.IntegerField(default = 100)
+    exp_points = models.IntegerField(default = 0)
     
     
     def __str__(self):
