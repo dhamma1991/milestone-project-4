@@ -4,7 +4,7 @@
     <h1>Today's Tasks</h1>
     
     <p>{{ user.profile.hitpoints }}/100hp</p>
-    <p>Level {{ user.profile.user_level }}</p>
+    <p>{{ user.profile.level_rank }}</p>
     <p>XP: {{ user.profile.exp_points}}/some_number</p>
     
     <a href="{% url 'tasks:create_task' %}">Add a Task</a>
