@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from level_system.models import UserLevel
 from PIL import Image
 
-# Create your models here.
-
 class Profile(models.Model):
     # Create a one-to-one relationship with Django's User model
     # Ensure the profile is deleted if the user is deleted
@@ -14,8 +12,8 @@ class Profile(models.Model):
     hitpoints = models.IntegerField(default = 100)
     exp_points = models.IntegerField(default = 0)
     # It is not forseen that a level will ever have to be deleted, but in case it is
-    # ensure users are not also deleted and set their level to null
-    # level_rank = models.ForeignKey(UserLevel, on_delete = models.SET_NULL, null = True, default = 1)
+    # ensure users are not also deleted
+    level_rank = models.ForeignKey(UserLevel, on_delete = models.SET_NULL, null = True)
     
     
     def __str__(self):
