@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from level_system.models import UserLevel
 from PIL import Image
 
 # Create your models here.
@@ -12,7 +13,9 @@ class Profile(models.Model):
     image = models.ImageField(default = 'default.jpg', upload_to='profile_pics')
     hitpoints = models.IntegerField(default = 100)
     exp_points = models.IntegerField(default = 0)
-    user_level = models.IntegerField(default = 1)
+    # It is not forseen that a level will ever have to be deleted, but in case it is
+    # ensure users are not also deleted and set their level to null
+    level_rank = models.ForeignKey(UserLevel, on_delete = models.SET_NULL, default = 1)
     
     
     def __str__(self):
