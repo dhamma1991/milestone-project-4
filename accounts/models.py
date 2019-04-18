@@ -15,7 +15,7 @@ class Profile(models.Model):
     exp_points = models.IntegerField(default = 0)
     # It is not forseen that a level will ever have to be deleted, but in case it is
     # ensure users are not also deleted and set their level to null
-    level_rank = models.ForeignKey(UserLevel, on_delete = models.SET_NULL, default = 1)
+    level_rank = models.ForeignKey(UserLevel, on_delete = models.SET_NULL, null = True, default = 1)
     
     
     def __str__(self):
