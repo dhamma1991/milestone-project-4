@@ -9,10 +9,15 @@ class Profile(models.Model):
     # Allow users to upload a profile image
     image = models.ImageField(default = 'default.jpg', upload_to='profile_pics')
     hitpoints = models.IntegerField(default = 100)
+    # Users start off with 0 experience points
     exp_points = models.IntegerField(default = 0)
-    # It is not forseen that a level will ever have to be deleted, but in case it is
-    # ensure users are not also deleted
-    # level_rank = models.ForeignKey(UserLevel, on_delete = models.SET_NULL, null = True)
+    # Users start off as level 1
+    level_rank = models.IntegerField(default = 1)
+    # The default experience points threshold to reach the next 
+    # level is 100 (to reach level 2)
+    xp_threshold = models.IntegerField(default = 100)
+    
+    
     
     
     def __str__(self):
