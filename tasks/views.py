@@ -51,6 +51,10 @@ def toggle_done_status(request, task_id, task_difficulty):
     # Makes this easier to change if I ever decide to change how xp rewards are calculated
     base_xp = 10
     
+    # Set base xp_threshold increment
+    # Again, if this ever needs changing
+    base_xp_threshold = 100
+    
     # If the task marked as done has a difficulty of 'Easy'
     if task_difficulty == 'EA':
         # XP gained is base XP
@@ -85,7 +89,26 @@ def toggle_done_status(request, task_id, task_difficulty):
     # Else, they lose xp. This is here in case a user mistakingly marks a task as done
     # Honesty is key but monitoring the user's activities is beyond the scope of this app!
     else:
+        # Get the current user's xp before any calculations are made
+        # in case they lose a level
+        current_xp = user.exp_points
+        # Minus the xp value of the task from their current xp
         user.exp_points -= xp
+        
+        # If the user now has less than 0 xp
+        if user.exp_points < 0:
+            # Minus a level
+            user.level_rank -= 1
+            # Set the new xp threshold of the new level
+            user.xp_threshold -= base_xp_threshold
+            # Set their new xp
+            # If the user loses a level from undoing a task, they do not get set to 0
+            # xp like if they lose a level from lost hp
+            # Instead, they go 'back in time' and have the same xp they would of had
+            # at the previous level before marking the task as done
+            # e.g. a user on 20xp at level 2 marks an ambitious task (40xp) as undone
+            # They go back to level 1 (100xp threshold), but with 80xp already attained
+            user.exp_points = user.xp_threshold - current_xp
         
     # If the user's xp has reached or exceeded their current xp_threshold
     if user.exp_points >= user.xp_threshold:
@@ -97,7 +120,7 @@ def toggle_done_status(request, task_id, task_difficulty):
         user.level_rank +=1
         # Set the new xp_threshold
         # Each subsequent level gets harder to obtain!
-        user.xp_threshold += 100
+        user.xp_threshold += base_xp_threshold
         
         # Feedback to the user
         messages.success(request, "Well done! You've just gained a level!")
