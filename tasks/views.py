@@ -96,7 +96,6 @@ def toggle_done_status(request, task_id, task_difficulty):
         user.exp_points = 0
         messages.success(request, "Well done! You've just gained a level!")
         
-        
     user.save()
     
     return redirect('tasks:get_tasks')
