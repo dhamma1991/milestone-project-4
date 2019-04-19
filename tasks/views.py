@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from accounts.models import Profile
-from level_system.models import UserLevel
 from .models import Task
 from .forms import AddTaskForm
     
@@ -12,14 +11,14 @@ from .forms import AddTaskForm
 def get_tasks(request):
     task_list = Task.objects.order_by('-created_date').filter(user=request.user)
     # Get the raw integer value of the current xp threshold for the user's current level
-    level_threshold = UserLevel.objects.filter(
-        level_rank = request.user.profile.level_rank.level_rank).values(
-            'xp_threshold')[0].get(
-                'xp_threshold')
+    # level_threshold = UserLevel.objects.filter(
+    #     level_rank = request.user.profile.level_rank.level_rank).values(
+    #         'xp_threshold')[0].get(
+    #             'xp_threshold')
                 
     context = {
         'task_list': task_list,
-        'level_threshold': level_threshold
+        # 'level_threshold': level_threshold
     }
     return render(request, 'tasks/tasks.html', context)
     
