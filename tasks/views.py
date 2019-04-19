@@ -69,10 +69,19 @@ def toggle_done_status(request, task_id, task_difficulty):
     #  Get the current logged in user
     user = request.user.profile
     
+    # Initialize leftover variable. This is used to 'save' any remaining xp
+    # a user may have when levelling up, to count towards them getting the next level
+    leftover = 0
+    
     # The user can mark a task as done or not done
     # If it's done, they gain xp
     if task.done_status:
         user.exp_points += xp
+        
+        # Calculate any 'leftover' xp
+        if user.exp_points >= user.xp_threshold:
+            leftover = user.exp_points - user.xp_threshold
+        
     # Else, they lose xp. This is here in case a user mistakingly marks a task as done
     # Honesty is key but monitoring the user's activities is beyond the scope of this app!
     else:
@@ -80,8 +89,10 @@ def toggle_done_status(request, task_id, task_difficulty):
         
     # If the user's xp has reached or exceeded their current xp_threshold
     if user.exp_points >= user.xp_threshold:
-        # Reset experience points
-        user.exp_points = 0
+        # Reset experience points, but allow the user to retain full xp from a task
+        # e.g. if a user completes an amibitous task (40xp) when they only need 10 to level up
+        # they will have 30xp towards the next level
+        user.exp_points = 0 + leftover
         # Increment the users level by 1
         user.level_rank +=1
         # Set the new xp_threshold
