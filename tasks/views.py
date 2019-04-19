@@ -86,7 +86,7 @@ def toggle_done_status(request, task_id, task_difficulty):
         user.level_rank +=1
         # Set the new xp_threshold
         # Each subsequent level gets harder to obtain!
-        user.xp_threshold += user.xp_threshold * 0.5
+        user.xp_threshold += 100
         
         # Feedback to the user
         messages.success(request, "Well done! You've just gained a level!")
