@@ -1,6 +1,7 @@
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
+from django.contrib import messages
 from django.contrib.auth.models import User
 from accounts.models import Profile
 from level_system.models import UserLevel
@@ -90,6 +91,11 @@ def toggle_done_status(request, task_id, task_difficulty):
         level_rank = request.user.profile.level_rank.level_rank).values(
             'xp_threshold')[0].get(
                 'xp_threshold')
+                
+    if user.exp_points >= level_threshold:
+        user.exp_points = 0
+        messages.success(request, "Well done! You've just gained a level!")
+        
         
     user.save()
     
