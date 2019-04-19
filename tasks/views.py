@@ -78,16 +78,13 @@ def toggle_done_status(request, task_id, task_difficulty):
     else:
         user.exp_points -= xp
         
-
-    # Get the raw integer value of the current xp threshold for the user's current level
-    level_threshold = UserLevel.objects.filter(
-        level_rank = request.user.profile.level_rank.level_rank).values(
-            'xp_threshold')[0].get(
-                'xp_threshold')
-                
-    if user.exp_points >= level_threshold:
+    if user.exp_points >= user.xp_threshold:
         user.exp_points = 0
+        user.level_rank +=1
+        user.xp_threshold += user.xp_threshold * 0.5
+        
         messages.success(request, "Well done! You've just gained a level!")
+
         
     user.save()
     
