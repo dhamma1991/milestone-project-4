@@ -5,7 +5,7 @@
     
     <p>{{ user.profile.hitpoints }}/100hp</p>
     <p>{{ user.profile.level_rank }}</p>
-    <p>XP: {{ user.profile.exp_points}}/some_number</p>
+    <p>XP: {{ user.profile.exp_points}}/{{ level_threshold }}</p>
     
     <a href="{% url 'tasks:create_task' %}">Add a Task</a>
     <!-- If the user has tasks, display them -->
