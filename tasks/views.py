@@ -78,14 +78,21 @@ def toggle_done_status(request, task_id, task_difficulty):
     else:
         user.exp_points -= xp
         
+    # If the user's xp has reached or exceeded their current xp_threshold
     if user.exp_points >= user.xp_threshold:
+        # Reset experience points
         user.exp_points = 0
+        # Increment the users level by 1
         user.level_rank +=1
+        # Set the new xp_threshold
+        # Each subsequent level gets harder to obtain!
         user.xp_threshold += user.xp_threshold * 0.5
         
+        # Feedback to the user
         messages.success(request, "Well done! You've just gained a level!")
 
-        
+      
+     # Save the updated user instance  
     user.save()
     
     return redirect('tasks:get_tasks')
