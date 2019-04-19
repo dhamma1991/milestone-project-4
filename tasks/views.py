@@ -15,6 +15,7 @@ def get_tasks(request):
         level_rank = request.user.profile.level_rank.level_rank).values(
             'xp_threshold')[0].get(
                 'xp_threshold')
+                
     context = {
         'task_list': task_list,
         'level_threshold': level_threshold
@@ -72,18 +73,25 @@ def toggle_done_status(request, task_id, task_difficulty):
     # No else statement to make this quicker to modify if I ever change the difficulty system
     
     #  Get the current logged in user
-    user = request.user
+    user = request.user.profile
     
     # The user can mark a task as done or not done
     # If it's done, they gain xp
     if task.done_status:
-        user.profile.exp_points += xp
+        user.exp_points += xp
     # Else, they lose xp. This is here in case a user mistakingly marks a task as done
     # Honesty is key but monitoring the user's activities is beyond the scope of this app!
     else:
-        user.profile.exp_points -= xp
+        user.exp_points -= xp
         
-    user.profile.save()
+
+    # Get the raw integer value of the current xp threshold for the user's current level
+    level_threshold = UserLevel.objects.filter(
+        level_rank = request.user.profile.level_rank.level_rank).values(
+            'xp_threshold')[0].get(
+                'xp_threshold')
+        
+    user.save()
     
     return redirect('tasks:get_tasks')
     
