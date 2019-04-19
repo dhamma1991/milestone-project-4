@@ -4,8 +4,8 @@
     <h1>Today's Tasks</h1>
     
     <p>{{ user.profile.hitpoints }}/100hp</p>
-    <p>{{ user.profile.level_rank }}</p>
-    <p>XP: {{ user.profile.exp_points}}/{{ level_threshold }}</p>
+    <p>Level {{ user.profile.level_rank }}</p>
+    <p>XP: {{ user.profile.exp_points}}/{{ user.profile.xp_threshold }}</p>
     
     <a href="{% url 'tasks:create_task' %}">Add a Task</a>
     <!-- If the user has tasks, display them -->
