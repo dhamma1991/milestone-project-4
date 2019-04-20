@@ -19,7 +19,7 @@ class Profile(models.Model):
     xp_threshold = models.IntegerField(default = 100)
     # The user's last login is used to determine when task.done_status is refreshed
     # Default is when the user is created
-    last_login = models.DateTimeField(default = date.today)
+    # last_login = models.DateTimeField(default = date.today)
     
     
     
