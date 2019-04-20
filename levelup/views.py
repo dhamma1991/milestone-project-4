@@ -1,6 +1,7 @@
 from django.http import Http404
-from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
+from django.conf import settings
+from django.shortcuts import render, get_object_or_404, redirect
 
 def index(request):
     """
@@ -10,6 +11,9 @@ def index(request):
     
 def donate(request):
     """
-    Render the donation page
+    Render the donation page and pass along the key required by Stripe
     """
-    return render(request, 'donate.html')
+    context = {
+        'key': settings.STRIPE_PUBLISHABLE_KEY
+    }
+    return render(request, 'donate.html', context)
