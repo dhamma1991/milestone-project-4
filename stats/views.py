@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from tasks.models import Task
 
 def get_stats(request):
+    """
+    Render stats.html. Pass through required values
+    """
     # Count all tasks currently in the database
     all_tasks = Task.objects.all().count()
     # Count all the users
