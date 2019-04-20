@@ -23,11 +23,11 @@ def get_tasks(request):
     # Only grab the current day
     # # # # # # # # IMPORTANT!!!!! Whilst testing, just set the 'day' argument in the replace function to the next day to simulate a day having passed
     current_login = make_aware(datetime.datetime.now()).replace(
-        day=21, hour=0, minute=0, second=0, microsecond=0)
+        hour=0, minute=0, second=0, microsecond=0)
     # Grab the last login from the database
     saved_login = user.last_login
     
-    # If the user has logged in on a new day
+    # If the user gets tasks on a new day
     if current_login > user.last_login:
         # Initialize hitpoints_lost
         # This is to feedback to the user should they have lost hitpoints
@@ -39,9 +39,11 @@ def get_tasks(request):
         # Initialise user_lost_level
         # This is used to check whether to feedback to the user that they have lost a level
         user_lost_level = False
+        # Initialise user_is_level_one
+        # This helps determine the mesage to shaw a user who is level 1 but loses all their hitpoints
+        # Users cannot become level 0 or negative levels
+        user_is_level_one = False
         
-        
-        # my_message = "It knows this login is after the last one"
         # Go through each task
         for task in task_list:
             # And check if the task is not done
@@ -71,6 +73,7 @@ def get_tasks(request):
         
             # If the user has lost all their hitpoints
             if user.hitpoints <= 0:
+                # Users who are level 1 when they lose all their hitpoints can not go below level 1
                 if not user.level_rank == 1:
                     user_lost_level = True
                     # Reduce the user's level
@@ -78,28 +81,31 @@ def get_tasks(request):
                     # And set the new xp_threshold
                     user.xp_threshold -= 100
                 else:
-                    messages.info(request, "Don't worry, you can't lose any more levels when you are level 1. Maybe you need to make your tasks easier?")
+                    user_is_level_one = True
                 # Reset the user's hitpoints
                 user.hitpoints = 100
                 # Reset the user xp
                 user.exp_points = 0
-            
-            # A user cannot fall to 0 or negative level_ranks
-            if user.level_rank < 1:
-                user.level_rank = 1
-                user.xp_threshold = 100
-        
+
         # If the tasks_not_done var has remained zero (all tasks completed)
         if not tasks_not_done:     
             messages.info(request, "A new day has begun! You managed to complete all your tasks yesterday. Great work!")
         else:
+            # Inform the user that some tasks were not completed
             messages.info(request, "Looks like you didn't fully complete you tasks yesterday!")
+            # If a user higher than level 1 loses a level
             if user_lost_level:
-                messages.info(request, "You lost a level!")
+                messages.info(request, "You lost a level! Your xp will reset to 0.")
+            # Else if a level 1 user 'loses' a level
+            elif user_is_level_one:
+                messages.info(request, "Don't worry, users who are level 1 cannot lose levels. Maybe you need to make your tasks easier in order to level up?")
+            # If a user didn't lose a level but still lost hitpoints
+            # Inform them of the amount of hitpoint loss
+            else:
+                messages.info(request, "Total hitpoints lost: {}".format(hitpoints_lost))
+                
+            # Inform users of the number of tasks they didn't complete
             messages.info(request, "Tasks not completed: {}".format(tasks_not_done))
-            messages.info(request, "Total hitpoints lost: {}".format(hitpoints_lost))
-    # else:
-    #     my_message = "It doesn't know whats going on yet"
            
         # Finally, save any changes to user model
         user.save()            
