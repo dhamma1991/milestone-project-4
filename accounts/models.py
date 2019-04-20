@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
@@ -16,6 +17,9 @@ class Profile(models.Model):
     # The default experience points threshold to reach the next 
     # level is 100 (to reach level 2)
     xp_threshold = models.IntegerField(default = 100)
+    # The user's last login is used to determine when task.done_status is refreshed
+    # Default is when the user is created
+    last_login = models.DateTimeField(default = date.today)
     
     
     
