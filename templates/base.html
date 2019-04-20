@@ -29,6 +29,7 @@
         <div class="nav-wrapper"><a id="logo-container" href="{% url 'index' %}" class="brand-logo">LEVELUP</a>
             <ul class="right hide-on-med-and-down">
                     <li><a href="">Help</a></li>
+                    <li><a href="">Levelup Stats</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'tasks:get_tasks' %}">Tasks</a></li>
                         <li><a class="dropdown-trigger" href="#" data-target="user-dropdown">{{ request.user.username }}<i class="material-icons right">arrow_drop_down</i></a></li>
