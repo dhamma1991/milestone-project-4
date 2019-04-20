@@ -24,8 +24,6 @@ def get_tasks(request):
     # # # # # # # # IMPORTANT!!!!! Whilst testing, just set the 'day' argument in the replace function to the next day to simulate a day having passed
     current_login = make_aware(datetime.datetime.now()).replace(
         hour=0, minute=0, second=0, microsecond=0)
-    # Grab the last login from the database
-    saved_login = user.last_login
     
     # If the user gets tasks on a new day
     if current_login > user.last_login:
@@ -106,7 +104,11 @@ def get_tasks(request):
                 
             # Inform users of the number of tasks they didn't complete
             messages.info(request, "Tasks not completed: {}".format(tasks_not_done))
-           
+        
+        # Update user's last login to reflect the current day
+        # The changes that occur above will occur again when another day has passed
+        user.last_login = current_login
+        
         # Finally, save any changes to user model
         user.save()            
         
@@ -114,7 +116,7 @@ def get_tasks(request):
         'task_list': task_list,
         'current_login': current_login,
         # 'my_message': my_message,
-        'saved_login': saved_login
+        'last_login': user.last_login
     }
     
     return render(request, 'tasks/tasks.html', context)
