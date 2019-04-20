@@ -3,6 +3,8 @@
 {% block content %}
     <h1>Today's Tasks</h1>
     
+    <p>{{ last_login }}</p>
+    
     <p>{{ user.profile.hitpoints }}/100hp</p>
     <p>Level {{ user.profile.level_rank }}</p>
     <p>XP: {{ user.profile.exp_points}}/{{ user.profile.xp_threshold }}</p>

@@ -1,3 +1,4 @@
+import datetime
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
@@ -9,10 +10,14 @@ from .forms import AddTaskForm
     
 # Filter goes here to filter by user
 def get_tasks(request):
+    
+    last_login = datetime.date.today()
+    
     task_list = Task.objects.order_by('-created_date').filter(user=request.user)
                 
     context = {
         'task_list': task_list,
+        'last_login': last_login,
     }
     return render(request, 'tasks/tasks.html', context)
     
