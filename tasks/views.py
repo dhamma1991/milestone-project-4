@@ -4,11 +4,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from accounts.models import Profile
 from .models import Task
 from .forms import AddTaskForm
     
-# Filter goes here to filter by user
+@login_required
 def get_tasks(request):
     
     last_login = datetime.date.today()
