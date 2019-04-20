@@ -12,23 +12,105 @@ from .forms import AddTaskForm
     
 @login_required
 def get_tasks(request):
-    
-    # current_login = make_aware(datetime.datetime.now())
-    
-    current_login = datetime.date.today()
-    
-    if current_login > request.user.profile.last_login:
-        my_message = "It knows this login is after the last one"
-    else:
-        my_message = "It doesn't know whats going on yet"
-    
+    # Get the list of tasks for the current logged in user
     task_list = Task.objects.order_by('-created_date').filter(user=request.user)
-                
+    
+    # Get the current user
+    user = request.user.profile
+    
+    # Grab the timestamp for the current request and make it into a format acceptable to the
+    # last_login field
+    # Only grab the current day
+    # # # # # # # # IMPORTANT!!!!! Whilst testing, just set the 'day' argument in the replace function to the next day to simulate a day having passed
+    current_login = make_aware(datetime.datetime.now()).replace(
+        day=21, hour=0, minute=0, second=0, microsecond=0)
+    # Grab the last login from the database
+    saved_login = user.last_login
+    
+    # If the user has logged in on a new day
+    if current_login > user.last_login:
+        # Initialize hitpoints_lost
+        # This is to feedback to the user should they have lost hitpoints
+        hitpoints_lost = 0
+        # Initialise tasks_not_done
+        # This is to feedback to the user the number of tasks they didn't complete
+        # As well as the sum of any hitpoints lost
+        tasks_not_done = 0
+        # Initialise user_lost_level
+        # This is used to check whether to feedback to the user that they have lost a level
+        user_lost_level = False
+        
+        
+        # my_message = "It knows this login is after the last one"
+        # Go through each task
+        for task in task_list:
+            # And check if the task is not done
+            # Check the task's difficulty and apply hp loss based on the task's difficulty
+            # Harder tasks lose more hp when not done (to balance them giving more xp when done)
+            if not task.done_status:
+                # If a task is not done, increment tasks_not_done by 1
+                tasks_not_done += 1
+                if task.task_difficulty == 'EA':
+                    user.hitpoints -= 10
+                    hitpoints_lost += 10
+                elif task.task_difficulty == 'ME':
+                    user.hitpoints -=20
+                    hitpoints_lost += 20
+                elif task.task_difficulty == 'HA':
+                    user.hitpoints -=30
+                    hitpoints_lost += 30
+                elif task.task_difficulty == 'AM':
+                    user.hitpoints -=40
+                    hitpoints_lost += 40
+            
+            # Then reset the done_status of each task to false since a new day has started
+            task.done_status = False
+            
+            # Save any changes to task model
+            task.save()
+        
+            # If the user has lost all their hitpoints
+            if user.hitpoints <= 0:
+                if not user.level_rank == 1:
+                    user_lost_level = True
+                    # Reduce the user's level
+                    user.level_rank -=1
+                    # And set the new xp_threshold
+                    user.xp_threshold -= 100
+                else:
+                    messages.info(request, "Don't worry, you can't lose any more levels when you are level 1. Maybe you need to make your tasks easier?")
+                # Reset the user's hitpoints
+                user.hitpoints = 100
+                # Reset the user xp
+                user.exp_points = 0
+            
+            # A user cannot fall to 0 or negative level_ranks
+            if user.level_rank < 1:
+                user.level_rank = 1
+                user.xp_threshold = 100
+        
+        # If the tasks_not_done var has remained zero (all tasks completed)
+        if not tasks_not_done:     
+            messages.info(request, "A new day has begun! You managed to complete all your tasks yesterday. Great work!")
+        else:
+            messages.info(request, "Looks like you didn't fully complete you tasks yesterday!")
+            if user_lost_level:
+                messages.info(request, "You lost a level!")
+            messages.info(request, "Tasks not completed: {}".format(tasks_not_done))
+            messages.info(request, "Total hitpoints lost: {}".format(hitpoints_lost))
+    # else:
+    #     my_message = "It doesn't know whats going on yet"
+           
+        # Finally, save any changes to user model
+        user.save()            
+        
     context = {
         'task_list': task_list,
         'current_login': current_login,
-        'my_message': my_message
+        # 'my_message': my_message,
+        'saved_login': saved_login
     }
+    
     return render(request, 'tasks/tasks.html', context)
     
 # User filter will need to go here for security
