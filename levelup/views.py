@@ -21,6 +21,7 @@ def donate(request):
     return render(request, 'donate.html', context)
     
 def charge(request):
+    stripe.api_key = settings.STRIPE_SECRET_KEY
     if request.method == 'POST':
         charge = stripe.Charge.create(
             amount=500,
