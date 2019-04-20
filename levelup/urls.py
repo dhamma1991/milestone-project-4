@@ -28,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('tasks/', include('tasks.urls')),
     path('stats/', include('stats.urls')),
+    path('donate/', views.donate, name='donate'),
     # Since the accounts app path comes before the auth accounts path,
     # the accounts app path will be priority
     path('sign_up/', accounts_views.register, name='sign_up'),

@@ -7,3 +7,9 @@ def index(request):
     Render index.html
     """
     return render(request, 'index.html')
+    
+def donate(request):
+    """
+    Render the donation page
+    """
+    return render(request, 'donate.html')
