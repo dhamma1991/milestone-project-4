@@ -30,6 +30,7 @@
             <ul class="right hide-on-med-and-down">
                     <li><a href="">Help</a></li>
                     <li><a href="{% url 'stats:get_stats' %}">Levelup Stats</a></li>
+                    <li><a href="#">Donate</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'tasks:get_tasks' %}">Tasks</a></li>
                         <li><a class="dropdown-trigger" href="#" data-target="user-dropdown">{{ request.user.username }}<i class="material-icons right">arrow_drop_down</i></a></li>
