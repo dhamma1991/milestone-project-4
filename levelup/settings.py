@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'tasks.apps.TasksConfig',
     'accounts.apps.AccountsConfig',
     'level_system.apps.LevelSystemConfig',
+    'stats.apps.StatsConfig',
     'crispy_forms',
     'crispy_forms_materialize',
 ]
