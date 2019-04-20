@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.utils.timezone import make_aware
 from accounts.models import Profile
 from .models import Task
 from .forms import AddTaskForm
@@ -12,13 +13,21 @@ from .forms import AddTaskForm
 @login_required
 def get_tasks(request):
     
-    last_login = datetime.date.today()
+    # current_login = make_aware(datetime.datetime.now())
+    
+    current_login = datetime.date.today()
+    
+    if current_login > request.user.profile.last_login:
+        my_message = "It knows this login is after the last one"
+    else:
+        my_message = "It doesn't know whats going on yet"
     
     task_list = Task.objects.order_by('-created_date').filter(user=request.user)
                 
     context = {
         'task_list': task_list,
-        'last_login': last_login,
+        'current_login': current_login,
+        'my_message': my_message
     }
     return render(request, 'tasks/tasks.html', context)
     
