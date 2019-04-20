@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+def get_stats(request):
+    context = {
+        
+    }
+    return render(request, 'stats/stats.html', context)
