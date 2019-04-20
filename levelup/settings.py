@@ -173,6 +173,10 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 # Crispy Forms configuration
 CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
 
+# Stripe configuration
+STRIPE_PUBLISHABLE_KEY = 'pk_test_a1sVyoIJ44jtCvZLROa08pJQ'
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SEC_KEY')
+
 # Configure Django App for Heroku.
 # Try to import django-heroku depending on Travis or Heroku
 # This prevents an error from occuring on Travis
