@@ -21,9 +21,12 @@
 
 /* /Font Classes */
 /* Color Classes
-    Used to quickly change an element's color */
+    Used to quickly change an element's background or font color */
 .theme-dark {
   background-color: #545454; }
+
+.theme-font-white {
+  color: #fdfdfd; }
 
 /* /Color Classes */
 .icon-block {

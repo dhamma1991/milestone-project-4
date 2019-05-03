@@ -8,8 +8,12 @@
 /* /Font Classes */
 
 /* Color Classes
-    Used to quickly change an element's color */
+    Used to quickly change an element's background or font color */
 .theme-dark {
     background-color: $themeDark;
+}
+
+.theme-font-white {
+    color: $themeFontWhite;
 }
 /* /Color Classes */
