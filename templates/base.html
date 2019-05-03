@@ -26,7 +26,16 @@
     </ul>
 
     <nav class="light-blue lighten-1" role="navigation">
-        <div class="nav-wrapper"><a id="logo-container" href="{% url 'index' %}" class="brand-logo">LEVELUP<img src="{% static 'images/levelup-logo.svg' %}"></a>
+        <div class="nav-wrapper">
+            <div id="logo-container">
+                <a href="{% url 'index' %}" class="brand-logo">LEVELUP</a>
+                
+                <a href="{% url 'index' %}" class="brand-logo">
+                    <img src="{% static 'images/levelup-logo.svg' %}" class="brand-logo">             
+                </a>
+                
+            </div>
+            
             <ul class="right hide-on-med-and-down">
                     <li><a href="">Help</a></li>
                     <li><a href="{% url 'stats:get_stats' %}">Levelup Stats</a></li>

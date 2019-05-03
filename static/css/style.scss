@@ -7,6 +7,9 @@
  *
  * Made By MaterializeCSS.com
  */
+ 
+@import "helpers/mixins.scss";
+@import "helpers/variables.scss";
 
 .icon-block {
   padding: 0 15px;
@@ -25,8 +28,16 @@ main {
     flex: 1 auto;
 }
 
-#logo-container {
+.nav-wrapper {
     img {
         max-width: 50px;
+        position: absolute;
+        
+        @include mqMaxWidth($matSmBreakpoint) {
+            // Position the nav logo image
+            left: 90px;
+            top: 10px;
+        }
     }
+    
 }
