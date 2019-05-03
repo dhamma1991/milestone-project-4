@@ -1,3 +1,13 @@
+/* Materialize does not include an sr-only class (unlike Bootstrap) so one was added here */
+.sr-only {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
 /* Font Classes
     Add a font family to an element */
 @import url('https://fonts.googleapis.com/css?family=Arimo:400,700');

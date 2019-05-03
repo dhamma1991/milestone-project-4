@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 
+<!-- Although 'load static' is being used in the base template, it seems it must be used in other templates as well when static files are used -->
+{% load static %} 
+
 {% block content %}
     <main class="theme-dark">
-        <h1 class="center-align arimo-font theme-font-white">LEVELUP</h1>
+        <h1 class="sr-only">Level Up - Home Page</h1>
+        
+        <h1 class="center-align arimo-font theme-font-white" aria-hidden="true">LEVELUP
+            <img src="{% static 'images/levelup-logo.svg' %}" alt="Level Up logo" class="brand-logo">
+        </h1>
     </main>
 {% endblock %}
