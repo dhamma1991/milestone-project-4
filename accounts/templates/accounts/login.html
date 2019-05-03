@@ -5,18 +5,20 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-     <h2>Login</h2>
-  
-    <form method="POST">
-        {% csrf_token %}
-        <fieldset>
-            <legend>Login</legend>
-            {{ form | crispy }}
-        </fieldset>
-        <button type="submit">Login</button>
-        <small><a href="{% url 'password_reset' %}">Forgot Password?</a></small>
-        <!--{{ form.as_p }}-->
-    </form>
-    
-    <small>Don't have an account yet? <a href="{% url 'sign_up' %}">Sign Up</a></small>
+    <main class="container">
+        <h2>Login</h2>
+        
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset>
+                <legend>Login</legend>
+                {{ form | crispy }}
+            </fieldset>
+            <button type="submit">Login</button>
+            <small><a href="{% url 'password_reset' %}">Forgot Password?</a></small>
+            <!--{{ form.as_p }}-->
+        </form>
+        
+        <small>Don't have an account yet? <a href="{% url 'sign_up' %}">Sign Up</a></small>
+    </main>
 {% endblock %}

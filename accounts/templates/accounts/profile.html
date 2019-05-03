@@ -5,23 +5,29 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-     <h1>Your Profile</h2>
-     
-     <div>
-         <img src="{{ user.profile.image.url }}">
-         <h2>{{ user.username }}</h2>
-         <p>{{ user.email }}</p>
-     </div>
-     
-     <form method="POST" enctype="multipart/form-data">
-          {% csrf_token %}
-          <fieldset>
-            <legend>Edit Your Account Profile Details</legend>
-            <!-- Render both the account and profile forms
-                 but make it look like one form -->
-            {{ account_form | crispy }}
-            {{ profile_form | crispy }}
-          </fieldset>
-          <button type="submit">Update</button>
-     </form>
+    <main class="container">
+         <h1>Your Profile</h2>
+         
+         <div>
+             <img src="{{ user.profile.image.url }}">
+             
+             <h2>{{ user.username }}</h2>
+             
+             <p>{{ user.email }}</p>
+         </div>
+         
+         <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <fieldset>
+                <legend>Edit Your Account Profile Details</legend>
+                
+                <!-- Render both the account and profile forms
+                     but make it look like one form -->
+                {{ account_form | crispy }}
+                {{ profile_form | crispy }}
+              </fieldset>
+              
+              <button type="submit">Update</button>
+         </form>
+    </main>
 {% endblock %}

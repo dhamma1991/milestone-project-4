@@ -5,17 +5,20 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-     <h2>Sign up</h2>
-  
-    <form method="POST">
-        {% csrf_token %}
-        <fieldset>
-            <legend>Join Today</legend>
-            {{ form | crispy }}
-        </fieldset>
-        <button type="submit">Sign up</button>
-        <!--{{ form.as_p }}-->
-    </form>
-    
-    <small>Already have an account? <a href="{% url 'login' %}">Sign In</a></small>
+    <main class="container">
+        <h2>Sign up</h2>
+        
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset>
+                <legend>Join Today</legend>
+                
+                {{ form | crispy }}
+            </fieldset>
+            
+            <button type="submit">Sign up</button>
+        </form>
+        
+        <small>Already have an account? <a href="{% url 'login' %}">Sign In</a></small>
+    </main>
 {% endblock %}

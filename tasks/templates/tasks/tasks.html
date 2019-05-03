@@ -1,36 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Today's Tasks</h1>
-    
-    <p>Current Login: {{ current_login }}</p>
-    
-    <p>Login saved in database: {{ last_login }}</p>
-    
-    <p>{{ my_message }}</p>
-    
-    <p>{{ user.profile.hitpoints }}/100hp</p>
-    <p>Level {{ user.profile.level_rank }}</p>
-    <p>XP: {{ user.profile.exp_points}}/{{ user.profile.xp_threshold }}</p>
-    
-    <a href="{% url 'tasks:create_task' %}">Add a Task</a>
-    <!-- If the user has tasks, display them -->
-    {% if task_list %}
-        <ul>
-        {% for task in task_list %}
-            <li><a href="{% url 'tasks:detail' task.id %}">{{ task.task_name }}</a> {{ task.get_task_difficulty_display }}</li>
-            <td><form method="POST" action="done/{{ task.id }}/{{ task.task_difficulty }}/">{% csrf_token %}<input type="submit" value="Done"></form></td>
-            <td><form method="POST" action="delete/{{ task.id }}/">{% csrf_token %}<input type="submit" value="Delete"></form></td>
-            {% if task.done_status %}
-                &#9989;
-            {% else %}
-                &#10005;
-            {% endif %}
-        {% endfor %}
-        </ul>
+    <main class="container">
+        <h1>Today's Tasks</h1>
+        
+        <p>Current Login: {{ current_login }}</p>
+        
+        <p>Login saved in database: {{ last_login }}</p>
+        
+        <p>{{ my_message }}</p>
+        
+        <p>{{ user.profile.hitpoints }}/100hp</p>
+        
+        <p>Level {{ user.profile.level_rank }}</p>
+        
+        <p>XP: {{ user.profile.exp_points}}/{{ user.profile.xp_threshold }}</p>
+        
+        <a href="{% url 'tasks:create_task' %}">Add a Task</a>
+        
+        <!-- If the user has tasks, display them -->
+        {% if task_list %}
+            <ul>
+            {% for task in task_list %}
+                <li><a href="{% url 'tasks:detail' task.id %}">{{ task.task_name }}</a> {{ task.get_task_difficulty_display }}</li>
+                
+                <td><form method="POST" action="done/{{ task.id }}/{{ task.task_difficulty }}/">{% csrf_token %}<input type="submit" value="Done"></form></td>
+                
+                <td><form method="POST" action="delete/{{ task.id }}/">{% csrf_token %}<input type="submit" value="Delete"></form></td>
+                
+                {% if task.done_status %}
+                    &#9989;
+                {% else %}
+                    &#10005;
+                {% endif %}
+            {% endfor %}
+            </ul>
+            
         <!-- Else, the user has no tasks -->
-    {% else %}
-        <p>You currently have no tasks!.</p>
-    {% endif %}
-    
+        {% else %}
+            <p>You currently have no tasks!.</p>
+        {% endif %}
+    </main>
 {% endblock %}
