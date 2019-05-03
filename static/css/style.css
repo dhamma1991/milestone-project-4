@@ -38,19 +38,11 @@
   color: #fdfdfd; }
 
 /* /Color Classes */
-.icon-block {
-  padding: 0 15px; }
-  .icon-block .material-icons {
-    font-size: inherit; }
+/*
 
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column; }
+These styles relate to elements found across multiple pages
 
-main {
-  flex: 1 auto; }
-
+*/
 .nav-wrapper #logo-container {
   margin-left: 20px; }
   .nav-wrapper #logo-container img {
@@ -81,5 +73,24 @@ main {
       .nav-wrapper #logo-container img {
         left: 95px;
         top: 2px; } }
+
+main h1 img {
+  position: relative;
+  max-width: 85px;
+  top: 21px;
+  right: 12px; }
+
+.icon-block {
+  padding: 0 15px; }
+  .icon-block .material-icons {
+    font-size: inherit; }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column; }
+
+main {
+  flex: 1 auto; }
 
 /*# sourceMappingURL=style.css.map */
