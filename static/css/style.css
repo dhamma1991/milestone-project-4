@@ -11,11 +11,17 @@
 /* Materialize Breakpoints 
     These are the same values used by the Materialize framework's grid */
 /* /Materialize Breakpoints */
+/* Colors */
+/* /Colors */
+/* Color Classes
+    Used to quickly change an element's color */
+.theme-dark {
+  background-color: #545454; }
+
 .icon-block {
   padding: 0 15px; }
-
-.icon-block .material-icons {
-  font-size: inherit; }
+  .icon-block .material-icons {
+    font-size: inherit; }
 
 body {
   display: flex;
@@ -28,11 +34,30 @@ main {
 .nav-wrapper img {
   max-width: 50px;
   position: absolute;
+  /* Incrementally adjust the logo image based on the layout of the page, which depends on the viewport width 
+      The Materialize nav uses max-width for layout changes, so that system is mostly copied here by using max-width media queries */
+  /* This mixin used for media queries, using responsive design principles of mobile first */
+  /* Similiar to above mixin. In some cases functionality is easier to implement with max width 
+      This is the case when following Materialize's system, since that system uses max-width in some cases */
+  /* Similiar to above mixin. In some cases functionality is easier to implement with max width 
+      This is the case when following Materialize's system, since that system uses max-width in some cases */
   /* Similiar to above mixin. In some cases functionality is easier to implement with max width 
       This is the case when following Materialize's system, since that system uses max-width in some cases */ }
+  @media (min-width: 1201px) {
+    .nav-wrapper img {
+      left: 127px;
+      top: 7px; } }
+  @media (max-width: 1200px) {
+    .nav-wrapper img {
+      left: 123px;
+      top: 7px; } }
+  @media (max-width: 992px) {
+    .nav-wrapper img {
+      left: 87px;
+      top: 7px; } }
   @media (max-width: 600px) {
     .nav-wrapper img {
-      left: 90px;
-      top: 10px; } }
+      left: 87px;
+      top: 3px; } }
 
 /*# sourceMappingURL=style.css.map */
