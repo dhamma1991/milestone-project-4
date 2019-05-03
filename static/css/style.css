@@ -6,7 +6,6 @@
  *
  * Made By MaterializeCSS.com
  */
-@import url("https://fonts.googleapis.com/css?family=Arimo:400,700");
 /* Media Queries */
 /* /Media Queries */
 /* Materialize Breakpoints 
@@ -14,11 +13,19 @@
 /* /Materialize Breakpoints */
 /* Colors */
 /* /Colors */
+/* Font Classes
+    Add a font family to an element */
+@import url("https://fonts.googleapis.com/css?family=Arimo:400,700");
+.arimo-font {
+  font-family: 'Arimo', sans-serif; }
+
+/* /Font Classes */
 /* Color Classes
     Used to quickly change an element's color */
 .theme-dark {
   background-color: #545454; }
 
+/* /Color Classes */
 .icon-block {
   padding: 0 15px; }
   .icon-block .material-icons {
@@ -33,8 +40,7 @@ main {
   flex: 1 auto; }
 
 .nav-wrapper #logo-container {
-  margin-left: 20px;
-  font-family: 'Arimo', sans-serif; }
+  margin-left: 20px; }
   .nav-wrapper #logo-container img {
     max-width: 50px;
     position: absolute;

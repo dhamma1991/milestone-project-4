@@ -1,5 +1,15 @@
+/* Font Classes
+    Add a font family to an element */
+@import url('https://fonts.googleapis.com/css?family=Arimo:400,700');
+
+.arimo-font {
+    font-family: 'Arimo', sans-serif;
+}
+/* /Font Classes */
+
 /* Color Classes
     Used to quickly change an element's color */
 .theme-dark {
     background-color: $themeDark;
 }
+/* /Color Classes */
