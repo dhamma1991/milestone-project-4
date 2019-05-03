@@ -24,3 +24,9 @@ body {
 main {
     flex: 1 auto;
 }
+
+#logo-container {
+    img {
+        max-width: 50px;
+    }
+}
