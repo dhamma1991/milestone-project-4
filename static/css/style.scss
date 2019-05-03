@@ -32,10 +32,11 @@ main {
 }
 
 .nav-wrapper {
-    .brand-logo {
+    #logo-container { // Target the container for the logo text and image
+        margin-left: 20px;
         font-family: 'Arimo', sans-serif;
-        
-        img {
+            
+        img { // Target the logo image
             max-width: 50px;
             position: absolute;
             

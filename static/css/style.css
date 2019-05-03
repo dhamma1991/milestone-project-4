@@ -32,9 +32,10 @@ body {
 main {
   flex: 1 auto; }
 
-.nav-wrapper .brand-logo {
+.nav-wrapper #logo-container {
+  margin-left: 20px;
   font-family: 'Arimo', sans-serif; }
-  .nav-wrapper .brand-logo img {
+  .nav-wrapper #logo-container img {
     max-width: 50px;
     position: absolute;
     /* Incrementally adjust the logo image based on the layout of the page, which depends on the viewport width 
@@ -47,19 +48,19 @@ main {
     /* Similiar to above mixin. In some cases functionality is easier to implement with max width 
         This is the case when following Materialize's system, since that system uses max-width in some cases */ }
     @media (min-width: 1201px) {
-      .nav-wrapper .brand-logo img {
+      .nav-wrapper #logo-container img {
         left: 147px;
         top: 6px; } }
     @media (max-width: 1200px) {
-      .nav-wrapper .brand-logo img {
+      .nav-wrapper #logo-container img {
         left: 142px;
         top: 7px; } }
     @media (max-width: 992px) {
-      .nav-wrapper .brand-logo img {
+      .nav-wrapper #logo-container img {
         left: 95px;
         top: 7px; } }
     @media (max-width: 600px) {
-      .nav-wrapper .brand-logo img {
+      .nav-wrapper #logo-container img {
         left: 95px;
         top: 2px; } }
 
