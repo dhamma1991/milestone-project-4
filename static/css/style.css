@@ -6,6 +6,7 @@
  *
  * Made By MaterializeCSS.com
  */
+@import url("https://fonts.googleapis.com/css?family=Arimo:400,700");
 /* Media Queries */
 /* /Media Queries */
 /* Materialize Breakpoints 
@@ -31,33 +32,35 @@ body {
 main {
   flex: 1 auto; }
 
-.nav-wrapper img {
-  max-width: 50px;
-  position: absolute;
-  /* Incrementally adjust the logo image based on the layout of the page, which depends on the viewport width 
-      The Materialize nav uses max-width for layout changes, so that system is mostly copied here by using max-width media queries */
-  /* This mixin used for media queries, using responsive design principles of mobile first */
-  /* Similiar to above mixin. In some cases functionality is easier to implement with max width 
-      This is the case when following Materialize's system, since that system uses max-width in some cases */
-  /* Similiar to above mixin. In some cases functionality is easier to implement with max width 
-      This is the case when following Materialize's system, since that system uses max-width in some cases */
-  /* Similiar to above mixin. In some cases functionality is easier to implement with max width 
-      This is the case when following Materialize's system, since that system uses max-width in some cases */ }
-  @media (min-width: 1201px) {
-    .nav-wrapper img {
-      left: 127px;
-      top: 7px; } }
-  @media (max-width: 1200px) {
-    .nav-wrapper img {
-      left: 123px;
-      top: 7px; } }
-  @media (max-width: 992px) {
-    .nav-wrapper img {
-      left: 87px;
-      top: 7px; } }
-  @media (max-width: 600px) {
-    .nav-wrapper img {
-      left: 87px;
-      top: 3px; } }
+.nav-wrapper .brand-logo {
+  font-family: 'Arimo', sans-serif; }
+  .nav-wrapper .brand-logo img {
+    max-width: 50px;
+    position: absolute;
+    /* Incrementally adjust the logo image based on the layout of the page, which depends on the viewport width 
+        The Materialize nav uses max-width for layout changes, so that system is MOSTLY copied here by using max-width media queries */
+    /* This mixin used for media queries, using responsive design principles of mobile first */
+    /* Similiar to above mixin. In some cases functionality is easier to implement with max width 
+        This is the case when following Materialize's system, since that system uses max-width in some cases */
+    /* Similiar to above mixin. In some cases functionality is easier to implement with max width 
+        This is the case when following Materialize's system, since that system uses max-width in some cases */
+    /* Similiar to above mixin. In some cases functionality is easier to implement with max width 
+        This is the case when following Materialize's system, since that system uses max-width in some cases */ }
+    @media (min-width: 1201px) {
+      .nav-wrapper .brand-logo img {
+        left: 147px;
+        top: 6px; } }
+    @media (max-width: 1200px) {
+      .nav-wrapper .brand-logo img {
+        left: 142px;
+        top: 7px; } }
+    @media (max-width: 992px) {
+      .nav-wrapper .brand-logo img {
+        left: 95px;
+        top: 7px; } }
+    @media (max-width: 600px) {
+      .nav-wrapper .brand-logo img {
+        left: 95px;
+        top: 2px; } }
 
 /*# sourceMappingURL=style.css.map */

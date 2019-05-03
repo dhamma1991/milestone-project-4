@@ -8,6 +8,7 @@
  * Made By MaterializeCSS.com
  */
  
+@import "helpers/fonts.scss";
 @import "helpers/mixins.scss";
 @import "helpers/variables.scss";
 @import "helpers/helper-classes.scss";
@@ -31,31 +32,34 @@ main {
 }
 
 .nav-wrapper {
-    img {
-        max-width: 50px;
-        position: absolute;
+    .brand-logo {
+        font-family: 'Arimo', sans-serif;
         
-        /* Incrementally adjust the logo image based on the layout of the page, which depends on the viewport width 
-            The Materialize nav uses max-width for layout changes, so that system is mostly copied here by using max-width media queries */
-        @include mqMinWidth($matLaBreakpoint + 1px) { // + 1px to ensure this media query doesn't overlap with the one below it
-            left: 127px;
-            top: 7px;
-        }
-        
-        @include mqMaxWidth($matLaBreakpoint) {
-            left: 123px;
-            top: 7px;
-        }
-        
-        @include mqMaxWidth($matMeBreakpoint) {
-            left: 87px;
-            top: 7px;
-        }
-        
-        @include mqMaxWidth($matSmBreakpoint) {
-            left: 87px;
-            top: 3px;
+        img {
+            max-width: 50px;
+            position: absolute;
+            
+            /* Incrementally adjust the logo image based on the layout of the page, which depends on the viewport width 
+                The Materialize nav uses max-width for layout changes, so that system is MOSTLY copied here by using max-width media queries */
+            @include mqMinWidth($matLaBreakpoint + 1px) { // + 1px to ensure this media query doesn't overlap with the one below it
+                left: 147px;
+                top: 6px;
+            }
+            
+            @include mqMaxWidth($matLaBreakpoint) {
+                left: 142px;
+                top: 7px;
+            }
+            
+            @include mqMaxWidth($matMeBreakpoint) {
+                left: 95px;
+                top: 7px;
+            }
+            
+            @include mqMaxWidth($matSmBreakpoint) {
+                left: 95px;
+                top: 2px;
+            }
         }
     }
-    
 }
