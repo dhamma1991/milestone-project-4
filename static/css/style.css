@@ -78,11 +78,15 @@ These styles relate to elements found across multiple pages
         left: 95px;
         top: 2px; } }
 
-.page-footer .footer-copyright .row {
-  margin: 0; }
-  .page-footer .footer-copyright .row a {
-    color: #fdfdfd; }
+/* Footer */
+.page-footer {
+  padding-top: 0; }
+  .page-footer .footer-copyright .row {
+    margin: 0; }
+    .page-footer .footer-copyright .row a {
+      color: #fdfdfd; }
 
+/* /Footer */
 .index-main h1 img {
   position: relative;
   max-width: 85px;

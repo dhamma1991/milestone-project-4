@@ -37,7 +37,10 @@ These styles relate to elements found across multiple pages
     }
 }
 
+/* Footer */
 .page-footer {
+    padding-top: 0; // Reset default Materialize padding
+    
     .footer-copyright {
         .row {
             margin: 0; // Overwrite Materialize default margin
@@ -48,3 +51,4 @@ These styles relate to elements found across multiple pages
         }
     }
 }
+/* /Footer */
