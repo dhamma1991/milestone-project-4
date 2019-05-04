@@ -1,4 +1,4 @@
-main {
+.index-main {
     h1 {
         img {
             position: relative;
@@ -6,5 +6,14 @@ main {
             top: 21px;
             right: 12px;
         }
+    }
+    
+    h2 {
+        font-size: 2.5rem; // Overwrite Materialize default
+    }
+    
+    a {
+        color: $themeFontWhite;
+        text-decoration: underline;
     }
 }

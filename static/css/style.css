@@ -74,11 +74,19 @@ These styles relate to elements found across multiple pages
         left: 95px;
         top: 2px; } }
 
-main h1 img {
+h2 {
+  font-size: 2.5rem; }
+
+.index-main h1 img {
   position: relative;
   max-width: 85px;
   top: 21px;
   right: 12px; }
+.index-main h2 {
+  font-size: 2.5rem; }
+.index-main a {
+  color: #fdfdfd;
+  text-decoration: underline; }
 
 .icon-block {
   padding: 0 15px; }
