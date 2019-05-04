@@ -38,7 +38,6 @@
             
             <ul class="right hide-on-med-and-down">
                     <li><a href="">Help</a></li>
-                    <li><a href="{% url 'stats:get_stats' %}">Levelup Stats</a></li>
                     <li><a href="{% url 'donate' %}">Donate</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'tasks:get_tasks' %}">Tasks</a></li>
@@ -96,12 +95,12 @@
             However, the styles applied by this Materialize class work almost perfectly for how I want the footer to look -->
         <div class="footer-copyright">
             <div class="container">
-                <div class="row">
-                    <a class="col s3"href="#">Link 1</a>
-                    <a class="col s3"href="#">Link 2</a>
-                    <a class="col s3"href="#">Link 3</a>
-                    <a class="col s3"href="#">Link 4</a>
-                </div>
+                    <ul class="row">
+                        <a class="col s3"href="#">Link 1</a>
+                        <a class="col s3"href="#">Link 2</a>
+                        <a class="col s3"href="#">Link 3</a>
+                        <li class="col s3"><a href="{% url 'stats:get_stats' %}">Levelup Stats</a></li>          
+                    </ul>
                 <!--Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>-->
             </div>
         </div>
