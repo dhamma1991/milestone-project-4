@@ -39,10 +39,21 @@
     </main>
 {% endblock %}
 
+<!-- Chain Fade Effect -->
 {% block chain_fade %}
     <script src="{% static 'js/chain_fade.js' %}"></script>
     
     <script>
-        $('.index-fadein-effect').chainFade();
+        $(document).ready(function() {
+            $('.index-fadein-effect').chainFade({
+                // Time in miliseconds between each animation
+                interval: 1000,
+                // Which direction each element should travel
+                toThe: 'right',
+                // Initial distance of each element
+                distance: 500,
+            });       
+        })
     </script>
 {% endblock %}
+<!-- /Chain Fade Effect
