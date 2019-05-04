@@ -12,7 +12,6 @@
     These are the same values used by the Materialize framework's grid */
 /* /Materialize Breakpoints */
 /* Colors */
-/* /Colors */
 /* Materialize does not include an sr-only class (unlike Bootstrap) so one was added here */
 @import url("https://fonts.googleapis.com/css?family=Arimo:400,700");
 .sr-only {
@@ -74,8 +73,10 @@ These styles relate to elements found across multiple pages
         left: 95px;
         top: 2px; } }
 
-h2 {
-  font-size: 2.5rem; }
+.page-footer .footer-copyright .row {
+  margin: 0; }
+  .page-footer .footer-copyright .row a {
+    color: #fdfdfd; }
 
 .index-main h1 img {
   position: relative;

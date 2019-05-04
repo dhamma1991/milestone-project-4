@@ -37,6 +37,14 @@ These styles relate to elements found across multiple pages
     }
 }
 
-h2 {
-    font-size: 2.5rem; // Overwrite Materialize default
+.page-footer {
+    .footer-copyright {
+        .row {
+            margin: 0; // Overwrite Materialize default margin
+            
+            a {
+                color: $themeFontWhite;
+            }
+        }
+    }
 }
