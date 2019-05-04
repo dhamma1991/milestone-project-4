@@ -5,18 +5,29 @@
 
 {% block content %}
     <main class="theme-dark index-main flow-text">
+        <!-- Hidden h1
+            This element will only be visible to screen reader users -->
         <h1 class="sr-only">Level Up - Home Page</h1>
+        <!-- /Hidden h1 -->
         
+        <!-- Visible h1
+            This element is hidden to all users on small screen sizes, in which case
+            for sighted users the nav-logo serves as the page heading and
+            for screen reader users, the sr-only h1 above serves as the page heading.
+            On smaller viewports having two identical 'LEVELUP' headings (one in the nav and one in <main> is redundant -->
         <h1 class="center-align arimo-font theme-font-white hide-on-small-only" aria-hidden="true">LEVELUP
             <img src="{% static 'images/levelup-logo.svg' %}" alt="Level Up logo" class="brand-logo">
         </h1>
+        <!-- /Visible h1 -->
         
-        <div class="center-align theme-font-white">
+        <!-- Index Text Content -->
+        <section class="center-align theme-font-white">
             <h2 class="">PRODUCTIVITY REINVENTED</h2>
             
             <p>Gamify your life to the next level</p>  
             
             <a href="#"><p>Get Started</p></a>
-        </div>
+        </section>
+        <!-- /Index Text Content -->
     </main>
 {% endblock %}

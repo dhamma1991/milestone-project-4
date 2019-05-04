@@ -12,6 +12,11 @@
     These are the same values used by the Materialize framework's grid */
 /* /Materialize Breakpoints */
 /* Colors */
+/*
+
+These classes assist in accomplishing various changes to elements or improving accessibility
+
+*/
 /* Materialize does not include an sr-only class (unlike Bootstrap) so one was added here */
 @import url("https://fonts.googleapis.com/css?family=Arimo:400,700");
 .sr-only {
