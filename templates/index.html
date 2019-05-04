@@ -15,19 +15,34 @@
             for sighted users the nav-logo serves as the page heading and
             for screen reader users, the sr-only h1 above serves as the page heading.
             On smaller viewports having two identical 'LEVELUP' headings (one in the nav and one in <main> is redundant -->
-        <h1 class="center-align arimo-font theme-font-white hide-on-small-only" aria-hidden="true">LEVELUP
+        <h1 class="center-align arimo-font theme-font-white hide-on-small-only index-fadein-effect" aria-hidden="true">LEVELUP
             <img src="{% static 'images/levelup-logo.svg' %}" alt="Level Up logo" class="brand-logo">
         </h1>
         <!-- /Visible h1 -->
         
         <!-- Index Text Content -->
         <section class="center-align theme-font-white">
-            <h2 class="">PRODUCTIVITY REINVENTED</h2>
+        <!--    <div class="index-fadein-effect">-->
+                <!-- Having this lone h2 here may be bad semantics -->
+                <h2 class="index-fadein-effect">PRODUCTIVITY REINVENTED</h2>      
+            <!--</div>-->
             
-            <p>Gamify your life to the next level</p>  
+            <!--<div class="index-fadein-effect">-->
+                <p class="index-fadein-effect">Gamify your life to the next level</p>              
+            <!--</div>-->
             
-            <a href="#"><p>Get Started</p></a>
+            <!--<div class="index-fadein-effect">-->
+                <a class="index-fadein-effect" href="#"><p>Get Started</p></a>         
+            <!--</div>-->
         </section>
         <!-- /Index Text Content -->
     </main>
+{% endblock %}
+
+{% block chain_fade %}
+    <script src="{% static 'js/chain_fade.js' %}"></script>
+    
+    <script>
+        $('.index-fadein-effect').chainFade();
+    </script>
 {% endblock %}

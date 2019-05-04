@@ -86,6 +86,9 @@ These styles relate to elements found across multiple pages
     .page-footer .footer-copyright .row a {
       color: #fdfdfd; }
 
+.index-fadein-effect {
+  display: none; }
+
 /* /Footer */
 .index-main h1 img {
   position: relative;
