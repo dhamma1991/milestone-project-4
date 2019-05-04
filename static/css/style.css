@@ -105,6 +105,16 @@ These styles relate to elements found across multiple pages
   color: #fdfdfd;
   text-decoration: underline; }
 
+/*
+
+Styles common to the elements found within the accounts app
+
+*/
+.user-form .form-links {
+  margin: 10px 0 0 10px; }
+  .user-form .form-links small {
+    margin-left: 15px; }
+
 .icon-block {
   padding: 0 15px; }
   .icon-block .material-icons {
