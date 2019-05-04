@@ -12,6 +12,7 @@
     These are the same values used by the Materialize framework's grid */
 /* /Materialize Breakpoints */
 /* Colors */
+/* /Colors */
 /*
 
 These classes assist in accomplishing various changes to elements or improving accessibility
@@ -40,6 +41,9 @@ These classes assist in accomplishing various changes to elements or improving a
 
 .theme-font-white {
   color: #fdfdfd; }
+
+.theme-cyan {
+  background-color: #34b5a6; }
 
 /* /Color Classes */
 /*
