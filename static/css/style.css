@@ -82,6 +82,9 @@ These styles relate to elements found across multiple pages
         left: 95px;
         top: 2px; } }
 
+h1 {
+  font-size: 3.5rem; }
+
 /* Footer */
 .page-footer {
   padding-top: 0; }
@@ -90,15 +93,20 @@ These styles relate to elements found across multiple pages
     .page-footer .footer-copyright .row a {
       color: #fdfdfd; }
 
+/* Index Fade In Effect */
 .index-fadein-effect {
   display: none; }
 
+/* /Index Fade In Effect */
 /* /Footer */
-.index-main h1 img {
-  position: relative;
-  max-width: 85px;
-  top: 21px;
-  right: 12px; }
+.index-main h1 {
+  /* This is the default Materialize h1 size, it is reapplied here so that the h1 declarations in structure.scss don't overwrite it */
+  font-size: 4.2rem; }
+  .index-main h1 img {
+    position: relative;
+    max-width: 85px;
+    top: 21px;
+    right: 12px; }
 .index-main h2 {
   font-size: 2.5rem; }
 .index-main a {

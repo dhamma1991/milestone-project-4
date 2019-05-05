@@ -37,6 +37,10 @@ These styles relate to elements found across multiple pages
     }
 }
 
+h1 {
+    font-size: 3.5rem; // Overwrite Materialize default
+}
+
 /* Footer */
 .page-footer {
     padding-top: 0; // Reset default Materialize padding
@@ -52,7 +56,10 @@ These styles relate to elements found across multiple pages
     }
 }
 
+/* Index Fade In Effect */
+// Ensure that the faded in elements start off as not displayed
 .index-fadein-effect {
     display: none;
 }
+/* /Index Fade In Effect */
 /* /Footer */
