@@ -1,0 +1,15 @@
+/*
+
+Styles common to the elements found within the accounts app
+
+*/
+
+.user-form {
+    .form-links {
+        margin: 10px 0 0 10px;
+        
+        small { // Target the 'forgot password' link
+            margin-left: 15px;
+        }
+    }
+}
