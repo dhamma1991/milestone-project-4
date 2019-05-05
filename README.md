@@ -8,5 +8,9 @@ Materialize 1.0.0
 https://materializecss.com/
 
 jQuery 3.2.1
+[link here]
+
+chain-fade
+https://www.jqueryscript.net/animation/Sequential-Entrance-Animations-chain-fade.html
 
 # REFERENCES
