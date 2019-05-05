@@ -18,11 +18,7 @@ def index(request):
     """
     Render index.html
     """
-    context = {
-        'title': "LEVELUP | Productivity Reinvented"
-    }
-    
-    return render(request, 'index.html', context)
+    return render(request, 'index.html')
 """ /1. The index view """
 
 """ 2. The donate view """
