@@ -10,7 +10,7 @@
     <main class="container">
         <h2>Sign up</h2>
         
-        <form method="POST">
+        <form class="user-form" method="POST">
             {% csrf_token %}
             <fieldset>
                 <legend>Join Today</legend>
@@ -18,9 +18,11 @@
                 {{ form | crispy }}
             </fieldset>
             
-            <button type="submit">Sign up</button>
+            <div class="form-links">
+                <button class="waves-effect waves-light btn theme-cyan" type="submit">Sign up</button>
+            
+                <small>Already have an account? <a href="{% url 'login' %}">Sign In</a></small>       
+            </div>
         </form>
-        
-        <small>Already have an account? <a href="{% url 'login' %}">Sign In</a></small>
     </main>
 {% endblock %}
