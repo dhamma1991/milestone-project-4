@@ -13,6 +13,11 @@ Styles common to the elements found within the accounts app
         display: none;
     }
     
+    dd {
+        color: $validationRed;
+        margin: 0;
+    }
+    
     .form-links {
         margin: 10px 0 0 10px;
         
