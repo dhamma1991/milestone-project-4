@@ -3,21 +3,24 @@
 {% load static %}
 <html lang="en">
 <head>
+    <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--/Meta Tags -->
+    
     <title>{% block title %}{% endblock %}</title>
     
-    <!-- STYLESHEETS -->
+    <!-- Stylesheets -->
     <!-- Materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" type="text/css" media="screen,projection" href="{% static 'css/style.css' %}">
-    <!-- /STYLESHEETS -->
+    <!-- /Stylesheets -->
     
-    <!-- FONTS -->
+    <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- /FONTS -->
+    <!-- /Material Icons -->
 </head>
 <body>
     <ul id="user-dropdown" class="dropdown-content">
