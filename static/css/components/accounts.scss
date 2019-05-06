@@ -5,6 +5,14 @@ Styles common to the elements found within the accounts app
 */
 
 .user-form {
+    /* Hide the hints for when the user changes their password
+        This could probably be done more efficiently in the backend by modifying Django's default form
+        However, this is far easier and can be done with very little code
+        If the user fails the validation the validation hints still display as normal */
+    #hint_id_new_password1 {
+        display: none;
+    }
+    
     .form-links {
         margin: 10px 0 0 10px;
         
