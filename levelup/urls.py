@@ -28,11 +28,15 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
     # Logout url, default Django logout, point Django towards the template
     path('logout/', auth_views.LogoutView.as_view(template_name='accounts/logout.html'), name='logout'),
-    # Password reset urls, these are Django defaults
-    path('password-reset/', 
-        auth_views.PasswordResetView.as_view(template_name='accounts/password_reset.html'), 
+    # Password Reset URLs 
+    # These are mostly Django defaults, although Django must be pointed
+    # Towards the 'accounts' directory, by default it will look for a 'registration'
+    path('password-reset/', auth_views.PasswordResetView.as_view(template_name='accounts/password_reset.html',
+        # Set the email template and the email subject
+        email_template_name = 'accounts/password_reset_email.html',
+        subject_template_name = 'accounts/password_reset_subject.txt'), 
         name='password_reset'),
-    path('password-reset/done/', 
+    path('password-reset/done/',
         auth_views.PasswordResetDoneView.as_view(template_name='accounts/password_reset_done.html'), 
         name='password_reset_done'),
     path('password-reset-confirm/<uidb64>/<token>/', 
@@ -41,7 +45,7 @@ urlpatterns = [
     path('password-reset-complete/', 
         auth_views.PasswordResetCompleteView.as_view(template_name='accounts/password_reset_complete.html'), 
         name='password_reset_complete'),
-    # /Password reset urls
+    # /Password Reset URLs
     
 ]
 
