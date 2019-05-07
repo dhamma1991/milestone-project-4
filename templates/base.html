@@ -58,11 +58,15 @@
         </div>
     </nav>
     
+    <!-- Django Messages -->
     {% if messages %}
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
+        <ul class="django-messages flow-text center-align">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
     {% endif %}
+    <!-- /Django Messages -->
     
     {% block content %}
     {% endblock %}

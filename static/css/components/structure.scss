@@ -37,6 +37,10 @@ These styles relate to elements found across multiple pages
     }
 }
 
+.django-messages {
+    margin: 0 0.35rem 0;
+}
+
 h1 {
     font-size: 3.5rem; // Overwrite Materialize default
 }

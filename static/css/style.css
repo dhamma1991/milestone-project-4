@@ -82,6 +82,9 @@ These styles relate to elements found across multiple pages
         left: 95px;
         top: 2px; } }
 
+.django-messages {
+  margin: 0 0.35rem 0; }
+
 h1 {
   font-size: 3.5rem; }
 
