@@ -9,6 +9,13 @@
         <!-- Human Readable Task Difficulty -->
         {{ task.get_task_difficulty_display }}
         <!-- /Human Readable Task Difficulty -->
+
+        <form method="POST" action="delete/">
+            {% csrf_token %}
+            
+            <input type="submit" value="Delete" class="waves-effect waves-light btn red">
+        </form> 
+        
         <a href="{% url 'tasks:get_tasks' %}">Back to Task List</a>
     </main>
     

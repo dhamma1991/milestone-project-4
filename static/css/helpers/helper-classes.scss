@@ -37,3 +37,9 @@ These classes assist in accomplishing various changes to elements or improving a
     background-color: $themeCyan;
 }
 /* /Color Classes */
+
+/* Structural Classes
+    These classes allow an easy way to structure elements in the html */
+.def-margin-top {
+    margin-top: $defaultMargin;
+}
