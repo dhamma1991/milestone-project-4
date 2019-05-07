@@ -190,6 +190,8 @@ These styles relate to content found on tasks.html
       color: #f5c116; }
   .tasks-main .tasks-ul li {
     margin-top: 20px;
+    /* Target all but the last task 
+        Add a divider and thicken the height*/
     /* Task Icon
         The task icons require some positioning that
         is different to the other icons on the page */
@@ -198,6 +200,9 @@ These styles relate to content found on tasks.html
     /* /Task Done Button */
     /* Checkbox */
     /* /Checkbox */ }
+    .tasks-main .tasks-ul li:not(:last-child) {
+      padding: 10px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
     .tasks-main .tasks-ul li .task-icon {
       top: 3px;
       /* This mixin used for media queries, using responsive design principles of mobile first */ }

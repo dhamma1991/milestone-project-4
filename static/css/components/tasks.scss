@@ -40,6 +40,13 @@ These styles relate to content found on tasks.html
         li {
             margin-top: $defaultMargin;
             
+            /* Target all but the last task 
+                Add a divider and thicken the height*/
+            &:not(:last-child) {
+                padding: 10px;
+                border-bottom: 1px solid rgba(0,0,0,0.2);
+            }
+            
             /* Task Icon
                 The task icons require some positioning that
                 is different to the other icons on the page */
