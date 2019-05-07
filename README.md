@@ -29,3 +29,7 @@ chain-fade
 https://www.jqueryscript.net/animation/Sequential-Entrance-Animations-chain-fade.html
 
 # REFERENCES
+Images
+
+Task Checkbox
+https://www.canva.com/media/MAAQottVXFI with custom colour modification
