@@ -98,6 +98,11 @@ h1 {
   font-size: 3.5rem; }
 
 /* /Headings */
+/* Site Buttons */
+.btn {
+  min-width: 100px; }
+
+/* /Site Buttons */
 /* Anchor Links */
 /* /Anchor Links */
 /* Footer */
@@ -153,11 +158,14 @@ Styles common to the elements found within the accounts app
 These styles relate to content found on tasks.html
 
 */
-/* User Info */
-.user-info {
-  margin-top: 20px;
-  /* Style the hp and xp icons */ }
-  .user-info .material-icons {
+.tasks-main {
+  /* Material Icons */
+  /* /Material Icons */
+  /* User Info */
+  /* /User Info */
+  /* Tasks List */
+  /* /Tasks List */ }
+  .tasks-main .material-icons {
     cursor: default;
     /* Positiom the icons to fit with the text */
     position: relative;
@@ -166,14 +174,46 @@ These styles relate to content found on tasks.html
         to sit well with the text */
     /* This mixin used for media queries, using responsive design principles of mobile first */ }
     @media (min-width: 660px) {
-      .user-info .material-icons {
+      .tasks-main .material-icons {
         top: 3px; } }
-  .user-info .hp-icon {
-    color: #c6302c; }
-  .user-info .xp-icon {
-    color: #f5c116; }
+  .tasks-main .user-info {
+    margin-top: 20px;
+    /* Style the hp and xp icons */ }
+    .tasks-main .user-info .hp-icon {
+      color: #c6302c; }
+    .tasks-main .user-info .xp-icon {
+      color: #f5c116; }
+  .tasks-main .tasks-ul li {
+    margin-top: 20px;
+    /* Task Icon
+        The task icons require some positioning that
+        is different to the other icons on the page */
+    /* /Task Icon */
+    /* Task Done and Delete Buttons */
+    /* /Task Done and Delete Buttons */
+    /* Checkbox */
+    /* /Checkbox */ }
+    .tasks-main .tasks-ul li .task-icon {
+      top: 3px;
+      /* This mixin used for media queries, using responsive design principles of mobile first */ }
+      @media (min-width: 660px) {
+        .tasks-main .tasks-ul li .task-icon {
+          top: 4px; } }
+    .tasks-main .tasks-ul li form {
+      display: inline-block; }
+      .tasks-main .tasks-ul li form input {
+        color: white; }
+    .tasks-main .tasks-ul li .done-status {
+      border: 2px solid black;
+      display: inline-block;
+      width: 80px;
+      height: 80px; }
+      .tasks-main .tasks-ul li .done-status img {
+        text-align: center;
+        width: 75px;
+        height: 75px;
+        padding: 10px; }
 
-/* /User Info */
 .icon-block {
   padding: 0 15px; }
   .icon-block .material-icons {

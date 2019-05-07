@@ -6,6 +6,9 @@
         <br>
         {{ task.task_notes }}
         <br>
+        <!-- Human Readable Task Difficulty -->
+        {{ task.get_task_difficulty_display }}
+        <!-- /Human Readable Task Difficulty -->
         <a href="{% url 'tasks:get_tasks' %}">Back to Task List</a>
     </main>
     

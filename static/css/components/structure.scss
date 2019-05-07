@@ -51,6 +51,12 @@ h1 {
 }
 /* /Headings */
 
+/* Site Buttons */
+.btn {
+    min-width: 100px; // Set a min-width on the Materialize button class
+}
+/* /Site Buttons */
+
 /* Anchor Links */
 // a {
 //     color: $themeCyan;

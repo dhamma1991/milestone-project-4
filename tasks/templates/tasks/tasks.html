@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
-    <main class="container">
+    <main class="container tasks-main">
         <!-- User Info -->
         <section class="user-info">
             <!-- Username and Hitpoints -->
@@ -48,21 +50,47 @@
         
         <p>Login saved in database: {{ last_login }}</p>
 
+        <!-- Tasks List -->
         <!-- If the user has tasks, display them -->
         {% if task_list %}
-            <ul class="center-align">
+            <ul class="center-align flow-text tasks-ul">
             {% for task in task_list %}
-                <li><a href="{% url 'tasks:detail' task.id %}">{{ task.task_name }}</a> {{ task.get_task_difficulty_display }}</li>
-                
-                <td><form method="POST" action="done/{{ task.id }}/{{ task.task_difficulty }}/">{% csrf_token %}<input type="submit" value="Done"></form></td>
-                
-                <td><form method="POST" action="delete/{{ task.id }}/">{% csrf_token %}<input type="submit" value="Delete"></form></td>
-                
-                {% if task.done_status %}
-                    &#9989;
-                {% else %}
-                    &#10005;
-                {% endif %}
+                <li class="row">
+                    <div class="col s12">
+                        <!-- Task Icon -->
+                        <i class="material-icons flow-text task-icon">today</i>
+                        <!-- /Task Icon -->
+                        
+                        <!-- Task Name -->
+                        {{ task.task_name }}
+                        <!-- /Task Name -->              
+                    </div>
+                    
+                    <div class="col s12">
+                        <!-- Edit Task Link -->
+                        <a href="{% url 'tasks:detail' task.id %}">Edit</a> 
+                        <!-- /Edit Task Link -->                 
+                    </div>
+                    
+                    <div class="col s6">
+                        <form method="POST" action="done/{{ task.id }}/{{ task.task_difficulty }}/">{% csrf_token %}<input type="submit" value="Done" class="waves-effect waves-light btn theme-cyan"></form>     
+                    </div>
+                    
+                    <div class="col s6">
+                        <form method="POST" action="delete/{{ task.id }}/">{% csrf_token %}<input type="submit" value="Delete" class="waves-effect waves-light btn red"></form>                    
+                    </div>
+                    
+                    <div class="col s12 center-align">
+                        <div class="done-status">
+                            {% if task.done_status %}
+                                <img src="{% static 'images/task-checkbox.svg' %}" alt="Check">
+                                <!--<span>&#10003;</span>-->
+                            {% else %}
+                                <span></span>
+                            {% endif %}                              
+                        </div>
+                    </div>
+                </li>
             {% endfor %}
             </ul>
             
@@ -70,5 +98,6 @@
         {% else %}
             <p>You currently have no tasks!.</p>
         {% endif %}
+        <!-- /Tasks List -->
     </main>
 {% endblock %}

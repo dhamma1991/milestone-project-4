@@ -4,10 +4,8 @@ These styles relate to content found on tasks.html
 
 */
 
-/* User Info */
-.user-info {
-    margin-top: $defaultMargin;
-    
+.tasks-main {
+    /* Material Icons */
     .material-icons {
         cursor: default; 
         /* Positiom the icons to fit with the text */
@@ -20,14 +18,66 @@ These styles relate to content found on tasks.html
             top: 3px;
         }
     }
+    /* /Material Icons */
     
-    /* Style the hp and xp icons */
-    .hp-icon {
-        color: $hpRed;
+    /* User Info */
+    .user-info {
+        margin-top: $defaultMargin;
+        
+        /* Style the hp and xp icons */
+        .hp-icon {
+            color: $hpRed;
+        }
+        
+        .xp-icon {
+            color: $xpGold;
+        }
     }
+    /* /User Info */
     
-    .xp-icon {
-        color: $xpGold;
+    /* Tasks List */
+    .tasks-ul {
+        li {
+            margin-top: $defaultMargin;
+            
+            /* Task Icon
+                The task icons require some positioning that
+                is different to the other icons on the page */
+            .task-icon {
+                top: 3px;
+                
+                @include mqMinWidth(660px) {
+                    top: 4px;
+                }
+            }
+            /* /Task Icon */
+            
+            /* Task Done and Delete Buttons */
+            form {
+                display: inline-block;
+                
+                input {
+                    color: white;
+                }
+            }
+            /* /Task Done and Delete Buttons */
+            
+            /* Checkbox */
+            .done-status {
+                border: 2px solid black;
+                display: inline-block;
+                width: 80px;
+                height: 80px;    
+                
+                img {
+                    text-align: center;
+                    width: 75px;
+                    height: 75px;
+                    padding: 10px;
+                }
+            }
+            /* /Checkbox */
+        }
     }
+    /* /Tasks List */
 }
-/* /User Info */
