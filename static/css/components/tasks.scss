@@ -6,6 +6,8 @@ These styles relate to content found on tasks.html
 
 /* User Info */
 .user-info {
+    margin-top: $defaultMargin;
+    
     .material-icons {
         cursor: default; 
         /* Positiom the icons to fit with the text */

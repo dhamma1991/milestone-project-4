@@ -4,6 +4,7 @@ These styles relate to elements found across multiple pages
 
 */
 
+/* Nav */
 .nav-wrapper {
     #logo-container { // Target the container for the logo text and image
         margin-left: 20px;
@@ -36,14 +37,25 @@ These styles relate to elements found across multiple pages
         }
     }
 }
+/* /Nav */
 
+/* Django Messages */
 .django-messages {
     margin: 0 0.35rem 0;
 }
+/* /Django Messages */
 
+/* Headings */
 h1 {
     font-size: 3.5rem; // Overwrite Materialize default
 }
+/* /Headings */
+
+/* Anchor Links */
+// a {
+//     color: $themeCyan;
+// }
+/* /Anchor Links */
 
 /* Footer */
 .page-footer {

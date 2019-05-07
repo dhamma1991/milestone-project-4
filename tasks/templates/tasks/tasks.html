@@ -2,8 +2,7 @@
 
 {% block content %}
     <main class="container">
-        <h1>Today's Tasks</h1>
-        
+        <!-- User Info -->
         <section class="user-info">
             <!-- Username and Hitpoints -->
             <div class="row">
@@ -33,22 +32,25 @@
             </div>
             <!-- /Level and XP -->          
         </section>
+        <!-- /User Info -->
+        
+        <!-- Heading -->
+        <h1 class="center-align">Tasks</h1>
+        <!-- /Heading -->
+        
+        <!-- Add a Task Link -->
+        <div class="center-align flow-text">
+            <a href="{% url 'tasks:create_task' %}">Add a Task</a>     
+        </div>
+        <!-- /Add a Task Link -->
         
         <p>Current Login: {{ current_login }}</p>
         
         <p>Login saved in database: {{ last_login }}</p>
-        
-        <p>{{ my_message }}</p>
-        
-        <p></p>
-        
-        <p></p>
-        
-        <a href="{% url 'tasks:create_task' %}">Add a Task</a>
-        
+
         <!-- If the user has tasks, display them -->
         {% if task_list %}
-            <ul>
+            <ul class="center-align">
             {% for task in task_list %}
                 <li><a href="{% url 'tasks:detail' task.id %}">{{ task.task_name }}</a> {{ task.get_task_difficulty_display }}</li>
                 
