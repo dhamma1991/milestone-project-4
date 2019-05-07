@@ -56,7 +56,7 @@
             <ul class="center-align flow-text tasks-ul">
             {% for task in task_list %}
                 <li class="row">
-                    <div class="col s12">
+                    <div class="col s12 m3">
                         <!-- Task Icon -->
                         <i class="material-icons flow-text task-icon">today</i>
                         <!-- /Task Icon -->
@@ -66,13 +66,13 @@
                         <!-- /Task Name -->              
                     </div>
                     
-                    <div class="col s12">
+                    <div class="col s12 m3">
                         <!-- Edit Task Link -->
                         <a href="{% url 'tasks:detail' task.id %}">Edit</a> 
                         <!-- /Edit Task Link -->                 
                     </div>
                     
-                    <div class="col s6 valign-wrapper done-btn-container">
+                    <div class="col s6 m3 valign-wrapper">
                         <!-- Done Button -->
                         <form method="POST" action="done/{{ task.id }}/{{ task.task_difficulty }}/">
                             {% csrf_token %}
@@ -83,7 +83,7 @@
                         <!-- /Done Button -->
                     </div>
                     
-                    <div class="col s6">
+                    <div class="col s6 m3">
                         <div class="done-status">
                             {% if task.done_status %}
                                 <img src="{% static 'images/task-checkbox.svg' %}" alt="Check">

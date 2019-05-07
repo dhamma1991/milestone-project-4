@@ -204,22 +204,24 @@ These styles relate to content found on tasks.html
       @media (min-width: 660px) {
         .tasks-main .tasks-ul li .task-icon {
           top: 4px; } }
-    .tasks-main .tasks-ul li .done-btn-container {
-      height: 80px; }
-      .tasks-main .tasks-ul li .done-btn-container form {
-        display: inline-block; }
-        .tasks-main .tasks-ul li .done-btn-container form input {
-          color: white; }
+    .tasks-main .tasks-ul li form {
+      display: inline-block; }
+      .tasks-main .tasks-ul li form .btn {
+        padding: 0 10px; }
+      .tasks-main .tasks-ul li form input {
+        color: white;
+        min-width: 115px;
+        font-size: 12px; }
     .tasks-main .tasks-ul li .done-status {
       border: 2px solid black;
       display: inline-block;
-      width: 80px;
-      height: 80px; }
+      width: 35px;
+      height: 35px; }
       .tasks-main .tasks-ul li .done-status img {
         text-align: center;
-        width: 75px;
-        height: 75px;
-        padding: 10px; }
+        width: 30px;
+        height: 30px;
+        padding: 2px; }
 
 .icon-block {
   padding: 0 15px; }

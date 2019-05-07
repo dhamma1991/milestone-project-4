@@ -53,14 +53,17 @@ These styles relate to content found on tasks.html
             /* /Task Icon */
             
             /* Task Done Button */
-            .done-btn-container {
-                height: 80px;
-                form {
-                    display: inline-block;
-                        
-                    input {
-                        color: white;
-                    }
+            form {
+                display: inline-block;
+                
+                .btn {
+                    padding: 0 10px; // Adjust the default Materialize .btn padding
+                }
+                    
+                input {
+                    color: white;
+                    min-width: 115px;
+                    font-size: 12px; // Hard value used here as the integrity of the layout of the page depends on it
                 }
             }
             /* /Task Done Button */
@@ -69,14 +72,14 @@ These styles relate to content found on tasks.html
             .done-status {
                 border: 2px solid black;
                 display: inline-block;
-                width: 80px;
-                height: 80px;    
+                width: 35px;
+                height: 35px;    
                 
                 img {
                     text-align: center;
-                    width: 75px;
-                    height: 75px;
-                    padding: 10px;
+                    width: 30px;
+                    height: 30px;
+                    padding: 2px;
                 }
             }
             /* /Checkbox */
