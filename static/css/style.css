@@ -194,8 +194,8 @@ These styles relate to content found on tasks.html
         The task icons require some positioning that
         is different to the other icons on the page */
     /* /Task Icon */
-    /* Task Done and Delete Buttons */
-    /* /Task Done and Delete Buttons */
+    /* Task Done Button */
+    /* /Task Done Button */
     /* Checkbox */
     /* /Checkbox */ }
     .tasks-main .tasks-ul li .task-icon {
@@ -204,10 +204,12 @@ These styles relate to content found on tasks.html
       @media (min-width: 660px) {
         .tasks-main .tasks-ul li .task-icon {
           top: 4px; } }
-    .tasks-main .tasks-ul li form {
-      display: inline-block; }
-      .tasks-main .tasks-ul li form input {
-        color: white; }
+    .tasks-main .tasks-ul li .done-btn-container {
+      height: 80px; }
+      .tasks-main .tasks-ul li .done-btn-container form {
+        display: inline-block; }
+        .tasks-main .tasks-ul li .done-btn-container form input {
+          color: white; }
     .tasks-main .tasks-ul li .done-status {
       border: 2px solid black;
       display: inline-block;

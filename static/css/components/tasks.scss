@@ -52,15 +52,18 @@ These styles relate to content found on tasks.html
             }
             /* /Task Icon */
             
-            /* Task Done and Delete Buttons */
-            form {
-                display: inline-block;
-                
-                input {
-                    color: white;
+            /* Task Done Button */
+            .done-btn-container {
+                height: 80px;
+                form {
+                    display: inline-block;
+                        
+                    input {
+                        color: white;
+                    }
                 }
             }
-            /* /Task Done and Delete Buttons */
+            /* /Task Done Button */
             
             /* Checkbox */
             .done-status {

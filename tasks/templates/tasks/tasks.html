@@ -72,14 +72,18 @@
                         <!-- /Edit Task Link -->                 
                     </div>
                     
-                    <div class="col s6">
-                        <form method="POST" action="done/{{ task.id }}/{{ task.task_difficulty }}/">{% csrf_token %}<input type="submit" value="Done" class="waves-effect waves-light btn theme-cyan"></form>     
+                    <div class="col s6 valign-wrapper done-btn-container">
+                        <!-- Done Button -->
+                        <form method="POST" action="done/{{ task.id }}/{{ task.task_difficulty }}/">
+                            {% csrf_token %}
+                        
+                            <input type="submit" value="{% if task.done_status %}Mark Undone{% else %}Mark Done{% endif %}" 
+                            class="waves-effect waves-light btn theme-cyan">
+                        </form>    
+                        <!-- /Done Button -->
                     </div>
                     
                     <div class="col s6">
-                    </div>
-                    
-                    <div class="col s12 center-align def-margin-top">
                         <div class="done-status">
                             {% if task.done_status %}
                                 <img src="{% static 'images/task-checkbox.svg' %}" alt="Check">
@@ -88,6 +92,10 @@
                                 <span></span>
                             {% endif %}                              
                         </div>
+                    </div>
+                    
+                    <div class="col s12 center-align def-margin-top">
+
                     </div>
                 </li>
             {% endfor %}
