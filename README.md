@@ -9,6 +9,12 @@ Should the user fail the validation when the form is submitted, then hints will 
 
 {{ It was decided to not go with client-side validation for the user forms. It would be envisioned that????? }}
 
+
+
+Material Icons are used on tasks.html to represent the user's hitpoints, experience, and also as icons representing tasks. 
+
+Within the wireframes for the project, canva elements were used for the icons. It was decided to go with Material Icons during development as these would be easier to implement, are included with Materialize, and are as aesthetically viable as the canva elements.
+
 # Technologies Used
 Django
 [link here]
