@@ -4,17 +4,45 @@
     <main class="container">
         <h1>Today's Tasks</h1>
         
+        <section class="user-info">
+            <!-- Username and Hitpoints -->
+            <div class="row">
+                <div class="col s12 offset-m3 m3 flow-text center-align">
+                    {{ request.user.username }}
+                </div>
+                
+                <div class="col s12 m3 flow-text center-align">
+                    <i class="material-icons flow-text hp-icon">local_hospital</i>
+                    
+                    {{ user.profile.hitpoints }}/100hp
+                </div>
+            </div>
+            <!-- /Username and Hitpoints -->
+            
+            <!-- Level and XP -->
+            <div class="row">
+                <div class="col s12 offset-m3 m3 flow-text center-align">
+                    Level {{ user.profile.level_rank }}
+                </div>
+                
+                <div class="col s12 m3 flow-text center-align">
+                    <i class="material-icons flow-text xp-icon">grade</i>
+                    
+                    XP: {{ user.profile.exp_points}}/{{ user.profile.xp_threshold }}
+                </div>
+            </div>
+            <!-- /Level and XP -->          
+        </section>
+        
         <p>Current Login: {{ current_login }}</p>
         
         <p>Login saved in database: {{ last_login }}</p>
         
         <p>{{ my_message }}</p>
         
-        <p>{{ user.profile.hitpoints }}/100hp</p>
+        <p></p>
         
-        <p>Level {{ user.profile.level_rank }}</p>
-        
-        <p>XP: {{ user.profile.exp_points}}/{{ user.profile.xp_threshold }}</p>
+        <p></p>
         
         <a href="{% url 'tasks:create_task' %}">Add a Task</a>
         

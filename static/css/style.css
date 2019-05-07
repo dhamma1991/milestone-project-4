@@ -12,6 +12,8 @@
     These are the same values used by the Materialize framework's grid */
 /* /Materialize Breakpoints */
 /* Colors */
+/* Theme Colors */
+/* /Theme Colors */
 /* /Colors */
 /*
 
@@ -136,6 +138,31 @@ Styles common to the elements found within the accounts app
     .user-form .form-links small {
       margin-left: 15px; }
 
+/*
+
+These styles relate to content found on tasks.html
+
+*/
+/* User Info */
+.user-info {
+  /* Style the hp and xp icons */ }
+  .user-info .material-icons {
+    cursor: default;
+    /* Positiom the icons to fit with the text */
+    position: relative;
+    top: 2px;
+    /* Match a flow-text breakpoint, adjust the icon so it continues
+        to sit well with the text */
+    /* This mixin used for media queries, using responsive design principles of mobile first */ }
+    @media (min-width: 660px) {
+      .user-info .material-icons {
+        top: 3px; } }
+  .user-info .hp-icon {
+    color: #c6302c; }
+  .user-info .xp-icon {
+    color: #f5c116; }
+
+/* /User Info */
 .icon-block {
   padding: 0 15px; }
   .icon-block .material-icons {

@@ -1,0 +1,31 @@
+/*
+
+These styles relate to content found on tasks.html
+
+*/
+
+/* User Info */
+.user-info {
+    .material-icons {
+        cursor: default; 
+        /* Positiom the icons to fit with the text */
+        position: relative;
+        top: 2px;
+        
+        /* Match a flow-text breakpoint, adjust the icon so it continues
+            to sit well with the text */
+        @include mqMinWidth(660px) {
+            top: 3px;
+        }
+    }
+    
+    /* Style the hp and xp icons */
+    .hp-icon {
+        color: $hpRed;
+    }
+    
+    .xp-icon {
+        color: $xpGold;
+    }
+}
+/* /User Info */
