@@ -16,6 +16,8 @@ urlpatterns = [
     path('tasks/', include('tasks.urls')),
     # Stats url, go to the stats page
     path('stats/', include('stats.urls')),
+    # Help url, go to the help page
+    path('get_started/', views.get_started, name='get_started'),
     # Donate url, go to the donate page
     path('donate/', views.donate, name='donate'),
     # Make a 'charge' to the user who goes through with a donation
