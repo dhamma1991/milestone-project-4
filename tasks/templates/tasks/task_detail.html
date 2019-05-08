@@ -26,23 +26,27 @@
             
             {{ form | crispy }}
             
-            <div class="center-align task-page-btns">
+            <div class="row center-align task-page-btns">
                 <!-- Edit Button -->
-                <button class="waves-effect waves-light btn theme-cyan" type="submit">Edit Task</button>   
+                <div class="col s12 m6">
+                    <button class="waves-effect waves-light btn theme-cyan" type="submit">Edit Task</button>                       
+                </div>
                 <!-- /Edit Button -->
-                
-                <!-- Delete Button -->
-                <input type="submit" value="Delete Task" formaction="delete/" class="waves-effect waves-light btn red">
+
+                <!-- Delete Button -->                
+                <div class="col s12 m6">
+                    <input type="submit" value="Delete Task" formaction="delete/" class="waves-effect waves-light btn red">                    
+                </div>
                 <!-- /Delete Button -->
+                
+                <!-- Cancel Button -->
+                <div class="center-align">
+                    <a class="waves-effect waves-light btn red task-detail-cancel" href="{% url 'tasks:get_tasks' %}">Cancel</a>
+                </div>
+                <!-- /Cancel Button -->
             </div>
         </form>
         <!-- /Edit Task Form -->
-        
-        <!-- Cancel Button -->
-        <div class="center-align">
-            <a class="waves-effect waves-light btn red task-detail-cancel" href="{% url 'tasks:get_tasks' %}">Cancel</a>
-        </div>
-        <!-- /Cancel Button -->
     </main>
     
 {% endblock %}

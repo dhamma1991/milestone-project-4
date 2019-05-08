@@ -271,15 +271,29 @@ These styles relate to the html content found in the tasks app templates
 .task-page-btns {
   /* Target the Add and Edit task button */
   /* Target the Delete button */
-  /* Target the Cancel link for Add Task */ }
+  /* Target the Cancel link */ }
+  .task-page-btns .btn {
+    padding: 0; }
   .task-page-btns button {
-    margin-right: 10px; }
-  .task-page-btns input {
-    color: white; }
+    margin-bottom: 20px;
+    width: 140px;
+    cursor: pointer;
+    /* This mixin used for media queries, using responsive design principles of mobile first */ }
+    @media (min-width: 600px) {
+      .task-page-btns button {
+        margin-bottom: 0; } }
+  .task-page-btns i {
+    width: 140px; }
+    .task-page-btns i input {
+      color: white;
+      cursor: pointer;
+      /* Ensure the clickable area of the input matches the width and height of the container */
+      width: inherit;
+      height: inherit; }
   .task-page-btns a {
-    margin-left: 10px; }
+    min-width: 140px; }
 
-/* Specifically target the Cancel button on task-detail */
+/* Specifically target the Cancel link on task-detail */
 .task-detail-cancel {
   /* Since there are 3 buttons on task-detail as opposed to 2 on add-task,
       the third buton (Cancel) needs spacing away from the other 2 */

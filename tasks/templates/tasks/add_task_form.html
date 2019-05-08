@@ -11,9 +11,18 @@
             
             {{ form | crispy }}
             
-            <div class="center-align task-page-btns">
-                <button class="waves-effect waves-light btn theme-cyan" type="submit">Save</button>   
-                <a class="waves-effect waves-light btn red" href="{% url 'tasks:get_tasks' %}">Cancel</a>
+            <div class="row center-align task-page-btns">
+                <!-- Save Button -->
+                <div class="col s12 m6">
+                    <button class="waves-effect waves-light btn theme-cyan" type="submit">Save</button>  
+                </div>
+                <!-- /Save Button -->
+                
+                <!-- Cancel Button -->
+                <div class="col s12 m6">
+                    <a class="waves-effect waves-light btn red" href="{% url 'tasks:get_tasks' %}">Cancel</a>
+                </div>
+                <!-- /Cancel Button -->
             </div>
         </form>
     </main>
