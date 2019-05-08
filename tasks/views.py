@@ -143,6 +143,8 @@ def create_task(request):
 def toggle_done_status(request, task_id, task_difficulty):
     """
     Update the task status from done if it is undone and undone if it is done
+    Apply any xp and level gains/losses
+    Feedback to the user the actions that are taken
     """
     task = get_object_or_404(Task, pk=task_id)
     task.done_status = not task.done_status
