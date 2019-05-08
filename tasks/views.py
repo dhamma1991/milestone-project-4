@@ -325,5 +325,11 @@ def delete_task(request, task_id):
     # If the user trying to delete a task is indeed the user who created the task,
     # allow them to carry out the action
     else:
+        # Delete the task
         task.delete()
+        
+        # Feedback to the user
+        messages.success(request, 'Task successfully deleted!')
+        
+        # Go to the user's task list
         return redirect('tasks:get_tasks')
