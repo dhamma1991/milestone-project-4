@@ -61,9 +61,14 @@ These styles relate to elements found across multiple pages
 }
 /* /Django Messages */
 
-/* Headings */
+/* Headings
+    Overwrite Materialize defaults */
 h1 {
-    font-size: 3.5rem; // Overwrite Materialize default
+    font-size: 3.5rem;
+}
+
+h2 {
+    font-size: 2.5rem;
 }
 /* /Headings */
 

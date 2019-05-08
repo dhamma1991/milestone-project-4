@@ -112,9 +112,13 @@ These styles relate to elements found across multiple pages
     background-color: #f3ff91; }
 
 /* /Django Messages */
-/* Headings */
+/* Headings
+    Overwrite Materialize defaults */
 h1 {
   font-size: 3.5rem; }
+
+h2 {
+  font-size: 2.5rem; }
 
 /* /Headings */
 /* Site Buttons */
@@ -146,8 +150,6 @@ h1 {
     max-width: 85px;
     top: 21px;
     right: 12px; }
-.index-main h2 {
-  font-size: 2.5rem; }
 .index-main a {
   color: #fdfdfd;
   text-decoration: underline; }
@@ -318,6 +320,15 @@ Styles relating to the content found on stats.html
     font-size: 2rem; }
   .stats-main .divider {
     margin-bottom: 20px; }
+
+/*
+
+These styles relate to the content found on help.html
+
+*/
+.help-main article {
+  /* Give the article a bit more breathing room away from the footer */
+  margin-bottom: 80px; }
 
 .icon-block {
   padding: 0 15px; }

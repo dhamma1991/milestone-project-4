@@ -1,0 +1,12 @@
+/*
+
+These styles relate to the content found on help.html
+
+*/
+
+.help-main {
+    article {
+        /* Give the article a bit more breathing room away from the footer */
+        margin-bottom: $defaultMargin * 4;
+    }
+}
