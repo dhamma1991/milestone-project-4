@@ -1,6 +1,6 @@
 /*
 
-These styles relate to content found on tasks.html
+These styles relate to the html content found in the tasks app templates
 
 */
 
@@ -105,3 +105,17 @@ These styles relate to content found on tasks.html
     }
     /* /Tasks List */
 }
+
+/* Task Detail and Add Task Page Buttons */
+.task-page-btns {
+    /* Target the Add and Edit task button */
+    button {
+        margin-right: 10px;
+    }
+    
+    /* Target the cancel link */
+    a {
+        margin-left: 10px;
+    }
+}
+/* /Task Detail and Add Task Page Buttons */

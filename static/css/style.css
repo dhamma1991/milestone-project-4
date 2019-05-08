@@ -171,7 +171,7 @@ Styles common to the elements found within the accounts app
 
 /*
 
-These styles relate to content found on tasks.html
+These styles relate to the html content found in the tasks app templates
 
 */
 .tasks-main {
@@ -250,6 +250,16 @@ These styles relate to content found on tasks.html
         height: 30px;
         padding: 2px; }
 
+/* Task Detail and Add Task Page Buttons */
+.task-page-btns {
+  /* Target the Add and Edit task button */
+  /* Target the cancel link */ }
+  .task-page-btns button {
+    margin-right: 10px; }
+  .task-page-btns a {
+    margin-left: 10px; }
+
+/* /Task Detail and Add Task Page Buttons */
 .icon-block {
   padding: 0 15px; }
   .icon-block .material-icons {
