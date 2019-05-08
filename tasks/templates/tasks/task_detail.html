@@ -2,14 +2,11 @@
 
 {% block content %}
     <main class="container">
-        {{ task.task_name }}
-        <br>
-        {{ task.task_notes }}
-        <br>
-        <!-- Human Readable Task Difficulty -->
-        {{ task.get_task_difficulty_display }}
-        <!-- /Human Readable Task Difficulty -->
+        <!-- Page Heading -->
+        <h1 class="center-align">Edit Task</h1>
+        <!-- /Page Heading -->
         
+        <!-- Edit Task Form -->
         <form method="POST">
             {% csrf_token %}
             
@@ -20,14 +17,19 @@
                 <a class="waves-effect waves-light btn red" href="{% url 'tasks:get_tasks' %}">Cancel</a>
             </div>
         </form>
-
+        <!-- /Edit Task Form -->
+        
+        <!-- Delete Task -->
         <form method="POST" action="delete/">
             {% csrf_token %}
             
             <input type="submit" value="Delete" class="waves-effect waves-light btn red">
         </form> 
+        <!-- /Delete Task -->
         
+        <!-- Cancel Button -->
         <a href="{% url 'tasks:get_tasks' %}">Back to Task List</a>
+        <!-- /Camcel Button -->
     </main>
     
 {% endblock %}
