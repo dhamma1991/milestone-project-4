@@ -250,6 +250,17 @@ These styles relate to the html content found in the tasks app templates
         height: 30px;
         padding: 2px; }
 
+#div_id_task_name {
+  margin-bottom: 30px; }
+
+#div_id_task_notes label {
+  /* Ensure that when Materialize's form animation for the 
+  label kicks in, the label isn't obscured by the widget */
+  top: -11px; }
+
+#div_id_task_difficulty label {
+  top: -22px; }
+
 /* Task Detail and Add Task Page Buttons */
 .task-page-btns {
   /* Target the Add and Edit task button */
