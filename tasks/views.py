@@ -220,6 +220,9 @@ def toggle_done_status(request, task_id, task_difficulty):
             # e.g. a user on 20xp at level 2 marks an ambitious task (40xp) as undone
             # They go back to level 1 (100xp threshold), but with 80xp already attained
             user.exp_points = user.xp_threshold - current_xp
+            
+            # Feedback to the user their level loss
+            messages.warning(request, 'You lost a level!')
         
     # If the user's xp has reached or exceeded their current xp_threshold
     if user.exp_points >= user.xp_threshold:
