@@ -306,6 +306,19 @@ These styles relate to the html content found in the tasks app templates
   margin-top: 20px; }
 
 /* /Task Detail and Add Task Page Buttons */
+/*
+
+Styles relating to the content found on stats.html
+
+*/
+.stats-main {
+  /* Target the statistical values */
+  /* Target the divider elements */ }
+  .stats-main strong {
+    font-size: 2rem; }
+  .stats-main .divider {
+    margin-bottom: 20px; }
+
 .icon-block {
   padding: 0 15px; }
   .icon-block .material-icons {

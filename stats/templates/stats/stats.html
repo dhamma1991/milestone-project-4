@@ -1,13 +1,27 @@
 {% extends 'base.html' %}
 
+<!-- This template is used to show users various stats about the app -->
+
 {% block content %}
-    <main class="container">
+    <main class="container stats-main center-align">
+        <!-- Page Heading -->
+        <h1>Level Up Stats</h1>
+        <!-- /Page Heading -->
+        
+        <!-- Total Number Of Users -->
         <strong>{{ all_users }}</strong>
         
         <p>Total number of active users on our site</p>
+        <!-- /Total Number Of Users -->
         
+        <div class="divider"></div>
+        
+        <!-- Total Number Of Tasks -->
         <strong>{{ all_tasks }}</strong>
         
         <p>Total number of user's tasks on our site</p>
+        <!-- /Total Number Of Tasks -->
+        
+        <div class="divider"></div>
     </main>
 {% endblock %}
