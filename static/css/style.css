@@ -190,6 +190,9 @@ These styles relate to content found on tasks.html
       color: #f5c116; }
   .tasks-main .tasks-ul li {
     margin-top: 20px;
+    height: 150px;
+    /* Increase the height of the list items with the viewport width */
+    /* This mixin used for media queries, using responsive design principles of mobile first */
     /* Target all but the last task 
         Add a divider and thicken the height*/
     /* Task Icon
@@ -200,6 +203,9 @@ These styles relate to content found on tasks.html
     /* /Task Done Button */
     /* Checkbox */
     /* /Checkbox */ }
+    @media (min-width: 601px) {
+      .tasks-main .tasks-ul li {
+        height: 200px; } }
     .tasks-main .tasks-ul li:not(:last-child) {
       padding: 10px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
@@ -212,11 +218,16 @@ These styles relate to content found on tasks.html
     .tasks-main .tasks-ul li form {
       display: inline-block; }
       .tasks-main .tasks-ul li form .btn {
-        padding: 0 10px; }
+        padding: 0; }
       .tasks-main .tasks-ul li form input {
         color: white;
         min-width: 115px;
-        font-size: 12px; }
+        font-size: 12px;
+        /* Make sure the clickable area of the input matches the .btn it is wrapped in */
+        width: inherit;
+        height: inherit;
+        /* Make it obvious the input does something */
+        cursor: pointer; }
     .tasks-main .tasks-ul li .done-status {
       border: 2px solid black;
       display: inline-block;

@@ -58,11 +58,13 @@
                 <li class="row">
                     <div class="col s12 m3">
                         <!-- Task Icon -->
-                        <i class="material-icons flow-text task-icon">today</i>
+                        <!--<i class="material-icons flow-text task-icon">today</i>-->
                         <!-- /Task Icon -->
                         
-                        <!-- Task Name -->
-                        {{ task.task_name }}
+                        <!-- Task Name 
+                            Truncate very long task names, this is to preserve the layout
+                            of the page -->
+                        {{ task.task_name|truncatechars:41 }}
                         <!-- /Task Name -->              
                     </div>
                     
@@ -72,7 +74,7 @@
                         <!-- /Edit Task Link -->                 
                     </div>
                     
-                    <div class="col s6 m3 valign-wrapper">
+                    <div class="col s6 m3 ">
                         <!-- Done Button -->
                         <form method="POST" action="done/{{ task.id }}/{{ task.task_difficulty }}/">
                             {% csrf_token %}

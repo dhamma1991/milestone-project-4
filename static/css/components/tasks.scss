@@ -39,6 +39,12 @@ These styles relate to content found on tasks.html
     .tasks-ul {
         li {
             margin-top: $defaultMargin;
+            height: 150px;
+            
+            /* Increase the height of the list items with the viewport width */
+            @include mqMinWidth($matSmBreakpoint + 1px) {
+                height: 200px;
+            }
             
             /* Target all but the last task 
                 Add a divider and thicken the height*/
@@ -64,13 +70,18 @@ These styles relate to content found on tasks.html
                 display: inline-block;
                 
                 .btn {
-                    padding: 0 10px; // Adjust the default Materialize .btn padding
+                    padding: 0; // Adjust the default Materialize .btn padding
                 }
                     
                 input {
                     color: white;
                     min-width: 115px;
                     font-size: 12px; // Hard value used here as the integrity of the layout of the page depends on it
+                    /* Make sure the clickable area of the input matches the .btn it is wrapped in */
+                    width: inherit;
+                    height: inherit;
+                    /* Make it obvious the input does something */
+                    cursor: pointer;
                 }
             }
             /* /Task Done Button */
