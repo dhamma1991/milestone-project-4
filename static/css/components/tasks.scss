@@ -140,6 +140,7 @@ These styles relate to the html content found in the tasks app templates
         width: 140px;
         cursor: pointer;
         
+        /* Once the m6 layout kicks in, margin bottom is not needed */
         @include mqMinWidth($matSmBreakpoint) {
             margin-bottom: 0;
         }
