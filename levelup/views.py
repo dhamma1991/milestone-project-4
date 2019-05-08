@@ -34,6 +34,9 @@ def donate(request):
 
 """ 3. The charge view """    
 def charge(request):
+    """
+    Make a 'charge' to the user and render charge.html
+    """
     stripe.api_key = settings.STRIPE_SECRET_KEY
     if request.method == 'POST':
         charge = stripe.Charge.create(

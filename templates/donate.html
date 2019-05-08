@@ -1,10 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<main class="container">
+<main class="container center-align">
+  <!-- Page Heading -->
+  <h1>Donate</h1>
+  <!-- /Page Heading -->
+  
+  <p>Level Up depends on your donations to keep this service up and running.</p>
+  
+  <p>A donation of just $5 goes a long way towards making sure we can continue hosting this service.</p>
+  
+  <p>Donations are easy and secure. To donate, just click the button below.</p>
+  
+  <!-- Donate Button -->
   <form action="{% url 'charge' %}" method="post">
     {% csrf_token %}
+    
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="{{ key }}" data-description="Donate" data-amount="500" data-locale="auto"></script>
   </form>
+  <!-- /Donate Button -->
 </main>
 {% endblock %}

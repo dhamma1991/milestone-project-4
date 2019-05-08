@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 
+<!-- This template is rendered after a user makes a successful donation using Stripe -->
+
 {% block content %}
-    <main class="container">
+    <main class="container center-align">
         <h1>Payment received</h1>
         
-        <p>Thank you! Your support helps LevelUp stay up and running!</p>
+        <p>Thank you! Your support helps Level Up stay up and running!</p>
+        
+        <p><a href="{% url 'index' %}">Back to Home</a></p>
     </main>
 {% endblock %}
