@@ -22,6 +22,12 @@ For example, say UserX has a task with id of 6, with a difficulty of Easy. If th
 
 However, it should be noted that the user has full control over the difficulty that they set to their tasks, so it doesn't make sense for the user to exploit the url system this way. Therefore, although this exploit exists, it doesn't really effect the functionality of the app.
 
+# Testing
+
+Automated testing was conducted using Django's built-in test framework (TestCase).
+
+Sanity tests were conducted first, these can be found in levelup/tests.py. Simple assertion tests were used to check that the test framework was functioning correctly.
+
 # Technologies Used
 Django
 [link here]
