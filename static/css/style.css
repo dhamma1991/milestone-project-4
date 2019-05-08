@@ -157,13 +157,17 @@ h1 {
 Styles common to the elements found within the accounts app
 
 */
+/* User Form */
 .user-form {
   /* Hide the hints that display on the user forms for correct password and username input
       This could probably be done more efficiently in the backend by modifying Django's default form
       However, this is far easier and can be done with very little code
-      If the user fails the validation the validation hints still display as normal */ }
+      If the user fails the validation the validation hints still display as normal */
+  /* Target the label for the image field */ }
   .user-form #hint_id_password1, .user-form #hint_id_password2, .user-form #hint_id_new_password1, .user-form #hint_id_username {
     display: none; }
+  .user-form #div_id_image label {
+    top: -32px; }
   .user-form dd {
     color: #f44336;
     margin: 0; }
@@ -172,6 +176,7 @@ Styles common to the elements found within the accounts app
     .user-form .form-links small {
       margin-left: 15px; }
 
+/* /User Form */
 /*
 
 These styles relate to the html content found in the tasks app templates
