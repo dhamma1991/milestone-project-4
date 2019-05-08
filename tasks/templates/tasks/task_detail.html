@@ -15,23 +15,22 @@
             {{ form | crispy }}
             
             <div class="center-align task-page-btns">
-                <button class="waves-effect waves-light btn theme-cyan" type="submit">Edit</button>   
-                <a class="waves-effect waves-light btn red" href="{% url 'tasks:get_tasks' %}">Cancel</a>
+                <!-- Edit Button -->
+                <button class="waves-effect waves-light btn theme-cyan" type="submit">Edit Task</button>   
+                <!-- /Edit Button -->
+                
+                <!-- Delete Button -->
+                <input type="submit" value="Delete Task" formaction="delete/" class="waves-effect waves-light btn red">
+                <!-- /Delete Button -->
             </div>
         </form>
         <!-- /Edit Task Form -->
         
-        <!-- Delete Task -->
-        <form method="POST" action="delete/">
-            {% csrf_token %}
-            
-            <input type="submit" value="Delete" class="waves-effect waves-light btn red">
-        </form> 
-        <!-- /Delete Task -->
-        
         <!-- Cancel Button -->
-        <a href="{% url 'tasks:get_tasks' %}">Back to Task List</a>
-        <!-- /Camcel Button -->
+        <div class="center-align">
+            <a class="waves-effect waves-light btn red task-detail-cancel" href="{% url 'tasks:get_tasks' %}">Cancel</a>
+        </div>
+        <!-- /Cancel Button -->
     </main>
     
 {% endblock %}

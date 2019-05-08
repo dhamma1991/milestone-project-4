@@ -131,9 +131,21 @@ These styles relate to the html content found in the tasks app templates
         margin-right: 10px;
     }
     
-    /* Target the cancel link */
+    /* Target the Delete button */
+    input {
+        color: white;
+    }
+    
+    /* Target the Cancel link for Add Task */
     a {
         margin-left: 10px;
     }
+}
+
+/* Specifically target the Cancel button on task-detail */
+.task-detail-cancel {
+    /* Since there are 3 buttons on task-detail as opposed to 2 on add-task,
+        the third buton (Cancel) needs spacing away from the other 2 */
+    margin-top: $defaultMargin;
 }
 /* /Task Detail and Add Task Page Buttons */
