@@ -20,12 +20,12 @@ def index(request):
     """
     return render(request, 'index.html')
 
-""" 2. The get started (help) view """
+""" 2. The get started (about) view """
 def get_started(request):
     """
-    Render help.html
+    Render about.html
     """
-    return render(request, 'help.html')
+    return render(request, 'about.html')
 
 """ 3. The donate view """
 def donate(request):
