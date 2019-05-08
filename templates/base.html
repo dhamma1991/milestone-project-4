@@ -70,49 +70,44 @@
     {% endblock %}
     
     <!-- Page Footer -->
-    <footer class="page-footer theme-dark">
-        <!--<div class="container">-->
-        <!--    <div class="row">-->
-        <!--        <div class="col l6 s12">-->
-        <!--            <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>-->
-    
-    
-        <!--        </div>-->
-        <!--        <div class="col l3 s12">-->
-        <!--            <ul>-->
-        <!--                <li><a class="white-text" href="#!">Link 1</a></li>-->
-        <!--                <li><a class="white-text" href="#!">Link 2</a></li>-->
-        <!--                <li><a class="white-text" href="#!">Link 3</a></li>-->
-        <!--                <li><a class="white-text" href="#!">Link 4</a></li>-->
-        <!--            </ul>-->
-        <!--        </div>-->
-        <!--        <div class="col l3 s12">-->
-        <!--            <ul>-->
-        <!--                <li><a class="white-text" href="#!">Link 1</a></li>-->
-        <!--                <li><a class="white-text" href="#!">Link 2</a></li>-->
-        <!--                <li><a class="white-text" href="#!">Link 3</a></li>-->
-        <!--                <li><a class="white-text" href="#!">Link 4</a></li>-->
-        <!--            </ul>-->
-        <!--        </div>-->
-        <!--    </div>-->
-        <!--</div>-->
+    <footer class="page-footer theme-dark center-align">
         <!-- This div does not strictly just contain copyright info
             However, the styles applied by this Materialize class work almost perfectly for how I want the footer to look -->
         <div class="footer-copyright">
             <div class="container">
                     <ul class="row">
-                        <a class="col s3"href="#">Link 1</a>
-                        <a class="col s3"href="#">Link 2</a>
-                        <a class="col s3"href="#">Link 3</a>
-                        <li class="col s3"><a href="{% url 'stats:get_stats' %}">Levelup Stats</a></li>          
+                        <!-- Home -->
+                        <li class="col s3">
+                            <a href="{% url 'index' %}">Home</a>
+                        </li>
+                        <!-- /Home -->
+                        
+                        <!-- Help -->                
+                        <li class="col s3">
+                            <a href="#">Help</a>    
+                        </li>
+                        <!-- /Help -->
+                        
+                        <!-- Donate -->    
+                        <li class="col s3">
+                            <a href="{% url 'donate' %}">Donate</a>       
+                        </li>
+                        <!-- /Donate -->
+                        
+                        <!-- Stats -->
+                        <li class="col s3"><a href="{% url 'stats:get_stats' %}">Levelup Stats</a></li>
+                        <!-- /Stats -->
                     </ul>
-                <!--Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>-->
+                    
+                    <!-- Copyright Info -->
+                    <small>&copy; Level Up <span id="copyright"></span></small>                        
+                    <!-- /Copyright Info -->
             </div>
         </div>
     </footer>
     <!-- /Page Footer -->
     
-    <!-- SCRIPTS -->
+    <!-- Scripts -->
     <!-- jQuery CDN -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- Materialize JS -->
@@ -122,8 +117,16 @@
     <!-- Materialize Initialize -->
     <script src="{% static 'js/init.js' %}"></script>
     
+    <!-- Get the current year to be used for the copyright date in the footer -->
+    <script>
+        var theDate = new Date().getFullYear();
+        document.getElementById("copyright").innerHTML = theDate;
+    </script>
+    
+    <!-- Chain Fade Effect -->
     {% block chain_fade %}
     {% endblock %}
-    <!-- /SCRIPTS -->
+    <!-- /Chain Fade Effect -->
+    <!-- /Scripts -->
 </body>
 </html>
