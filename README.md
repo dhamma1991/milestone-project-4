@@ -15,6 +15,13 @@ Material Icons are used on tasks.html to represent the user's hitpoints, experie
 
 Within the wireframes for the project, canva elements were used for the icons. It was decided to go with Material Icons during development as these would be easier to implement, are included with Materialize, and are as aesthetically viable as the canva elements.
 
+
+With the task/done url, there is technically an exploit the user can perform where they can modify the URL to change the amount of xp they gain.
+
+For example, say UserX has a task with id of 6, with a difficulty of Easy. If the user manually enters tasks/done/6/AM (with the 'AM' standing for ambitious), the user will mark the task as done, but gain the 40 xp reward for an Ambitious task completion, as opposed to the usual 10 xp for an Easy task.
+
+However, it should be noted that the user has full control over the difficulty that they set to their tasks, so it doesn't make sense for the user to exploit the url system this way. Therefore, although this exploit exists, it doesn't really effect the functionality of the app.
+
 # Technologies Used
 Django
 [link here]
