@@ -57,6 +57,9 @@ These classes assist in accomplishing various changes to elements or improving a
 .def-margin-top {
   margin-top: 20px; }
 
+.def-margin-bottom {
+  margin-bottom: 20px; }
+
 /*
 
 These styles relate to elements found across multiple pages
@@ -249,6 +252,9 @@ These styles relate to the html content found in the tasks app templates
         width: 30px;
         height: 30px;
         padding: 2px; }
+
+.task-detail-help-text {
+  margin-bottom: 40px; }
 
 #div_id_task_name {
   margin-bottom: 30px; }

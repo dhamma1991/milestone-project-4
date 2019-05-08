@@ -106,6 +106,10 @@ These styles relate to the html content found in the tasks app templates
     /* /Tasks List */
 }
 
+.task-detail-help-text {
+    margin-bottom: $defaultMargin * 2;
+}
+
 #div_id_task_name {
     margin-bottom: $defaultMargin + 10px; // Space out the form elements better
 }

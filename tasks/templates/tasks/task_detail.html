@@ -8,6 +8,18 @@
         <h1 class="center-align">View Task Detail</h1>
         <!-- /Page Heading -->
         
+        <!-- Help Text -->
+        <section class="task-detail-help-text">
+            <p>You can use this page to edit your task's details.</p>
+            
+            <p>Once you've finished editing, click the 'Edit Task' button.</p>
+            
+            <p>You can also delete the task, or just cancel and return to your task list.</p>
+            
+            <p>Deleting or editing a task does not afffect your current hitpoints ot experience.</p>           
+        </section>
+        <!-- /Help Text -->
+
         <!-- Edit Task Form -->
         <form method="POST">
             {% csrf_token %}
