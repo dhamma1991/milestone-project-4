@@ -94,10 +94,52 @@
             </ul>
             <!-- /Main Nav -->
     
+            <!-- Mobile Nav -->
             <ul id="nav-mobile" class="sidenav">
-                <li><a href="#">Navbar Link</a></li>
+                <!-- Help -->
+                <li>
+                    <a href="#">Help</a>
+                </li>
+                <!-- /Help -->
+                
+                <!-- Donate -->
+                <li>
+                    <a href="{% url 'donate' %}">Donate</a>  
+                </li>
+                <!-- /Donate -->
+                
+                <!-- Check for user authentication to display the correct links -->
+                {% if user.is_authenticated %}
+                    <!-- Your Profile -->
+                    <li>
+                        <a href="{% url 'profile' %}">Your Profile</a>
+                    </li>
+                    <!-- /Your Profile -->
+                    
+                    <!-- Logout -->
+                    <li>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    <!-- /Logout -->
+                {% else %}
+                    <!-- Login -->
+                    <li>
+                        <a href="{% url 'login' %}">Login</a>
+                    </li>
+                    <!-- /Login -->
+                    
+                    <!-- Create Account -->
+                    <li>
+                        <a href="{% url 'sign_up' %}">Create Account</a>
+                    </li>
+                    <!-- /Create Account -->
+                {% endif %}
             </ul>
+            <!-- /Mobile Nav -->
+            
+            <!-- Mobile Nav Trigger -->
             <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <!-- /Mobile Nav Trigger -->
         </div>
     </nav>
     <!-- /Nav -->
