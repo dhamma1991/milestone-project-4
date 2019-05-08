@@ -123,7 +123,11 @@ def get_tasks(request):
     
 @login_required
 def detail(request, task_id):
-
+    """
+    Render the detail for a task
+    Allow the user to make changes to the task object
+    """
+    # Get the task
     task = get_object_or_404(Task, pk=task_id)
     
     # Ensure only the user who created the task is able to view the task's detail
@@ -134,58 +138,48 @@ def detail(request, task_id):
     # If the user trying to access the task's detail is indeed the user who created the task,
     # show them the page
     else:
+        # The edit functionality
+        # If the user is posting the form
         if request.method == "POST":
+            # Create an instance of the form matching the instance in the db
             form = AddTaskForm(request.POST, instance = task)
             
+            # The form should always be valid due to the client side validation
             if form.is_valid():
+                # Create the task
                 task = form.save(commit=False)
+                # Set the correct user
                 task.user = request.user
+                # Save the task
                 task.save()
+                # Feedback to the user
+                messages.success(request, 'Task updated!')
+                # Go back to the user's task list
                 return redirect('tasks:get_tasks')
-            
+          
+        # Else the request is a get. Grab the form with the current task's details
+        # already filled in
         else:
             form = AddTaskForm(instance = task)
-            
+           
+        # Render the template, pass through the form 
         return render(request, "tasks/task_detail.html", {'form': form})
-    
-    
-    
-    
-    
-    
-    
-    #     if request.method=="POST":
-    #     # Construct the post form with user inputted data from the submitted form
-    #     form = AddTaskForm(request.POST)
-        
-    #     if form.is_valid():
-    #         task = form.save(commit=False)
-    #         task.user = request.user
-    #         task.save()
-    #         return redirect('tasks:get_tasks')
-            
-    # else:
-    #     form = AddTaskForm()
-    
-    
-    
-    
-    
-    
-        # return render(request, 'tasks/task_detail.html', {'task': task})
 
 @login_required
 def create_task(request):
+    # If the user is posting data
     if request.method=="POST":
         # Construct the post form with user inputted data from the submitted form
         form = AddTaskForm(request.POST)
         
+        # The form should always be valid upon submit, the client side validation checks for that
         if form.is_valid():
             task = form.save(commit=False)
             task.user = request.user
             task.save()
             return redirect('tasks:get_tasks')
-            
+      
+     # Else just render an empty form      
     else:
         form = AddTaskForm()
         
