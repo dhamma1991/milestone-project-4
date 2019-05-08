@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
     <main class="container">
         <h1 class="center-align">Add a Task</h1>
@@ -7,7 +9,7 @@
         <form method="POST">
             {% csrf_token %}
             
-            {{ form.as_p }}
+            {{ form | crispy }}
             
             <div class="center-align task-page-btns">
                 <button class="waves-effect waves-light btn theme-cyan" type="submit">Save</button>   
