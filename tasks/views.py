@@ -136,6 +136,7 @@ def detail(request, task_id):
     else:
         return render(request, 'tasks/task_detail.html', {'task': task})
 
+@login_required
 def create_task(request):
     if request.method=="POST":
         # Construct the post form with user inputted data from the submitted form
@@ -149,113 +150,124 @@ def create_task(request):
         form = AddTaskForm()
         
     return render(request, 'tasks/add_task_form.html', {'form': form})
-    
+
+@login_required    
 def toggle_done_status(request, task_id, task_difficulty):
     """
     Update the task status from done if it is undone and undone if it is done
     Apply any xp and level gains/losses
     Feedback to the user the actions that are taken
     """
+    
     task = get_object_or_404(Task, pk=task_id)
-    task.done_status = not task.done_status
-    task.save()
     
-    # Task Difficulty xp amounts
-    # This gets passed through from the template when the user
+    # Ensure only the user who created the task is able to mark the task as done
+    if not request.user == task.user:
+        # Return a 404 page
+        return render(request, '404.html')
     
-    # Set the base xp amount
-    # Using a base amount allows multipliers to be applied to higher difficulties
-    # Makes this easier to change if I ever decide to change how xp rewards are calculated
-    base_xp = 10
-    
-    # Set base xp_threshold increment
-    # Again, if this ever needs changing
-    base_xp_threshold = 100
-    
-    # If the task marked as done has a difficulty of 'Easy'
-    if task_difficulty == 'EA':
-        # XP gained is base XP
-        xp = base_xp
-    # Elif task difficulty medium
-    elif task_difficulty == 'ME':
-        xp = base_xp * 2
-    # Elif task difficulty hard
-    elif task_difficulty == 'HA':
-        xp = base_xp * 3
-    # Elif task difficulty ambitious
-    elif task_difficulty == 'AM':
-        xp = base_xp * 4
-    # No else statement to make this quicker to modify if I ever change the difficulty system
-    
-    #  Get the current logged in user
-    user = request.user.profile
-    
-    # Initialize leftover variable. This is used to 'save' any remaining xp
-    # a user may have when levelling up, to count towards them getting the next level
-    leftover = 0
-    
-    # The user can mark a task as done or not done
-    # If it's done, they gain xp
-    if task.done_status:
-        user.exp_points += xp
-        
-        # Feedback to the user their xp gain
-        messages.success(request, 'You completed a task and gained {} xp!'.format(xp))
-        
-        # Calculate any 'leftover' xp
-        if user.exp_points >= user.xp_threshold:
-            leftover = user.exp_points - user.xp_threshold
-        
-    # Else, they lose xp. This is here in case a user mistakingly marks a task as done
-    # Honesty is key but monitoring the user's activities is beyond the scope of this app!
+    # If the user trying to mark the task as done is indeed the user who created the task,
+    # allow them to carry out the action
     else:
-        # Get the current user's xp before any calculations are made
-        # in case they lose a level
-        current_xp = user.exp_points
-        # Minus the xp value of the task from their current xp
-        user.exp_points -= xp
+        task.done_status = not task.done_status
+        task.save()
         
-        # Feedback to the user their xp loss
-        messages.warning(request, 'You lost {} xp'.format(xp))
+        # Task Difficulty xp amounts
+        # This gets passed through from the template when the user
         
-        # If the user now has less than 0 xp
-        if user.exp_points < 0:
-            # Minus a level
-            user.level_rank -= 1
-            # Set the new xp threshold of the new level
-            user.xp_threshold -= base_xp_threshold
-            # Set their new xp
-            # If the user loses a level from undoing a task, they do not get set to 0
-            # xp like if they lose a level from lost hp
-            # Instead, they go 'back in time' and have the same xp they would of had
-            # at the previous level before marking the task as done
-            # e.g. a user on 20xp at level 2 marks an ambitious task (40xp) as undone
-            # They go back to level 1 (100xp threshold), but with 80xp already attained
-            user.exp_points = user.xp_threshold - current_xp
+        # Set the base xp amount
+        # Using a base amount allows multipliers to be applied to higher difficulties
+        # Makes this easier to change if I ever decide to change how xp rewards are calculated
+        base_xp = 10
+        
+        # Set base xp_threshold increment
+        # Again, if this ever needs changing
+        base_xp_threshold = 100
+        
+        # If the task marked as done has a difficulty of 'Easy'
+        if task_difficulty == 'EA':
+            # XP gained is base XP
+            xp = base_xp
+        # Elif task difficulty medium
+        elif task_difficulty == 'ME':
+            xp = base_xp * 2
+        # Elif task difficulty hard
+        elif task_difficulty == 'HA':
+            xp = base_xp * 3
+        # Elif task difficulty ambitious
+        elif task_difficulty == 'AM':
+            xp = base_xp * 4
+        # No else statement to make this quicker to modify if I ever change the difficulty system
+        
+        #  Get the current logged in user
+        user = request.user.profile
+        
+        # Initialize leftover variable. This is used to 'save' any remaining xp
+        # a user may have when levelling up, to count towards them getting the next level
+        leftover = 0
+        
+        # The user can mark a task as done or not done
+        # If it's done, they gain xp
+        if task.done_status:
+            user.exp_points += xp
             
-            # Feedback to the user their level loss
-            messages.warning(request, 'You lost a level!')
-        
-    # If the user's xp has reached or exceeded their current xp_threshold
-    if user.exp_points >= user.xp_threshold:
-        # Reset experience points, but allow the user to retain full xp from a task
-        # e.g. if a user completes an amibitous task (40xp) when they only need 10 to level up
-        # they will have 30xp towards the next level
-        user.exp_points = 0 + leftover
-        # Increment the users level by 1
-        user.level_rank +=1
-        # Set the new xp_threshold
-        # Each subsequent level gets harder to obtain!
-        user.xp_threshold += base_xp_threshold
-        
-        # Feedback to the user
-        messages.success(request, "Well done! You've just gained a level!")
-
-      
-     # Save the updated user instance  
-    user.save()
+            # Feedback to the user their xp gain
+            messages.success(request, 'You completed a task and gained {} xp!'.format(xp))
+            
+            # Calculate any 'leftover' xp
+            if user.exp_points >= user.xp_threshold:
+                leftover = user.exp_points - user.xp_threshold
+            
+        # Else, they lose xp. This is here in case a user mistakingly marks a task as done
+        # Honesty is key but monitoring the user's activities is beyond the scope of this app!
+        else:
+            # Get the current user's xp before any calculations are made
+            # in case they lose a level
+            current_xp = user.exp_points
+            # Minus the xp value of the task from their current xp
+            user.exp_points -= xp
+            
+            # Feedback to the user their xp loss
+            messages.warning(request, 'You lost {} xp'.format(xp))
+            
+            # If the user now has less than 0 xp
+            if user.exp_points < 0:
+                # Minus a level
+                user.level_rank -= 1
+                # Set the new xp threshold of the new level
+                user.xp_threshold -= base_xp_threshold
+                # Set their new xp
+                # If the user loses a level from undoing a task, they do not get set to 0
+                # xp like if they lose a level from lost hp
+                # Instead, they go 'back in time' and have the same xp they would of had
+                # at the previous level before marking the task as done
+                # e.g. a user on 20xp at level 2 marks an ambitious task (40xp) as undone
+                # They go back to level 1 (100xp threshold), but with 80xp already attained
+                user.exp_points = user.xp_threshold - current_xp
+                
+                # Feedback to the user their level loss
+                messages.warning(request, 'You lost a level!')
+            
+        # If the user's xp has reached or exceeded their current xp_threshold
+        if user.exp_points >= user.xp_threshold:
+            # Reset experience points, but allow the user to retain full xp from a task
+            # e.g. if a user completes an amibitous task (40xp) when they only need 10 to level up
+            # they will have 30xp towards the next level
+            user.exp_points = 0 + leftover
+            # Increment the users level by 1
+            user.level_rank +=1
+            # Set the new xp_threshold
+            # Each subsequent level gets harder to obtain!
+            user.xp_threshold += base_xp_threshold
+            
+            # Feedback to the user
+            messages.success(request, "Well done! You've just gained a level!")
     
-    return redirect('tasks:get_tasks')
+          
+         # Save the updated user instance  
+        user.save()
+        
+        return redirect('tasks:get_tasks')
     
 def delete_task(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
