@@ -121,10 +121,20 @@ def get_tasks(request):
     
     return render(request, 'tasks/tasks.html', context)
     
-# User filter will need to go here for security
+@login_required
 def detail(request, task_id):
+
     task = get_object_or_404(Task, pk=task_id)
-    return render(request, 'tasks/task_detail.html', {'task': task})
+    
+    # Ensure only the user who created the task is able to view the task's detail
+    if not request.user == task.user:
+        # Return a 404 page
+        return render(request, '404.html')
+    
+    # If the user trying to access the task's detail is indeed the user who created the task,
+    # show them the page
+    else:
+        return render(request, 'tasks/task_detail.html', {'task': task})
 
 def create_task(request):
     if request.method=="POST":
