@@ -269,7 +269,21 @@ def toggle_done_status(request, task_id, task_difficulty):
         
         return redirect('tasks:get_tasks')
     
+@login_required
 def delete_task(request, task_id):
+    """
+    Allows a user to delete a task they created
+    """
+    # Get the task
     task = get_object_or_404(Task, pk=task_id)
-    task.delete()
-    return redirect('tasks:get_tasks')
+    
+    # Ensure only the user who created the task is able to delete it
+    if not request.user == task.user:
+        # Return a 404 page
+        return render(request, '404.html')
+    
+    # If the user trying to delete a task is indeed the user who created the task,
+    # allow them to carry out the action
+    else:
+        task.delete()
+        return redirect('tasks:get_tasks')
