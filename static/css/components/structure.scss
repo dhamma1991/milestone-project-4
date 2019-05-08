@@ -42,8 +42,22 @@ These styles relate to elements found across multiple pages
 /* Django Messages */
 .django-messages {
     margin: 0; // Remove default margin set by ul
-    padding: 10px;
-    background-color: $messageSuccessColor;
+    
+    li {
+        padding: 10px 0;      
+    }
+    
+    /* Success Messages
+    Each of the different message types has a different background color
+    to serve as a visual indicator of the nature of the message */
+    .success {
+        background-color: $messageSuccessColor;       
+    }
+    
+    .warning {
+        background-color: $messageWarningColor;
+    }
+
 }
 /* /Django Messages */
 

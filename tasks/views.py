@@ -203,6 +203,9 @@ def toggle_done_status(request, task_id, task_difficulty):
         # Minus the xp value of the task from their current xp
         user.exp_points -= xp
         
+        # Feedback to the user their xp loss
+        messages.warning(request, 'You lost {} xp'.format(xp))
+        
         # If the user now has less than 0 xp
         if user.exp_points < 0:
             # Minus a level

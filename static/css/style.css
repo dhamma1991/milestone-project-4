@@ -14,6 +14,8 @@
 /* Colors */
 /* Theme Colors */
 /* /Theme Colors */
+/* Message Colors */
+/* /Message Colors */
 /* /Colors */
 /* Structural */
 /* /Structural */
@@ -96,8 +98,15 @@ These styles relate to elements found across multiple pages
 /* Django Messages */
 .django-messages {
   margin: 0;
-  padding: 10px;
-  background-color: #beffbe; }
+  /* Success Messages
+  Each of the different message types has a different background color
+  to serve as a visual indicator of the nature of the message */ }
+  .django-messages li {
+    padding: 10px 0; }
+  .django-messages .success {
+    background-color: #beffbe; }
+  .django-messages .warning {
+    background-color: #f3ff91; }
 
 /* /Django Messages */
 /* Headings */
