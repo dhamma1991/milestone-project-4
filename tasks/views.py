@@ -134,18 +134,58 @@ def detail(request, task_id):
     # If the user trying to access the task's detail is indeed the user who created the task,
     # show them the page
     else:
-        return render(request, 'tasks/task_detail.html', {'task': task})
+        if request.method == "POST":
+            form = AddTaskForm(request.POST, instance = task)
+            
+            if form.is_valid():
+                task = form.save(commit=False)
+                task.user = request.user
+                task.save()
+                return redirect('tasks:get_tasks')
+            
+        else:
+            form = AddTaskForm(instance = task)
+            
+        return render(request, "tasks/task_detail.html", {'form': form})
+    
+    
+    
+    
+    
+    
+    
+    #     if request.method=="POST":
+    #     # Construct the post form with user inputted data from the submitted form
+    #     form = AddTaskForm(request.POST)
+        
+    #     if form.is_valid():
+    #         task = form.save(commit=False)
+    #         task.user = request.user
+    #         task.save()
+    #         return redirect('tasks:get_tasks')
+            
+    # else:
+    #     form = AddTaskForm()
+    
+    
+    
+    
+    
+    
+        # return render(request, 'tasks/task_detail.html', {'task': task})
 
 @login_required
 def create_task(request):
     if request.method=="POST":
         # Construct the post form with user inputted data from the submitted form
         form = AddTaskForm(request.POST)
+        
         if form.is_valid():
             task = form.save(commit=False)
             task.user = request.user
             task.save()
             return redirect('tasks:get_tasks')
+            
     else:
         form = AddTaskForm()
         

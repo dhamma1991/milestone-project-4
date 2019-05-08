@@ -9,6 +9,17 @@
         <!-- Human Readable Task Difficulty -->
         {{ task.get_task_difficulty_display }}
         <!-- /Human Readable Task Difficulty -->
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            {{ form.as_p }}
+            
+            <div class="center-align task-page-btns">
+                <button class="waves-effect waves-light btn theme-cyan" type="submit">Edit</button>   
+                <a class="waves-effect waves-light btn red" href="{% url 'tasks:get_tasks' %}">Cancel</a>
+            </div>
+        </form>
 
         <form method="POST" action="delete/">
             {% csrf_token %}
