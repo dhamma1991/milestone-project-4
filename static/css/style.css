@@ -95,7 +95,9 @@ These styles relate to elements found across multiple pages
 /* /Nav */
 /* Django Messages */
 .django-messages {
-  margin: 0 0.35rem 0; }
+  margin: 0;
+  padding: 10px;
+  background-color: #beffbe; }
 
 /* /Django Messages */
 /* Headings */

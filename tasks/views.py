@@ -187,6 +187,9 @@ def toggle_done_status(request, task_id, task_difficulty):
     if task.done_status:
         user.exp_points += xp
         
+        # Feedback to the user their xp gain
+        messages.success(request, 'You completed a task and gained {} xp!'.format(xp))
+        
         # Calculate any 'leftover' xp
         if user.exp_points >= user.xp_threshold:
             leftover = user.exp_points - user.xp_threshold
