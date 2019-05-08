@@ -63,10 +63,6 @@
             {% for task in task_list %}
                 <li class="row">
                     <div class="col s12 m3">
-                        <!-- Task Icon -->
-                        <!--<i class="material-icons flow-text task-icon">today</i>-->
-                        <!-- /Task Icon -->
-                        
                         <!-- Task Name 
                             Truncate very long task names, this is to preserve the layout
                             of the page -->
@@ -91,23 +87,24 @@
                         <!-- /Done Button -->
                     </div>
                     
+                    <!-- Done Status Icon -->
                     <div class="col s6 m3">
                         <div class="done-status">
                             {% if task.done_status %}
                                 <img src="{% static 'images/task-checkbox.svg' %}" alt="Check">
-                                <!--<span>&#10003;</span>-->
                             {% else %}
                                 <span></span>
                             {% endif %}                              
                         </div>
                     </div>
+                    <!-- /Done Status Icon -->
                 </li>
             {% endfor %}
             </ul>
             
         <!-- Else, the user has no tasks -->
         {% else %}
-            <p>You currently have no tasks!.</p>
+            <p class="center-align">You currently have no tasks!.</p>
         {% endif %}
         <!-- /Tasks List -->
     </main>
