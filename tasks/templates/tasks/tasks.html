@@ -4,6 +4,10 @@
 
 {% block content %}
     <main class="container tasks-main">
+        <!-- Heading -->
+        <h1 class="center-align">Tasks</h1>
+        <!-- /Heading -->
+        
         <!-- User Info -->
         <section class="user-info">
             <!-- Username and Hitpoints -->
@@ -32,13 +36,15 @@
                     XP: {{ user.profile.exp_points}}/{{ user.profile.xp_threshold }}
                 </div>
             </div>
-            <!-- /Level and XP -->          
+            <!-- /Level and XP -->  
+            
+            <!-- Help Text -->
+            <p>This is your task list. You can mark a task as done by clicking the 'Mark Done' button. If you make a mistake, just click the button again and the task will be marked as not done.</p>
+            
+            <p>At the end of every day (currently midnight GMT), any task you have not done will cause you to lose health. If you run out of health, you lose a level.</p>
+            <!-- /Help Text -->
         </section>
         <!-- /User Info -->
-        
-        <!-- Heading -->
-        <h1 class="center-align">Tasks</h1>
-        <!-- /Heading -->
         
         <!-- Add a Task Link -->
         <div class="center-align flow-text">
