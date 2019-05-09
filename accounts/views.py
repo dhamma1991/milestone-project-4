@@ -7,6 +7,9 @@ from django.contrib.auth.decorators import login_required
 # Import forms
 from .forms import AccountCreationForm, AccountUpdateForm, ProfileUpdateForm
 
+# Import models
+from .models import Profile
+
 # Required for Stripe integration
 import stripe
 
@@ -86,14 +89,22 @@ def profile(request):
 def donate(request):
     """
     Render the donation page and pass along the key required by Stripe
+    Get a list of profiles which have previously donated
     """
-    context = {
-        'key': settings.STRIPE_PUBLISHABLE_KEY
-    }
+    # Get a list of the profiles filtered by profiles which have donated
+    profile_list = Profile.objects.filter(has_donated = True)
     
+    # Establish the context to pass through to the template
+    context = {
+        'key': settings.STRIPE_PUBLISHABLE_KEY,
+        'profile_list': profile_list
+    }
+
+    # Render the template, pass through context
     return render(request, 'accounts/donate.html', context)
     
-""" The charge view """    
+""" The charge view """
+@login_required
 def charge(request):
     """
     Make a 'charge' to the user and render charge.html

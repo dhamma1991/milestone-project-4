@@ -179,6 +179,11 @@ Styles common to the elements found within the accounts app
       margin-left: 15px; }
 
 /* /User Form */
+/* Donate Page */
+/* /Donate Page */
+.donated-users h2 {
+  font-size: 1.5rem; }
+
 /*
 
 These styles relate to the html content found in the tasks app templates
