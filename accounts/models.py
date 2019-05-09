@@ -19,6 +19,7 @@ class Profile(models.Model):
     xp_threshold = models.IntegerField(default = 100)
     # The user's last login is used to determine when task.done_status is refreshed
     # Default is when the user is created
+    # A last login field is built into Django's User model. However, in my case I specifically only want the day, so I thought it easier to just add it here
     last_login = models.DateTimeField(default = date.today)
     
     
