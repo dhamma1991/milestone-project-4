@@ -8,6 +8,8 @@ from . import views
 urlpatterns = [
     # Donate url, go to the donate page
     path('donate/', views.donate, name='donate'),
+    # Make a 'charge' to the user who goes through with a donation
+    path('charge/', views.charge, name='charge'),
     # Sign up url, go to the sign up page, post the form
     path('sign_up/', views.register, name='sign_up'),
     # Profile url, go to the user's profile page

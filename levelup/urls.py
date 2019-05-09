@@ -19,8 +19,6 @@ urlpatterns = [
     path('stats/', include('stats.urls')),
     # About url, go to the about page
     path('get_started/', views.get_started, name='get_started'),
-    # Make a 'charge' to the user who goes through with a donation
-    path('charge/', views.charge, name='charge'),
 ]
 
 # When in development, append media files to urlpatterns containing MEDIA_URL

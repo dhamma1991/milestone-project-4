@@ -7,6 +7,9 @@ from django.contrib.auth.decorators import login_required
 # Import forms
 from .forms import AccountCreationForm, AccountUpdateForm, ProfileUpdateForm
 
+# Required for Stripe integration
+import stripe
+
 """ The register view """
 def register(request):
     """ 
@@ -89,4 +92,25 @@ def donate(request):
     }
     
     return render(request, 'accounts/donate.html', context)
+    
+""" The charge view """    
+def charge(request):
+    """
+    Make a 'charge' to the user and render charge.html
+    """
+    # Get the stripe API key
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    
+    # If the user makes a post
+    if request.method == 'POST':
+        # Make a charge, pass in charge args
+        charge = stripe.Charge.create(
+            amount=500,
+            currency='usd',
+            description='Donate',
+            source=request.POST['stripeToken']
+        )
+        
+        # Go to charge.html
+        return render(request, 'charge.html')
     
