@@ -28,7 +28,7 @@ This app is technically redundant. Originally, I wanted to have the level system
 
 However, in the end, for the first release of the app I found it much easier to just build the level system into the tasks and accounts app.
 
-Since I do intend to continue developing this project I left the levelsystem app in place. This will be built upon for a subsequent release.
+Since I do intend to continue developing this project I left the levelsystem app in place. This will be built upon for a subsequent release. It will be noted that levelsystem is not included in Django's installed apps.
 
 # Testing
 
