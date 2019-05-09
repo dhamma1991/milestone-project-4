@@ -121,5 +121,5 @@ def charge(request):
         user.save()
         
         # Go to charge.html
-        return render(request, 'charge.html')
+        return render(request, 'accounts/charge.html')
     
