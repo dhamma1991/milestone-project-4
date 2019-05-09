@@ -1,8 +1,13 @@
+# Import Django components
 from django.shortcuts import render, redirect
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
+# Import forms
 from .forms import AccountCreationForm, AccountUpdateForm, ProfileUpdateForm
 
+""" The register view """
 def register(request):
     """ 
     Enable creation of a new user account
@@ -26,6 +31,7 @@ def register(request):
         form = AccountCreationForm()
     return render(request, 'accounts/signup.html', {'form': form})
   
+""" The profile view """
 # Ensure a user is logged in to be able to view the profile page
 @login_required
 def profile(request):
@@ -71,4 +77,16 @@ def profile(request):
     
     # Render the template with passed in context
     return render(request, 'accounts/profile.html', context)
+    
+""" The donate view """    
+@login_required
+def donate(request):
+    """
+    Render the donation page and pass along the key required by Stripe
+    """
+    context = {
+        'key': settings.STRIPE_PUBLISHABLE_KEY
+    }
+    
+    return render(request, 'accounts/donate.html', context)
     

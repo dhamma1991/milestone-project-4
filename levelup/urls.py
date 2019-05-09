@@ -19,7 +19,7 @@ urlpatterns = [
     # About url, go to the about page
     path('get_started/', views.get_started, name='get_started'),
     # Donate url, go to the donate page
-    path('donate/', views.donate, name='donate'),
+    path('donate/', accounts_views.donate, name='donate'),
     # Make a 'charge' to the user who goes through with a donation
     path('charge/', views.charge, name='charge'),
     # Sign up url, go to the sign up page, post the form

@@ -1,7 +1,8 @@
+# Import Django components
 from django.http import Http404
 from django.http import HttpResponse
 from django.conf import settings
-from django.shortcuts import render, get_object_or_404, redirect # Import necessary Django components
+from django.shortcuts import render, get_object_or_404, redirect
 
 import stripe # Required for Stripe integration
 
@@ -27,18 +28,7 @@ def get_started(request):
     """
     return render(request, 'about.html')
 
-""" 3. The donate view """
-def donate(request):
-    """
-    Render the donation page and pass along the key required by Stripe
-    """
-    context = {
-        'key': settings.STRIPE_PUBLISHABLE_KEY
-    }
-    
-    return render(request, 'donate.html', context)
-
-""" 4. The charge view """    
+""" 3. The charge view """    
 def charge(request):
     """
     Make a 'charge' to the user and render charge.html
