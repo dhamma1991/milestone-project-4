@@ -22,6 +22,14 @@ For example, say UserX has a task with id of 6, with a difficulty of Easy. If th
 
 However, it should be noted that the user has full control over the difficulty that they set to their tasks, so it doesn't make sense for the user to exploit the url system this way. Therefore, although this exploit exists, it doesn't really effect the functionality of the app.
 
+# # Apps
+# # # levelsystem
+This app is technically redundant. Originally, I wanted to have the level system contained within its own app with its own models. I wanted to set up a table where I could specify unique xp thresholds, and possibly special rewards upon completing certain level milestones (e.g. perhaps a special popup or congratulations for level 10).
+
+However, in the end, for the first release of the app I found it much easier to just build the level system into the tasks and accounts app.
+
+Since I do intend to continue developing this project I left the levelsystem app in place. This will be built upon for a subsequent release.
+
 # Testing
 
 Most of the testing was conducted manually. The app is not particularly complex, so development time was spent testing "on the go" with features being tested as they were added. The small nature of the app meant that if other features were breaking as new ones were added, this was likely to be obvious.
