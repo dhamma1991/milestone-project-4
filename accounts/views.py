@@ -111,6 +111,15 @@ def charge(request):
             source=request.POST['stripeToken']
         )
         
+        # Get the current user
+        user = request.user.profile
+        
+        # Set that the user has donated
+        user.has_donated = True
+        
+        # Save changes to the model
+        user.save()
+        
         # Go to charge.html
         return render(request, 'charge.html')
     
