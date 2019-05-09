@@ -9,6 +9,7 @@ class Profile(models.Model):
     account = models.OneToOneField(User, on_delete = models.CASCADE)
     # Allow users to upload a profile image
     image = models.ImageField(default = 'default.jpg', upload_to='profile_pics')
+    # The users hitpoints, new users start with 100
     hitpoints = models.IntegerField(default = 100)
     # Users start off with 0 experience points
     exp_points = models.IntegerField(default = 0)
@@ -21,6 +22,8 @@ class Profile(models.Model):
     # Default is when the user is created
     # A last login field is built into Django's User model. However, in my case I specifically only want the day, so I thought it easier to just add it here
     last_login = models.DateTimeField(default = date.today)
+    # If the user has donated, this is set to true
+    has_donated = models.BooleanField(default = False)
     
     
     
