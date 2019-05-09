@@ -4,9 +4,9 @@
 
 {% block content %}
     <main class="container center-align">
-        <h1>Payment received</h1>
+        <h1>Payment Received</h1>
         
-        <p>Thank you! Your support helps Level Up stay up and running!</p>
+        <p>Thank you {{ request.user }}! Your support helps Level Up stay up and running!</p>
         
         <p><a href="{% url 'index' %}">Back to Home</a></p>
     </main>
