@@ -53,17 +53,17 @@
                 </li>
                 <!-- /About -->
                 
-                <!-- Donate -->
-                <li>
-                    <a href="{% url 'donate' %}">Donate</a>
-                </li>
-                <!-- /Donate -->
-                
                 <!-- Conditional Nav Links 
-                    The last 2 links that get displayed depends on whether or not a user is authenticated
-                    If a user is authenticated, the links are Tasks and the User Dropdown
+                    The last links that get displayed depends on whether or not a user is authenticated
+                    If a user is authenticated, the links are Tasks, Donate and the User Dropdown
                     If no user is authenticated, the links are Login and Create accounts -->
                 {% if user.is_authenticated %}
+                    <!-- Donate -->
+                    <li>
+                        <a href="{% url 'donate' %}">Donate</a>
+                    </li>
+                    <!-- /Donate -->
+                    
                     <!-- Tasks -->
                     <li>
                         <a href="{% url 'tasks:get_tasks' %}">Tasks</a>
@@ -101,15 +101,15 @@
                     <a href="{% url 'get_started' %}">About</a>
                 </li>
                 <!-- /About -->
-                
-                <!-- Donate -->
-                <li>
-                    <a href="{% url 'donate' %}">Donate</a>  
-                </li>
-                <!-- /Donate -->
-                
+
                 <!-- Check for user authentication to display the correct links -->
                 {% if user.is_authenticated %}
+                    <!-- Donate -->
+                    <li>
+                        <a href="{% url 'donate' %}">Donate</a>  
+                    </li>
+                    <!-- /Donate -->
+                    
                     <!-- Your Profile -->
                     <li>
                         <a href="{% url 'profile' %}">Your Profile</a>
@@ -165,25 +165,19 @@
             <div class="container">
                     <ul class="row">
                         <!-- Home -->
-                        <li class="col s3">
+                        <li class="col s4">
                             <a href="{% url 'index' %}">Home</a>
                         </li>
                         <!-- /Home -->
                         
                         <!-- About -->                
-                        <li class="col s3">
+                        <li class="col s4">
                             <a href="{% url 'get_started' %}">About</a>    
                         </li>
                         <!-- /About -->
                         
-                        <!-- Donate -->    
-                        <li class="col s3">
-                            <a href="{% url 'donate' %}">Donate</a>       
-                        </li>
-                        <!-- /Donate -->
-                        
                         <!-- Stats -->
-                        <li class="col s3"><a href="{% url 'stats:get_stats' %}">Levelup Stats</a></li>
+                        <li class="col s4"><a href="{% url 'stats:get_stats' %}">Levelup Stats</a></li>
                         <!-- /Stats -->
                     </ul>
                     
