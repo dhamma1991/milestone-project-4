@@ -1,7 +1,9 @@
 # Import necessary modules so that tests can be conducted
 from django.test import TestCase
 from django.shortcuts import get_object_or_404
-# from .models import Item
+from django.contrib.auth.models import User
+# Client can be used to act as a dummy web browser, it also gives access to some useful methods, such as login()
+from django.test import Client
 
 
 class TestViews(TestCase):
@@ -13,10 +15,49 @@ class TestViews(TestCase):
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, "index.html")
     
-    # def test_get_add_item_page(self):
-    #     page = self.client.get("/add")
-    #     self.assertEqual(page.status_code, 200)
-    #     self.assertTemplateUsed(page, "item_form.html")
+    def test_cannot_get_tasks_page_without_login(self):
+        """
+        Since there is no authenticated user in the class yet, trying to get to the tasks page should get a 302 error, as a redirect
+        to login should occur
+        """
+        page = self.client.get("/tasks/")
+        self.assertEqual(page.status_code, 302)
+        
+    def test_can_get_tasks_page_with_user_logged_in(self):
+        """
+        With a user logged in, the app should be able to reach tasks.html
+        """
+        # Intialise Client
+        c = Client()
+        
+        # Create a user
+        User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+        
+        # Log in the user
+        c.login(username='test_user', password='supersecretpa55')
+        
+        # Assert the tasks page can be reached
+        page = c.get("/tasks/")
+        self.assertEqual(page.status_code, 200)
+        
+    def test_can_get_profile_page_with_user_logged_in(self):
+        """
+        With a user logged in, the app should be able to reach tasks.html
+        """
+        # Intialise Client
+        c = Client()
+        
+        # Create a user
+        User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+        
+        # Log in the user
+        c.login(username='test_user', password='supersecretpa55')
+        
+        # Assert the tasks page can be reached
+        page = c.get("/profile/")
+        self.assertEqual(page.status_code, 200)
+
+        
     
     # def test_get_edit_item_page(self):
     #     item = Item(name="Create a Test")

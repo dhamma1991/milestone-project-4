@@ -6,11 +6,13 @@ class LogInTest(TestCase):
         """
         Create a user with some credentials
         """
+        # Create credentials
         self.credentials = {
             'username': 'testuser',
             'password': 'secretpassword123'
         }
             
+        # Create a user
         User.objects.create_user(**self.credentials)
         
     def test_login(self):
