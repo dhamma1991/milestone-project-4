@@ -24,7 +24,9 @@ However, it should be noted that the user has full control over the difficulty t
 
 # Testing
 
-Automated testing was conducted using Django's built-in test framework (TestCase).
+Most of the testing was conducted manually. The app is not particularly complex, so development time was spent testing "on the go" with features being tested as they were added. The small nature of the app meant that if other features were breaking as new ones were added, this was likely to be obvious.
+
+Nevertheless, automated testing was conducted using Django's built-in test framework (TestCase), as much a demonstration of skill as it was a useful tool in this app's case. This is not in any way an attack on the the usefulness of automated testing in many cases, which is clearly essential especially for larger projects.
 
 Sanity tests were conducted first, these can be found in levelup/tests.py. Simple assertion tests were used to check that the test framework was functioning correctly.
 
