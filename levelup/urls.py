@@ -1,8 +1,10 @@
-from django.contrib import admin # Import admin to allow access to admin panel
-from django.contrib.auth import views as auth_views # Import Django authorization views
+# Import Django components
+from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+# Import views from apps
 from . import views
 from accounts import views as accounts_views
 from stats import views as stats_views
@@ -12,9 +14,9 @@ urlpatterns = [
     path('', views.index, name='index'),
     # Admin url
     path('admin/', admin.site.urls),
-    # Tasks url, get the user's tasks (or prompt them to login)
+    # Tasks app urls
     path('tasks/', include('tasks.urls')),
-    # Stats url, go to the stats page
+    # Stats app urls
     path('stats/', include('stats.urls')),
     # About url, go to the about page
     path('get_started/', views.get_started, name='get_started'),
