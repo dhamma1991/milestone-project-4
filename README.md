@@ -28,6 +28,8 @@ Automated testing was conducted using Django's built-in test framework (TestCase
 
 Sanity tests were conducted first, these can be found in levelup/tests.py. Simple assertion tests were used to check that the test framework was functioning correctly.
 
+Building up from there, I tested some of the built-in Django components, starting with the forms. I tested the AddTaskForm and UserCreationForm, checking that objects can be created successfully and that form.is_valid is true and false in cases where it should be true and false. No issues were detected during the tests. The tests themselves can be found within levelup/test_forms.py.
+
 # Technologies Used
 Django
 [link here]
