@@ -1,0 +1,49 @@
+/*
+
+These classes assist in accomplishing various changes to elements or improving accessibility
+
+*/
+
+/* Materialize does not include an sr-only class (unlike Bootstrap) so one was added here */
+.sr-only {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* Font Classes
+    Add a font family to an element */
+@import url('https://fonts.googleapis.com/css?family=Arimo:400,700');
+
+.arimo-font {
+    font-family: 'Arimo', sans-serif;
+}
+/* /Font Classes */
+
+/* Color Classes
+    Used to quickly change an element's background or font color */
+.theme-dark {
+    background-color: $themeDark;
+}
+
+.theme-font-white {
+    color: $themeFontWhite;
+}
+
+.theme-cyan {
+    background-color: $themeCyan;
+}
+/* /Color Classes */
+
+/* Structural Classes
+    These classes allow an easy way to structure elements in the html */
+.def-margin-top {
+    margin-top: $defaultMargin;
+}
+
+.def-margin-bottom {
+    margin-bottom: $defaultMargin;
+}

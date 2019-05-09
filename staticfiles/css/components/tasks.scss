@@ -1,0 +1,175 @@
+/*
+
+These styles relate to the html content found in the tasks app templates
+
+*/
+
+.tasks-main {
+    /* Material Icons */
+    .material-icons {
+        cursor: default; 
+        /* Positiom the icons to fit with the text */
+        position: relative;
+        top: 2px;
+        
+        /* Match a flow-text breakpoint, adjust the icon so it continues
+            to sit well with the text */
+        @include mqMinWidth(660px) {
+            top: 3px;
+        }
+    }
+    /* /Material Icons */
+    
+    /* User Info */
+    .user-info {
+        margin-top: $defaultMargin;
+        
+        /* Style the hp and xp icons */
+        .hp-icon {
+            color: $hpRed;
+        }
+        
+        .xp-icon {
+            color: $xpGold;
+        }
+    }
+    /* /User Info */
+    
+    /* Tasks List */
+    .tasks-ul {
+        li {
+            margin-top: $defaultMargin;
+            height: 150px;
+            
+            /* Increase the height of the list items with the viewport width */
+            @include mqMinWidth($matSmBreakpoint + 1px) {
+                height: 200px;
+            }
+            
+            /* Target all but the last task 
+                Add a divider and thicken the height*/
+            &:not(:last-child) {
+                padding: 10px;
+                border-bottom: 1px solid rgba(0,0,0,0.2);
+            }
+            
+            /* Task Icon
+                The task icons require some positioning that
+                is different to the other icons on the page */
+            .task-icon {
+                top: 3px;
+                
+                @include mqMinWidth(660px) {
+                    top: 4px;
+                }
+            }
+            /* /Task Icon */
+            
+            /* Task Done Button */
+            form {
+                display: inline-block;
+                
+                .btn {
+                    padding: 0; // Adjust the default Materialize .btn padding
+                }
+                    
+                input {
+                    color: white;
+                    min-width: 115px;
+                    font-size: 12px; // Hard value used here as the integrity of the layout of the page depends on it
+                    /* Make sure the clickable area of the input matches the .btn it is wrapped in */
+                    width: inherit;
+                    height: inherit;
+                    /* Make it obvious the input does something */
+                    cursor: pointer;
+                }
+            }
+            /* /Task Done Button */
+            
+            /* Checkbox */
+            .done-status {
+                border: 2px solid black;
+                display: inline-block;
+                width: 35px;
+                height: 35px;    
+                
+                img {
+                    text-align: center;
+                    width: 30px;
+                    height: 30px;
+                    padding: 2px;
+                }
+            }
+            /* /Checkbox */
+        }
+    }
+    /* /Tasks List */
+}
+
+.task-detail-help-text {
+    margin-bottom: $defaultMargin * 2;
+}
+
+#div_id_task_name {
+    margin-bottom: $defaultMargin + 10px; // Space out the form elements better
+}
+
+#div_id_task_notes {
+    label {
+        /* Ensure that when Materialize's form animation for the 
+        label kicks in, the label isn't obscured by the widget */
+        top: -11px;    
+    }
+}
+
+#div_id_task_difficulty {
+    label {
+        top: -22px; // Ensure the label doesn't obscure the text on the dropdown
+    }
+}
+
+/* Task Detail and Add Task Page Buttons */
+.task-page-btns {
+    .btn {
+        padding: 0;
+    }
+    
+    /* Target the Add and Edit task button */
+    button {
+        margin-bottom: $defaultMargin;
+        width: 140px;
+        cursor: pointer;
+        
+        /* Once the m6 layout kicks in, margin bottom is not needed */
+        @include mqMinWidth($matSmBreakpoint) {
+            margin-bottom: 0;
+        }
+    }
+    
+    /* Target the Delete button */
+    i {
+        width: 140px;
+        
+        input {
+            color: white;
+            cursor: pointer;
+            /* Ensure the clickable area of the input matches the width and height of the container */
+            width: inherit;
+            height: inherit;
+        }
+    }
+    
+    /* Target the Cancel link */
+    a {
+        // margin-left: 10px;
+        min-width: 140px;
+    }
+}
+
+/* Specifically target the Cancel link on task-detail */
+.task-detail-cancel {
+    /* Since there are 3 buttons on task-detail as opposed to 2 on add-task,
+        the third buton (Cancel) needs spacing away from the other 2 */
+    margin-top: $defaultMargin;
+}
+/* /Task Detail and Add Task Page Buttons */

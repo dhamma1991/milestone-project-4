@@ -1,0 +1,108 @@
+/*
+
+These styles relate to elements found across multiple pages
+
+*/
+
+/* Nav */
+.nav-wrapper {
+    #logo-container { // Target the container for the logo text and image
+        margin-left: 20px;
+            
+        img { // Target the logo image
+            max-width: 50px;
+            position: absolute;
+            
+            /* Incrementally adjust the logo image based on the layout of the page, which depends on the viewport width 
+                The Materialize nav uses max-width for layout changes, so that system is MOSTLY copied here by using max-width media queries */
+            @include mqMinWidth($matLaBreakpoint + 1px) { // + 1px to ensure this media query doesn't overlap with the one below it
+                left: 147px;
+                top: 6px;
+            }
+            
+            @include mqMaxWidth($matLaBreakpoint) {
+                left: 142px;
+                top: 7px;
+            }
+            
+            @include mqMaxWidth($matMeBreakpoint) {
+                left: 95px;
+                top: 7px;
+            }
+            
+            @include mqMaxWidth($matSmBreakpoint) {
+                left: 95px;
+                top: 2px;
+            }
+        }
+    }
+}
+/* /Nav */
+
+/* Django Messages */
+.django-messages {
+    margin: 0; // Remove default margin set by ul
+    
+    li {
+        padding: 10px 0;      
+    }
+    
+    /* Success Messages
+    Each of the different message types has a different background color
+    to serve as a visual indicator of the nature of the message */
+    .success {
+        background-color: $messageSuccessColor;       
+    }
+    
+    .warning {
+        background-color: $messageWarningColor;
+    }
+
+}
+/* /Django Messages */
+
+/* Headings
+    Overwrite Materialize defaults */
+h1 {
+    font-size: 3.5rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+/* /Headings */
+
+/* Site Buttons */
+.btn {
+    min-width: 100px; // Set a min-width on the Materialize button class
+}
+/* /Site Buttons */
+
+/* Anchor Links */
+// a {
+//     color: $themeCyan;
+// }
+/* /Anchor Links */
+
+/* Footer */
+.page-footer {
+    padding-top: 0; // Reset default Materialize padding
+    
+    .footer-copyright {
+        .row {
+            margin: 0; // Overwrite Materialize default margin
+            
+            a {
+                color: $themeFontWhite;
+            }
+        }
+    }
+}
+
+/* Index Fade In Effect */
+// Ensure that the faded in elements start off as not displayed
+.index-fadein-effect {
+    display: none;
+}
+/* /Index Fade In Effect */
+/* /Footer */

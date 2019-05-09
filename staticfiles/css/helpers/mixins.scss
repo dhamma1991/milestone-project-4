@@ -1,0 +1,16 @@
+/* Media Queries */
+@mixin mqMinWidth($mqWidth) {
+    /* This mixin used for media queries, using responsive design principles of mobile first */
+    @media (min-width: $mqWidth) {
+        @content
+    }
+}
+
+@mixin mqMaxWidth($mqWidth) {
+    /* Similiar to above mixin. In some cases functionality is easier to implement with max width 
+        This is the case when following Materialize's system, since that system uses max-width in some cases */
+    @media (max-width: $mqWidth) {
+        @content
+    }
+}
+/* /Media Queries */

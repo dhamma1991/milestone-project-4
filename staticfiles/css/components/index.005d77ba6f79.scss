@@ -1,0 +1,18 @@
+.index-main {
+    h1 {
+        /* This is the default Materialize h1 size, it is reapplied here so that the h1 declarations in structure.scss don't overwrite it */
+        font-size: 4.2rem;
+        
+        img {
+            position: relative;
+            max-width: 85px;
+            top: 21px;
+            right: 12px;
+        }
+    }
+    
+    a {
+        color: $themeFontWhite;
+        text-decoration: underline;
+    }
+}

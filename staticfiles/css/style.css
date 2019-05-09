@@ -1,0 +1,346 @@
+/* Default Materialize theme styles */
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+/* Media Queries */
+/* /Media Queries */
+/* Materialize Breakpoints 
+    These are the same values used by the Materialize framework's grid */
+/* /Materialize Breakpoints */
+/* Colors */
+/* Theme Colors */
+/* /Theme Colors */
+/* Message Colors */
+/* /Message Colors */
+/* /Colors */
+/* Structural */
+/* /Structural */
+/*
+
+These classes assist in accomplishing various changes to elements or improving accessibility
+
+*/
+/* Materialize does not include an sr-only class (unlike Bootstrap) so one was added here */
+@import url("https://fonts.googleapis.com/css?family=Arimo:400,700");
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden; }
+
+/* Font Classes
+    Add a font family to an element */
+.arimo-font {
+  font-family: 'Arimo', sans-serif; }
+
+/* /Font Classes */
+/* Color Classes
+    Used to quickly change an element's background or font color */
+.theme-dark {
+  background-color: #545454; }
+
+.theme-font-white {
+  color: #fdfdfd; }
+
+.theme-cyan {
+  background-color: #34b5a6; }
+
+/* /Color Classes */
+/* Structural Classes
+    These classes allow an easy way to structure elements in the html */
+.def-margin-top {
+  margin-top: 20px; }
+
+.def-margin-bottom {
+  margin-bottom: 20px; }
+
+/*
+
+These styles relate to elements found across multiple pages
+
+*/
+/* Nav */
+.nav-wrapper #logo-container {
+  margin-left: 20px; }
+  .nav-wrapper #logo-container img {
+    max-width: 50px;
+    position: absolute;
+    /* Incrementally adjust the logo image based on the layout of the page, which depends on the viewport width 
+        The Materialize nav uses max-width for layout changes, so that system is MOSTLY copied here by using max-width media queries */
+    /* This mixin used for media queries, using responsive design principles of mobile first */
+    /* Similiar to above mixin. In some cases functionality is easier to implement with max width 
+        This is the case when following Materialize's system, since that system uses max-width in some cases */
+    /* Similiar to above mixin. In some cases functionality is easier to implement with max width 
+        This is the case when following Materialize's system, since that system uses max-width in some cases */
+    /* Similiar to above mixin. In some cases functionality is easier to implement with max width 
+        This is the case when following Materialize's system, since that system uses max-width in some cases */ }
+    @media (min-width: 1201px) {
+      .nav-wrapper #logo-container img {
+        left: 147px;
+        top: 6px; } }
+    @media (max-width: 1200px) {
+      .nav-wrapper #logo-container img {
+        left: 142px;
+        top: 7px; } }
+    @media (max-width: 992px) {
+      .nav-wrapper #logo-container img {
+        left: 95px;
+        top: 7px; } }
+    @media (max-width: 600px) {
+      .nav-wrapper #logo-container img {
+        left: 95px;
+        top: 2px; } }
+
+/* /Nav */
+/* Django Messages */
+.django-messages {
+  margin: 0;
+  /* Success Messages
+  Each of the different message types has a different background color
+  to serve as a visual indicator of the nature of the message */ }
+  .django-messages li {
+    padding: 10px 0; }
+  .django-messages .success {
+    background-color: #beffbe; }
+  .django-messages .warning {
+    background-color: #f3ff91; }
+
+/* /Django Messages */
+/* Headings
+    Overwrite Materialize defaults */
+h1 {
+  font-size: 3.5rem; }
+
+h2 {
+  font-size: 2.5rem; }
+
+/* /Headings */
+/* Site Buttons */
+.btn {
+  min-width: 100px; }
+
+/* /Site Buttons */
+/* Anchor Links */
+/* /Anchor Links */
+/* Footer */
+.page-footer {
+  padding-top: 0; }
+  .page-footer .footer-copyright .row {
+    margin: 0; }
+    .page-footer .footer-copyright .row a {
+      color: #fdfdfd; }
+
+/* Index Fade In Effect */
+.index-fadein-effect {
+  display: none; }
+
+/* /Index Fade In Effect */
+/* /Footer */
+.index-main h1 {
+  /* This is the default Materialize h1 size, it is reapplied here so that the h1 declarations in structure.scss don't overwrite it */
+  font-size: 4.2rem; }
+  .index-main h1 img {
+    position: relative;
+    max-width: 85px;
+    top: 21px;
+    right: 12px; }
+.index-main a {
+  color: #fdfdfd;
+  text-decoration: underline; }
+
+/*
+
+Styles common to the elements found within the accounts app
+
+*/
+/* User Form */
+.user-form {
+  /* Hide the hints that display on the user forms for correct password and username input
+      This could probably be done more efficiently in the backend by modifying Django's default form
+      However, this is far easier and can be done with very little code
+      If the user fails the validation the validation hints still display as normal */
+  /* Target the label for the image field */ }
+  .user-form #hint_id_password1, .user-form #hint_id_password2, .user-form #hint_id_new_password1, .user-form #hint_id_username {
+    display: none; }
+  .user-form #div_id_image label {
+    top: -32px; }
+  .user-form dd {
+    color: #f44336;
+    margin: 0; }
+  .user-form .form-links {
+    margin: 10px 0 0 10px; }
+    .user-form .form-links small {
+      margin-left: 15px; }
+
+/* /User Form */
+/*
+
+These styles relate to the html content found in the tasks app templates
+
+*/
+.tasks-main {
+  /* Material Icons */
+  /* /Material Icons */
+  /* User Info */
+  /* /User Info */
+  /* Tasks List */
+  /* /Tasks List */ }
+  .tasks-main .material-icons {
+    cursor: default;
+    /* Positiom the icons to fit with the text */
+    position: relative;
+    top: 2px;
+    /* Match a flow-text breakpoint, adjust the icon so it continues
+        to sit well with the text */
+    /* This mixin used for media queries, using responsive design principles of mobile first */ }
+    @media (min-width: 660px) {
+      .tasks-main .material-icons {
+        top: 3px; } }
+  .tasks-main .user-info {
+    margin-top: 20px;
+    /* Style the hp and xp icons */ }
+    .tasks-main .user-info .hp-icon {
+      color: #c6302c; }
+    .tasks-main .user-info .xp-icon {
+      color: #f5c116; }
+  .tasks-main .tasks-ul li {
+    margin-top: 20px;
+    height: 150px;
+    /* Increase the height of the list items with the viewport width */
+    /* This mixin used for media queries, using responsive design principles of mobile first */
+    /* Target all but the last task 
+        Add a divider and thicken the height*/
+    /* Task Icon
+        The task icons require some positioning that
+        is different to the other icons on the page */
+    /* /Task Icon */
+    /* Task Done Button */
+    /* /Task Done Button */
+    /* Checkbox */
+    /* /Checkbox */ }
+    @media (min-width: 601px) {
+      .tasks-main .tasks-ul li {
+        height: 200px; } }
+    .tasks-main .tasks-ul li:not(:last-child) {
+      padding: 10px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+    .tasks-main .tasks-ul li .task-icon {
+      top: 3px;
+      /* This mixin used for media queries, using responsive design principles of mobile first */ }
+      @media (min-width: 660px) {
+        .tasks-main .tasks-ul li .task-icon {
+          top: 4px; } }
+    .tasks-main .tasks-ul li form {
+      display: inline-block; }
+      .tasks-main .tasks-ul li form .btn {
+        padding: 0; }
+      .tasks-main .tasks-ul li form input {
+        color: white;
+        min-width: 115px;
+        font-size: 12px;
+        /* Make sure the clickable area of the input matches the .btn it is wrapped in */
+        width: inherit;
+        height: inherit;
+        /* Make it obvious the input does something */
+        cursor: pointer; }
+    .tasks-main .tasks-ul li .done-status {
+      border: 2px solid black;
+      display: inline-block;
+      width: 35px;
+      height: 35px; }
+      .tasks-main .tasks-ul li .done-status img {
+        text-align: center;
+        width: 30px;
+        height: 30px;
+        padding: 2px; }
+
+.task-detail-help-text {
+  margin-bottom: 40px; }
+
+#div_id_task_name {
+  margin-bottom: 30px; }
+
+#div_id_task_notes label {
+  /* Ensure that when Materialize's form animation for the 
+  label kicks in, the label isn't obscured by the widget */
+  top: -11px; }
+
+#div_id_task_difficulty label {
+  top: -22px; }
+
+/* Task Detail and Add Task Page Buttons */
+.task-page-btns {
+  /* Target the Add and Edit task button */
+  /* Target the Delete button */
+  /* Target the Cancel link */ }
+  .task-page-btns .btn {
+    padding: 0; }
+  .task-page-btns button {
+    margin-bottom: 20px;
+    width: 140px;
+    cursor: pointer;
+    /* Once the m6 layout kicks in, margin bottom is not needed */
+    /* This mixin used for media queries, using responsive design principles of mobile first */ }
+    @media (min-width: 600px) {
+      .task-page-btns button {
+        margin-bottom: 0; } }
+  .task-page-btns i {
+    width: 140px; }
+    .task-page-btns i input {
+      color: white;
+      cursor: pointer;
+      /* Ensure the clickable area of the input matches the width and height of the container */
+      width: inherit;
+      height: inherit; }
+  .task-page-btns a {
+    min-width: 140px; }
+
+/* Specifically target the Cancel link on task-detail */
+.task-detail-cancel {
+  /* Since there are 3 buttons on task-detail as opposed to 2 on add-task,
+      the third buton (Cancel) needs spacing away from the other 2 */
+  margin-top: 20px; }
+
+/* /Task Detail and Add Task Page Buttons */
+/*
+
+Styles relating to the content found on stats.html
+
+*/
+.stats-main {
+  /* Target the statistical values */
+  /* Target the divider elements */ }
+  .stats-main strong {
+    font-size: 2rem; }
+  .stats-main .divider {
+    margin-bottom: 20px; }
+
+/*
+
+These styles relate to the content found on about.html
+
+*/
+.about-main article {
+  /* Give the article a bit more breathing room away from the footer */
+  margin-bottom: 80px; }
+
+.icon-block {
+  padding: 0 15px; }
+  .icon-block .material-icons {
+    font-size: inherit; }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column; }
+
+main {
+  flex: 1 auto; }
+
+/*# sourceMappingURL=style.css.map */

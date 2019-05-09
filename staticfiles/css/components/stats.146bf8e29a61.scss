@@ -1,0 +1,17 @@
+/*
+
+Styles relating to the content found on stats.html
+
+*/
+
+.stats-main {
+    /* Target the statistical values */
+    strong {
+        font-size: 2rem;
+    }
+    
+    /* Target the divider elements */
+    .divider {
+        margin-bottom: $defaultMargin;
+    }
+}
