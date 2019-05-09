@@ -50,6 +50,15 @@ def profile(request):
             # Redirect back to the profile page
             # Any new details the user just submitted should be displayed
             return redirect('profile')
+         
+        # If the account or profile forms are not valid    
+        elif not account_form.is_valid() or profile_form.is_valid():
+            # This is required in case the user tries to change their username to an already existing username on the db
+            # The validation kicks in and prevents the change, but for some reason request.user still changes to the failed username
+            # This means that the user sees the failed username on both the profile page, and also in the top right navigation
+            # Not sure why this happens but the below line fixes it.
+            request.user.refresh_from_db()
+            
     else:
         account_form = AccountUpdateForm(instance=request.user)
         profile_form = ProfileUpdateForm(instance=request.user.profile)
