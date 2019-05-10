@@ -87,20 +87,20 @@ def get_tasks(request):
 
         # If the tasks_not_done var has remained zero (all tasks completed)
         if not tasks_not_done:     
-            messages.info(request, "A new day has begun! You managed to complete all your tasks yesterday. Great work!")
+            messages.success(request, "A new day has begun! You managed to complete all your tasks yesterday. Great work!")
         else:
             # Inform the user that some tasks were not completed
-            messages.info(request, "Looks like you didn't fully complete you tasks yesterday!")
+            messages.warning(request, "Looks like you didn't fully complete you tasks yesterday!")
             # If a user higher than level 1 loses a level
             if user_lost_level:
-                messages.info(request, "You lost a level! Your xp will reset to 0.")
+                messages.warning(request, "You lost a level! Your xp will reset to 0.")
             # Else if a level 1 user 'loses' a level
             elif user_is_level_one:
-                messages.info(request, "Don't worry, users who are level 1 cannot lose levels. Maybe you need to make your tasks easier in order to level up?")
+                messages.warning(request, "Don't worry, users who are level 1 cannot lose levels. Maybe you need to make your tasks easier in order to level up?")
             # If a user didn't lose a level but still lost hitpoints
             # Inform them of the amount of hitpoint loss
             else:
-                messages.info(request, "Total hitpoints lost: {}".format(hitpoints_lost))
+                messages.warning(request, "Total hitpoints lost: {}".format(hitpoints_lost))
                 
             # Inform users of the number of tasks they didn't complete
             messages.info(request, "Tasks not completed: {}".format(tasks_not_done))
