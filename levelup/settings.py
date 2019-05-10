@@ -15,7 +15,7 @@ import os
 import dj_database_url
 
 # If there is a environment variable called development, create a variable called development and set it to true
-if os.environ.get('DEVELOPMENT') == 1:
+if os.environ.get('DEVELOPMENT'):
     # This will tell the program it is in a dev environment. If that's the case, turn production settings, like the database url specific to heroku
     # These settings can be found further down in the settings.py file
     DEBUG = True
