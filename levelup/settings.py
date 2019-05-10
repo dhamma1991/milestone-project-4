@@ -15,11 +15,12 @@ import os
 import dj_database_url
 
 # If there is a environment variable called development, create a variable called development and set it to true
-if os.environ.get('DEVELOPMENT'):
+if os.environ.get('DEVELOPMENT') == 1:
     # This will tell the program it is in a dev environment. If that's the case, turn production settings, like the database url specific to heroku
-    development = True
+    # These settings can be found further down in the settings.py file
+    DEBUG = True
 else:
-    development = False
+    DEBUG = False
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -33,9 +34,6 @@ if os.environ.get('TRAVIS_BUILD'):
     SECRET_KEY = 'wt5xd3fx+bgh+vo^hj!%l&-nag7ginpz7e@6t)gcf#(_@0ecjk'
 else:
     SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = [os.environ.get('C9_HOSTNAME'),
                 'levelup-productivity.herokuapp.com',]
