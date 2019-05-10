@@ -29,7 +29,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # Django Secret Key
-if os.environ.get('travis_build'):
+if os.environ.get('TRAVIS_BUILD'):
     SECRET_KEY = 'wt5xd3fx+bgh+vo^hj!%l&-nag7ginpz7e@6t)gcf#(_@0ecjk'
 else:
     SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
