@@ -12,7 +12,7 @@ urlpatterns = [
     # Admin url
     path('admin/', admin.site.urls),
     # Accounts app urls
-    path('/', include('accounts.urls')),
+    path('', include('accounts.urls')),
     # Tasks app urls
     path('tasks/', include('tasks.urls')),
     # Stats app urls
