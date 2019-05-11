@@ -101,15 +101,27 @@ These styles relate to elements found across multiple pages
 /* Django Messages */
 .django-messages {
   margin: 0;
+  /* Select the close button */
+  /* Select all but the first li (the first li is the close button, so basically select all messages) */
   /* Success Messages
   Each of the different message types has a different background color
-  to serve as a visual indicator of the nature of the message */ }
-  .django-messages li {
+  to serve as a visual indicator of the nature of the message */
+  /* Warning Messages */
+  /* Message Close Icon */ }
+  .django-messages li:nth-child(1) {
+    position: absolute;
+    right: 0%; }
+  .django-messages li:nth-child(n+2) {
     padding: 10px 0; }
   .django-messages .success {
     background-color: #beffbe; }
   .django-messages .warning {
     background-color: #f3ff91; }
+  .django-messages i {
+    margin-right: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 10px 0 10px 10px; }
 
 /* /Django Messages */
 /* Headings

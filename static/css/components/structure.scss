@@ -43,8 +43,15 @@ These styles relate to elements found across multiple pages
 .django-messages {
     margin: 0; // Remove default margin set by ul
     
-    li {
-        padding: 10px 0;      
+    /* Select the close button */
+    li:nth-child(1) {
+        position: absolute;
+        right: 0%;
+    }
+    
+    /* Select all but the first li (the first li is the close button, so basically select all messages) */
+    li:nth-child(n+2) {
+        padding: 10px 0;  
     }
     
     /* Success Messages
@@ -54,8 +61,17 @@ These styles relate to elements found across multiple pages
         background-color: $messageSuccessColor;       
     }
     
+    /* Warning Messages */
     .warning {
         background-color: $messageWarningColor;
+    }
+    
+    /* Message Close Icon */
+    i {
+        margin-right: $defaultMargin;
+        font-size: 14px;
+        cursor: pointer; // Make it obvious the close icon does something
+        padding: 10px 0 10px 10px; // Make the clickable area of the close icon bigger
     }
 
 }

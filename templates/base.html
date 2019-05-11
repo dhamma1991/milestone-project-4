@@ -146,11 +146,23 @@
     
     <!-- Django Messages -->
     {% if messages %}
+        <!-- Message List -->
         <ul class="django-messages flow-text center-align">
+            <!-- Messages Close Button -->
+            <li class="right">
+                <i class="material-icons">close</i>
+            </li>
+            <!-- /Messages Close Button -->
+            
             {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                <!-- Message Contents -->
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    {{ message }}
+                </li>
+                <!-- /Message Contents -->
             {% endfor %}
         </ul>
+        <!-- /Message List -->
     {% endif %}
     <!-- /Django Messages -->
     
