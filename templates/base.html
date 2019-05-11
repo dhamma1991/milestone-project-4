@@ -150,7 +150,7 @@
         <ul class="django-messages flow-text center-align">
             <!-- Messages Close Button -->
             <li class="right">
-                <i class="material-icons">close</i>
+                <i id="message-close-btn" class="material-icons">close</i>
             </li>
             <!-- /Messages Close Button -->
             
@@ -221,6 +221,10 @@
     {% block chain_fade %}
     {% endblock %}
     <!-- /Chain Fade Effect -->
+    
+    <!-- Django Messages Close Button -->
+    <script src="{% static 'js/messageClose.js' %}"></script>
+    <!-- Django Messages Close Button -->
     <!-- /Scripts -->
 </body>
 </html>
