@@ -38,9 +38,6 @@ else:
 ALLOWED_HOSTS = [os.environ.get('C9_HOSTNAME'),
                 'levelup-productivity.herokuapp.com',]
 
-
-# Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,6 +51,7 @@ INSTALLED_APPS = [
     'stats.apps.StatsConfig',
     'crispy_forms',
     'crispy_forms_materialize',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -177,6 +175,19 @@ CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
 # Stripe configuration
 STRIPE_PUBLISHABLE_KEY = 'pk_test_a1sVyoIJ44jtCvZLROa08pJQ'
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SEC_KEY')
+
+# AWS configuration
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+
+# If a user uploads a file that has the same name as a file another user has
+# uploaded, that shouldn't change all user's files
+AWS_S3_FILE_OVERWRITE = False
+# Setting this to none possibly prevents issues from occurring with djangp storage
+AWS_DEFAULT_ACL = None
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # Configure Django App for Heroku.
 # Try to import django-heroku depending on Travis or Heroku
