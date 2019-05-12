@@ -1,4 +1,6 @@
+# Import datetime for date and time manipulation
 import datetime
+# Import Django components
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
@@ -6,8 +8,11 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.utils.timezone import make_aware
+# Import models
 from accounts.models import Profile
+from stats.models import StatsModel
 from .models import Task
+# Import forms
 from .forms import AddTaskForm
     
 @login_required
@@ -193,7 +198,11 @@ def toggle_done_status(request, task_id, task_difficulty):
     Feedback to the user the actions that are taken
     """
     
+    # Get the task being toggled as done/not done
     task = get_object_or_404(Task, pk=task_id)
+    
+    # Get the stats model so that totals can be updated
+    stats = get_object_or_404(StatsModel, stats_name = 'Totals')
     
     # Ensure only the user who created the task is able to mark the task as done
     if not request.user == task.user:
@@ -245,6 +254,9 @@ def toggle_done_status(request, task_id, task_difficulty):
         if task.done_status:
             user.exp_points += xp
             
+            # Also update the total xp gained on the app figure
+            stats.total_xp_gain += xp
+            
             # Feedback to the user their xp gain
             messages.success(request, 'You completed a task and gained {} xp!'.format(xp))
             
@@ -261,6 +273,9 @@ def toggle_done_status(request, task_id, task_difficulty):
             # Minus the xp value of the task from their current xp
             user.exp_points -= xp
             
+            # Update the total xp gained across the app
+            stats.total_xp_gain -= xp
+            
             # Feedback to the user their xp loss
             messages.warning(request, 'You lost {} xp'.format(xp))
             
@@ -268,6 +283,8 @@ def toggle_done_status(request, task_id, task_difficulty):
             if user.exp_points < 0:
                 # Minus a level
                 user.level_rank -= 1
+                # Update the total levels gained on the app
+                stats.total_levels_gain -= 1
                 # Set the new xp threshold of the new level
                 user.xp_threshold -= base_xp_threshold
                 # Set their new xp
@@ -290,6 +307,8 @@ def toggle_done_status(request, task_id, task_difficulty):
             user.exp_points = 0 + leftover
             # Increment the users level by 1
             user.level_rank +=1
+            # Increment the total levels gained on the app by 1
+            stats.total_levels_gain += 1
             # Set the new xp_threshold
             # Each subsequent level gets harder to obtain!
             user.xp_threshold += base_xp_threshold
@@ -298,8 +317,11 @@ def toggle_done_status(request, task_id, task_difficulty):
             messages.success(request, "Well done! You've just gained a level!")
     
           
-         # Save the updated user instance  
+        # Save the updated user  
         user.save()
+        
+        # And updated stats
+        stats.save()
         
         return redirect('tasks:get_tasks')
     
