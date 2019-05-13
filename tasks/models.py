@@ -23,5 +23,12 @@ class Task(models.Model):
     task_difficulty = models.CharField(max_length=2, choices=task_difficulty_choices, default=easy)
     created_date = models.DateTimeField(editable=False, blank=True, auto_now_add=True)
     
+    def create_task(self, task_name, task_notes, task_difficulty):
+        """
+        Ensure an instance of Task can be created (used for testing)
+        """
+        task = self.create(task_name = task_name, task_notes = task_notes, task_difficulty = task_difficulty)
+        return task
+    
     def __str__(self):
         return self.task_name

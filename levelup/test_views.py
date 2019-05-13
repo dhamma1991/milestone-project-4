@@ -1,11 +1,12 @@
 # Import necessary modules so that tests can be conducted
 from django.test import TestCase
 from django.shortcuts import get_object_or_404
+# Import models
 from django.contrib.auth.models import User
+from tasks.models import Task
 # Client can be used to act as a dummy web browser, it also gives access to some useful methods, such as login()
 from django.test import Client
-
-
+        
 class TestViews(TestCase):
     def test_get_home_page(self):
         """
@@ -54,6 +55,25 @@ class TestViews(TestCase):
         c.login(username='test_user', password='supersecretpa55')
         
         # Assert the tasks page can be reached
+        page = c.get("/profile/")
+        self.assertEqual(page.status_code, 200)
+        
+    def test_easy_task_completion_gives_10_xp(self):
+        """
+        If a user marks an easy task as complete, their xp should increment by 10
+        """
+        # Intialise Client
+        c = Client()
+        
+        # Create a user
+        User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+        
+        # Log in the user
+        c.login(username='test_user', password='supersecretpa55')
+        
+        # Create a task
+        task = Task(task_name = "Test Task", task_difficulty = 'EA')
+        
         page = c.get("/profile/")
         self.assertEqual(page.status_code, 200)
 
