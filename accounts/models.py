@@ -54,6 +54,10 @@ class Profile(models.Model):
     #         img.save(self.image.path)
     
     def save(self, *args, **kwargs):
+        """
+        Overwrite the save method to resize a user uploaded image
+        With thanks to caiolopes and this gist https://gist.github.com/caiolopes/a9f2bd942fa2d18412ac0d68a915eedf
+        """
         super().save(*args, **kwargs)
     
         img_read = storage.open(self.image.name, 'r')
