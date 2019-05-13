@@ -1,6 +1,11 @@
+# Enable working with streams
+import io
+# Import Django components
 from datetime import date
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.files.storage import default_storage as storage
+# Enable support for image formats
 from PIL import Image
 
 class Profile(models.Model):
@@ -32,7 +37,6 @@ class Profile(models.Model):
         # Return how the class should be displayed
         return '%s Profile' % self.account.username
         
-    
     # # Override the save method
     # def save(self, *args, **kwargs):
     #     # Run the save method of the parent class
@@ -48,3 +52,20 @@ class Profile(models.Model):
     #         img.thumbnail(output_size)
     #         # Save
     #         img.save(self.image.path)
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+    
+        img_read = storage.open(self.image.name, 'r')
+        img = Image.open(img_read)
+    
+        if img.height > 150 or img.width > 150:
+            output_size = (150, 150)
+            img.thumbnail(output_size)
+            in_mem_file = io.BytesIO()
+            img.save(in_mem_file, format='JPEG')
+            img_write = storage.open(self.image.name, 'w+')
+            img_write.write(in_mem_file.getvalue())
+            img_write.close()
+    
+        img_read.close()
