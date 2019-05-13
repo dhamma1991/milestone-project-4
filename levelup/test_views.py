@@ -58,24 +58,50 @@ class TestViews(TestCase):
         page = c.get("/profile/")
         self.assertEqual(page.status_code, 200)
         
-    def test_easy_task_completion_gives_10_xp(self):
+    def test_newly_created_task_is_not_done(self):
         """
-        If a user marks an easy task as complete, their xp should increment by 10
+        A task that is created defaults to not done
         """
         # Intialise Client
         c = Client()
         
         # Create a user
+        # user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
         User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
         
         # Log in the user
         c.login(username='test_user', password='supersecretpa55')
         
-        # Create a task
-        task = Task(task_name = "Test Task", task_difficulty = 'EA')
+        # Create a task with a difficulty of easy
+        task = Task(task_name = 'Test Task', task_difficulty = 'EA')
         
-        page = c.get("/profile/")
-        self.assertEqual(page.status_code, 200)
+        # Assert task.done_status is false
+        self.assertEqual(task.done_status, False)
+        
+    # def test_easy_task_completion_gives_10_xp(self):
+    #     """
+    #     If a user marks an easy task as complete, their xp should increment by 10
+    #     """
+    #     # Intialise Client
+    #     c = Client()
+        
+    #     # Create a user
+    #     user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+        
+    #     # Log in the user
+    #     c.login(username='test_user', password='supersecretpa55')
+        
+    #     # Create a task with a difficulty of easy
+    #     task = Task.objects.create_task(user.id, 'Test Task', 'Test Notes', 'EA')
+        
+    #     id = task.id
+    
+    #     # self.assertEqual(user.profile.hitpoints, 50)
+        
+    #     self.client.post("/toggle_done_status/{0}".format(id))
+
+    #     # Assert the user has 10 xp
+    #     self.assertEqual(user.profile.exp_points, 10)
 
         
     
