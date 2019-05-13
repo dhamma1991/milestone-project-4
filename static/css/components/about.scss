@@ -8,5 +8,9 @@ These styles relate to the content found on about.html
     article {
         /* Give the article a bit more breathing room away from the footer */
         margin-bottom: $defaultMargin * 4;
+        
+        p:last-child {
+            font-size: 1.5rem;
+        }
     }
 }
