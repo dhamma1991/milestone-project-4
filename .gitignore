@@ -2,3 +2,5 @@
 *.pyc
 .~c9
 __pycache /
+.coverage
+htmlcov/
