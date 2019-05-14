@@ -20,7 +20,6 @@ class TestLoginViews(TestCase):
         """
         Create a user
         """
-        # Create a user
         User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
         
     def test_can_get_tasks_page_with_user_logged_in(self):
@@ -44,9 +43,6 @@ class TestLoginViews(TestCase):
         # Intialise Client
         c = Client()
         
-        # # Create a user
-        # User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
-        
         # Log in the user
         c.login(username='test_user', password='supersecretpa55')
         
@@ -60,10 +56,6 @@ class TestLoginViews(TestCase):
         """
         # Intialise Client
         c = Client()
-        
-        # Create a user
-        # # user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
-        # User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
         
         # Log in the user
         c.login(username='test_user', password='supersecretpa55')
