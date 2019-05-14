@@ -25,7 +25,7 @@ class TestToggleDoneStatus(TestCase):
         self.factory = RequestFactory()
         # Create a user for ReqestFactory
         self.user = User.objects.create_user(username = 'test_user_factory', email = None, password = 'supersecretpa55')
-        
+
         # Create task instances
         medium_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task ME', task_difficulty = 'ME')
         hard_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task HA', task_difficulty = 'HA')
@@ -111,13 +111,13 @@ class TestToggleDoneStatus(TestCase):
         messages = FallbackStorage(request)
         setattr(request, '_messages', messages)
                 
-        """ Assert task can be been marked done """
         # Run the view, pass in required args
         response = toggle_done_status(request, task_id = task_id, task_difficulty = task_difficulty)
         
         # Ensure the updated instance of easy task is available for the test
         easy_task.refresh_from_db()
         
+        """ Assert task can be been marked done """
         self.assertEqual(easy_task.done_status, True)
         
         """ Assert xp gained from easy task is 10 """
@@ -127,7 +127,7 @@ class TestToggleDoneStatus(TestCase):
         """
         Test the functionality involving toggle_done_status
         """
-        # Create an easy task that has a done_status of true
+        # Create an easy task
         easy_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task EA', task_difficulty = 'EA')
         
         # Grab the id and difficulty of the task
@@ -148,28 +148,71 @@ class TestToggleDoneStatus(TestCase):
         # Adding messages
         messages = FallbackStorage(request)
         setattr(request, '_messages', messages)
-                
-        """ Assert task can be been marked as done """
+            
         # Run the view, pass in required args
         response = toggle_done_status(request, task_id = task_id, task_difficulty = task_difficulty)
         
         # Ensure the updated instance of easy task is available for the test
         easy_task.refresh_from_db()
         
+        """ Assert task can be been marked as done """
         self.assertEqual(easy_task.done_status, True)
         
         """ Assert xp gained from easy task is 10 """
         self.assertEqual(request.user.profile.exp_points, 10)
         
-        """ Assert task being marked as undone affects task.done_status and make user lose xp"""
         # Run the view again to simulate task being marked as undone, pass in required args
         response = toggle_done_status(request, task_id = task_id, task_difficulty = task_difficulty)
         
         # Ensure the updated instance of easy task is available for the test
         easy_task.refresh_from_db()
         
-        # Assert the task is now NOT done
+        """ Assert task is now NOT done """
         self.assertEqual(easy_task.done_status, False)
         
-        # Asset user xp has gone back to 0
+        """ Assert user xp has gone back to 0 """
         self.assertEqual(request.user.profile.exp_points, 0)
+        
+    def test_user_who_exceeds_xp_threshold_levels_up_with_correct_xp(self):
+        """
+        Test that a user gains a level if they exceed their current xp threshold
+        Also ensure that any 'leftover' gets set as their new xp amount
+        """
+        # Create an ambitious task
+        amb_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task EA', task_difficulty = 'AM')
+        
+        # Grab the id and difficulty of the task
+        task_id = amb_task.id
+        task_difficulty = amb_task.task_difficulty
+        
+        # Make a request
+        request = self.factory.post('/tasks/done/{}/{}'.format(task_id, task_difficulty))
+        
+        # Set the user
+        request.user = self.user
+        
+        # Give the user some XP. The threshold for a level 1 user defaults to 100 so 
+        # 90 xp should mean they only need 10 to level up
+        request.user.profile.exp_points = 90
+        
+        # Adding session
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        
+        # Adding messages
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+        
+        # Run the view, pass in required args
+        response = toggle_done_status(request, task_id = task_id, task_difficulty = task_difficulty)
+        
+        # Ensure the updated instance of the user is available for the test
+        request.user.refresh_from_db()
+        
+        """ Assert that the user has 30 xp. 10 xp should of been used to get the user to their threshold of 100
+            The remainder gets added to their new xp value """
+        self.assertEqual(request.user.profile.exp_points, 30)
+        
+        """ Assert that the user is now level 2 """
+        self.assertEqual(request.user.profile.level_rank, 2)
