@@ -1,9 +1,12 @@
 # Import necessary modules so that tests can be conducted
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.shortcuts import get_object_or_404
 # Import models
 from django.contrib.auth.models import User
 from tasks.models import Task
+from stats.models import StatsModel
+# Import views
+from tasks.views import toggle_done_status
 # Client can be used to act as a dummy web browser, it also gives access to some useful methods, such as login()
 from django.test import Client
         
@@ -78,30 +81,52 @@ class TestViews(TestCase):
         # Assert task.done_status is false
         self.assertEqual(task.done_status, False)
         
-    # def test_easy_task_completion_gives_10_xp(self):
-    #     """
-    #     If a user marks an easy task as complete, their xp should increment by 10
-    #     """
-    #     # Intialise Client
-    #     c = Client()
+    def test_easy_task_completion_gives_10_xp(self):
+        """
+        If a user marks an easy task as complete, their xp should increment by 10
+        """
+        # Intialise Client
+        # c = Client()
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
         
-    #     # Create a user
-    #     user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+        request = self.factory.get('/tasks/done/{}/{}".format(id, difficulty)')
         
-    #     # Log in the user
-    #     c.login(username='test_user', password='supersecretpa55')
+        request.user = self.user
         
-    #     # Create a task with a difficulty of easy
-    #     task = Task.objects.create_task(user.id, 'Test Task', 'Test Notes', 'EA')
+        task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task', task_difficulty = 'EA')
+        stats = StatsModel.objects.create(stats_name = 'Totals')
         
-    #     id = task.id
+        task_id = task.id
+        task_difficulty = task.task_difficulty
+        
+        response = toggle_done_status(request, task_id = task_id, task_difficulty = task_difficulty)
+        
+        # Create a user
+        # user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+        
+        # Log in the user
+        # c.login(username='test_user', password='supersecretpa55')
+        
+        # Create a task with a difficulty of easy
+        # task = Task.objects.create_task(user.id, 'Test Task', 'Test Notes', 'EA')
+        # task = Task.objects.create(user_id = user.id, task_name = 'Test Task', task_difficulty = 'EA')
+        
+        # id = task.id
+        # difficulty = task.task_difficulty
     
-    #     # self.assertEqual(user.profile.hitpoints, 50)
+        # self.assertEqual(user.profile.hitpoints, 50)
         
-    #     self.client.post("/toggle_done_status/{0}".format(id))
+        # response = self.client.post("/tasks/done/{}/{}".format(id, difficulty))
+        
+        # task.refresh_from_db()
+        
+        # self.assertEqual(task.done_status, True)
+        
+        self.assertEqual(task.task_name, 'Test Task')
 
-    #     # Assert the user has 10 xp
-    #     self.assertEqual(user.profile.exp_points, 10)
+        # Assert the user has 10 xp
+        # self.assertEqual(user.profile.exp_points, 10)
 
         
     
