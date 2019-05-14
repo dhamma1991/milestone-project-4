@@ -1,6 +1,8 @@
 # Import necessary modules so that tests can be conducted
 from django.test import TestCase, RequestFactory
 from django.shortcuts import get_object_or_404
+from django.contrib.sessions.middleware import SessionMiddleware
+from django.contrib.messages.storage.fallback import FallbackStorage
 # Import models
 from django.contrib.auth.models import User
 from tasks.models import Task
@@ -100,6 +102,15 @@ class TestViews(TestCase):
         task_id = task.id
         task_difficulty = task.task_difficulty
         
+        # Adding session
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        
+        # Adding messages
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+        
         response = toggle_done_status(request, task_id = task_id, task_difficulty = task_difficulty)
         
         # Create a user
@@ -119,9 +130,9 @@ class TestViews(TestCase):
         
         # response = self.client.post("/tasks/done/{}/{}".format(id, difficulty))
         
-        # task.refresh_from_db()
+        task.refresh_from_db()
         
-        # self.assertEqual(task.done_status, True)
+        self.assertEqual(task.done_status, True)
         
         self.assertEqual(task.task_name, 'Test Task')
 
