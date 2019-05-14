@@ -20,7 +20,7 @@ class TestLoginViews(TestCase):
         """
         Create a user
         """
-        User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+        user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
         
     def test_can_get_tasks_page_with_user_logged_in(self):
         """
@@ -66,61 +66,52 @@ class TestLoginViews(TestCase):
         # Assert task.done_status is false
         self.assertEqual(task.done_status, False)
         
-    # def test_easy_task_completion_gives_10_xp(self):
-    #     """
-    #     If a user marks an easy task as complete, their xp should increment by 10
-    #     """
-    #     # Intialise Client
-    #     # c = Client()
-    #     self.factory = RequestFactory()
-    #     self.user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+    def test_toggle_done_status_should_mark_a_task_as_true(self):
+        """
+        If a user marks an easy task as complete, their xp should increment by 10
+        """
+        # Initialise requestFactory
+        self.factory = RequestFactory()
+        # Create a user for ReqestFactory
+        self.user = User.objects.create_user(username = 'test_user_factory', email = None, password = 'supersecretpa55')
         
-    #     task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task', task_difficulty = 'EA')
-    #     stats = StatsModel.objects.create(stats_name = 'Totals')
+        # Create a task instance
+        task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task', task_difficulty = 'EA')
+        # Create a stats instance, required as stats is referenced within toggle_done_status
+        stats = StatsModel.objects.create(stats_name = 'Totals')
         
-    #     task_id = task.id
-    #     task_difficulty = task.task_difficulty
+        # Grab the id and difficulty of the task
+        task_id = task.id
+        task_difficulty = task.task_difficulty
         
-    #     request = self.factory.post('/tasks/done/{}/{}'.format(task_id, task_difficulty))
+        # Make a request
+        request = self.factory.post('/tasks/done/{}/{}'.format(task_id, task_difficulty))
         
-    #     request.user = self.user
+        # Set the user
+        request.user = self.user
         
-    #     # Adding session
-    #     middleware = SessionMiddleware()
-    #     middleware.process_request(request)
-    #     request.session.save()
+        # Adding session
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
         
-    #     # Adding messages
-    #     messages = FallbackStorage(request)
-    #     setattr(request, '_messages', messages)
+        # Adding messages
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
         
-    #     response = toggle_done_status(request, task_id = task_id, task_difficulty = task_difficulty)
+        # Run the view, pass in required args
+        response = toggle_done_status(request, task_id = task_id, task_difficulty = task_difficulty)
         
-    #     # Create a user
-    #     # user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+        # Ensure the updated instance of task is available for the test
+        task.refresh_from_db()
         
-    #     # Log in the user
-    #     # c.login(username='test_user', password='supersecretpa55')
+        # Assert the task is now done
+        self.assertEqual(task.done_status, True)
         
-    #     # Create a task with a difficulty of easy
-    #     # task = Task.objects.create_task(user.id, 'Test Task', 'Test Notes', 'EA')
-    #     # task = Task.objects.create(user_id = user.id, task_name = 'Test Task', task_difficulty = 'EA')
-        
-    #     # id = task.id
-    #     # difficulty = task.task_difficulty
-    
-    #     # self.assertEqual(user.profile.hitpoints, 50)
-        
-    #     # response = self.client.post("/tasks/done/{}/{}".format(id, difficulty))
-        
-    #     task.refresh_from_db()
-        
-    #     self.assertEqual(task.done_status, True)
-        
-    #     # self.assertEqual(response.status_code, 301)
+        # self.assertEqual(response.status_code, 301)
 
-    #     # Assert the user has 10 xp
-    #     # self.assertEqual(user.profile.exp_points, 10)
+        # Assert the user has 10 xp
+        # self.assertEqual(user.profile.exp_points, 10)
     
     # def test_easy_task_completion_gives_10_xp(self):
     #     """
@@ -129,11 +120,12 @@ class TestLoginViews(TestCase):
     #     # Intialise Client
     #     c = Client()
         
-    #     # # Create a user
-    #     # user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
-        
     #     # Log in the user
     #     c.login(username='test_user', password='supersecretpa55')
+        
+    #     response = c.get('/tasks/')
+        
+    #     user = response.context["user"]
         
     #     # Create a task with a difficulty of easy
     #     task = Task(user_id = user.id, task_name = 'Test Task', task_difficulty = 'EA')
@@ -144,13 +136,13 @@ class TestLoginViews(TestCase):
     
     #     # self.assertEqual(user.profile.hitpoints, 50)
         
-    #     response = c.post("/tasks/done/{}/{}".format(task_id, task_difficulty))
+    #     response = c.post("/tasks/done/{}/{}".format(task_id, task_difficulty), follow = True)
         
     #     task.refresh_from_db()
         
     #     # self.assertEqual(response.status_code, 200)
         
-    #     self.assertEqual(task.done_status, True)
+    #     self.assertEqual(Task.objects.get(id = task_id).done_status, True)
         
     #     # self.assertEqual(response.status_code, 301)
 
