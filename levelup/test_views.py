@@ -92,15 +92,15 @@ class TestViews(TestCase):
         self.factory = RequestFactory()
         self.user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
         
-        request = self.factory.get('/tasks/done/{}/{}".format(id, difficulty)')
-        
-        request.user = self.user
-        
         task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task', task_difficulty = 'EA')
         stats = StatsModel.objects.create(stats_name = 'Totals')
         
         task_id = task.id
         task_difficulty = task.task_difficulty
+        
+        request = self.factory.post('/tasks/done/{}/{}'.format(task_id, task_difficulty))
+        
+        request.user = self.user
         
         # Adding session
         middleware = SessionMiddleware()
@@ -134,7 +134,7 @@ class TestViews(TestCase):
         
         self.assertEqual(task.done_status, True)
         
-        self.assertEqual(task.task_name, 'Test Task')
+        # self.assertEqual(response.status_code, 301)
 
         # Assert the user has 10 xp
         # self.assertEqual(user.profile.exp_points, 10)
