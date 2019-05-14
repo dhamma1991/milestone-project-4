@@ -14,7 +14,7 @@ from django.test import Client
         
 class TestLoginViews(TestCase):
     """
-    Test views that require a login
+    Test the smaller views that require a login
     """
     def setUp(self):
         """
@@ -65,53 +65,6 @@ class TestLoginViews(TestCase):
         
         # Assert task.done_status is false
         self.assertEqual(task.done_status, False)
-        
-    def test_toggle_done_status_should_mark_a_task_as_true(self):
-        """
-        If a user marks an easy task as complete, their xp should increment by 10
-        """
-        # Initialise requestFactory
-        self.factory = RequestFactory()
-        # Create a user for ReqestFactory
-        self.user = User.objects.create_user(username = 'test_user_factory', email = None, password = 'supersecretpa55')
-        
-        # Create a task instance
-        task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task', task_difficulty = 'EA')
-        # Create a stats instance, required as stats is referenced within toggle_done_status
-        stats = StatsModel.objects.create(stats_name = 'Totals')
-        
-        # Grab the id and difficulty of the task
-        task_id = task.id
-        task_difficulty = task.task_difficulty
-        
-        # Make a request
-        request = self.factory.post('/tasks/done/{}/{}'.format(task_id, task_difficulty))
-        
-        # Set the user
-        request.user = self.user
-        
-        # Adding session
-        middleware = SessionMiddleware()
-        middleware.process_request(request)
-        request.session.save()
-        
-        # Adding messages
-        messages = FallbackStorage(request)
-        setattr(request, '_messages', messages)
-        
-        # Run the view, pass in required args
-        response = toggle_done_status(request, task_id = task_id, task_difficulty = task_difficulty)
-        
-        # Ensure the updated instance of task is available for the test
-        task.refresh_from_db()
-        
-        # Assert the task is now done
-        self.assertEqual(task.done_status, True)
-        
-        # self.assertEqual(response.status_code, 301)
-
-        # Assert the user has 10 xp
-        # self.assertEqual(user.profile.exp_points, 10)
     
     # def test_easy_task_completion_gives_10_xp(self):
     #     """

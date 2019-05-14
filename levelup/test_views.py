@@ -14,7 +14,7 @@ from django.test import Client
         
 class TestViews(TestCase):
     """
-    Test views that do not require a login
+    Test the smaller views that do not require a login
     """
     def test_get_home_page(self):
         """
