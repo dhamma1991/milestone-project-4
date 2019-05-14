@@ -122,3 +122,54 @@ class TestToggleDoneStatus(TestCase):
         
         """ Assert xp gained from easy task is 10 """
         self.assertEqual(request.user.profile.exp_points, 10)
+        
+    def test_toggle_done_status_on_easy_task_marks_task_as_not_done_if_done_and_minuses_10_xp(self):
+        """
+        Test the functionality involving toggle_done_status
+        """
+        # Create an easy task that has a done_status of true
+        easy_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task EA', task_difficulty = 'EA')
+        
+        # Grab the id and difficulty of the task
+        task_id = easy_task.id
+        task_difficulty = easy_task.task_difficulty
+        
+        # Make a request
+        request = self.factory.post('/tasks/done/{}/{}'.format(task_id, task_difficulty))
+        
+        # Set the user
+        request.user = self.user
+        
+        # Adding session
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        
+        # Adding messages
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+                
+        """ Assert task can be been marked as done """
+        # Run the view, pass in required args
+        response = toggle_done_status(request, task_id = task_id, task_difficulty = task_difficulty)
+        
+        # Ensure the updated instance of easy task is available for the test
+        easy_task.refresh_from_db()
+        
+        self.assertEqual(easy_task.done_status, True)
+        
+        """ Assert xp gained from easy task is 10 """
+        self.assertEqual(request.user.profile.exp_points, 10)
+        
+        """ Assert task being marked as undone affects task.done_status and make user lose xp"""
+        # Run the view again to simulate task being marked as undone, pass in required args
+        response = toggle_done_status(request, task_id = task_id, task_difficulty = task_difficulty)
+        
+        # Ensure the updated instance of easy task is available for the test
+        easy_task.refresh_from_db()
+        
+        # Assert the task is now NOT done
+        self.assertEqual(easy_task.done_status, False)
+        
+        # Asset user xp has gone back to 0
+        self.assertEqual(request.user.profile.exp_points, 0)
