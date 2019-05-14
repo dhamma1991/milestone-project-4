@@ -16,15 +16,19 @@ class TestLoginViews(TestCase):
     """
     Test views that require a login
     """
+    def setUp(self):
+        """
+        Create a user
+        """
+        # Create a user
+        User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+        
     def test_can_get_tasks_page_with_user_logged_in(self):
         """
         With a user logged in, the app should be able to reach tasks.html
         """
         # Intialise Client
         c = Client()
-        
-        # Create a user
-        User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
         
         # Log in the user
         c.login(username='test_user', password='supersecretpa55')
@@ -40,8 +44,8 @@ class TestLoginViews(TestCase):
         # Intialise Client
         c = Client()
         
-        # Create a user
-        User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+        # # Create a user
+        # User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
         
         # Log in the user
         c.login(username='test_user', password='supersecretpa55')
@@ -58,8 +62,8 @@ class TestLoginViews(TestCase):
         c = Client()
         
         # Create a user
-        # user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
-        User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+        # # user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+        # User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
         
         # Log in the user
         c.login(username='test_user', password='supersecretpa55')
@@ -126,40 +130,40 @@ class TestLoginViews(TestCase):
     #     # Assert the user has 10 xp
     #     # self.assertEqual(user.profile.exp_points, 10)
     
-    def test_easy_task_completion_gives_10_xp(self):
-        """
-        If a user marks an easy task as complete, their xp should increment by 10
-        """
-        # Intialise Client
-        c = Client()
+    # def test_easy_task_completion_gives_10_xp(self):
+    #     """
+    #     If a user marks an easy task as complete, their xp should increment by 10
+    #     """
+    #     # Intialise Client
+    #     c = Client()
         
-        # Create a user
-        user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+    #     # # Create a user
+    #     # user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
         
-        # Log in the user
-        c.login(username='test_user', password='supersecretpa55')
+    #     # Log in the user
+    #     c.login(username='test_user', password='supersecretpa55')
         
-        # Create a task with a difficulty of easy
-        task = Task(user_id = user.id, task_name = 'Test Task', task_difficulty = 'EA')
-        task.save()
+    #     # Create a task with a difficulty of easy
+    #     task = Task(user_id = user.id, task_name = 'Test Task', task_difficulty = 'EA')
+    #     task.save()
         
-        task_id = task.id
-        task_difficulty = task.task_difficulty
+    #     task_id = task.id
+    #     task_difficulty = task.task_difficulty
     
-        # self.assertEqual(user.profile.hitpoints, 50)
+    #     # self.assertEqual(user.profile.hitpoints, 50)
         
-        response = c.post("/tasks/done/{}/{}".format(task_id, task_difficulty))
+    #     response = c.post("/tasks/done/{}/{}".format(task_id, task_difficulty))
         
-        task.refresh_from_db()
+    #     task.refresh_from_db()
         
-        # self.assertEqual(response.status_code, 200)
+    #     # self.assertEqual(response.status_code, 200)
         
-        self.assertEqual(task.done_status, True)
+    #     self.assertEqual(task.done_status, True)
         
-        # self.assertEqual(response.status_code, 301)
+    #     # self.assertEqual(response.status_code, 301)
 
-        # Assert the user has 10 xp
-        # self.assertEqual(user.profile.exp_points, 10)
+    #     # Assert the user has 10 xp
+    #     # self.assertEqual(user.profile.exp_points, 10)
 
         
     
