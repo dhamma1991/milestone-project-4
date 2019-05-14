@@ -20,8 +20,6 @@ class TestToggleDoneStatus(TestCase):
         """
         Basic set up
         Initialise RequestFactory
-        Create required instances
-        Add session and middleware
         """
         # Initialise RequestFactory
         self.factory = RequestFactory()
@@ -36,9 +34,9 @@ class TestToggleDoneStatus(TestCase):
         # Create a stats instance, required as stats is referenced within toggle_done_status
         stats = StatsModel.objects.create(stats_name = 'Totals')
         
-    def test_toggle_done_status_should_mark_a_task_as_true(self):
+    def test_toggle_done_status_on_easy_task_marks_task_as_done_if_not_done_and_gives_10_xp(self):
         """
-        If a user marks an easy task as complete, their xp should increment by 10
+        Test the functionality involving toggle_done_status
         """
         # Create an easy task
         easy_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task EA', task_difficulty = 'EA')
@@ -61,17 +59,66 @@ class TestToggleDoneStatus(TestCase):
         # Adding messages
         messages = FallbackStorage(request)
         setattr(request, '_messages', messages)
-        
+                
+        """ Assert task can be been marked done """
         # Run the view, pass in required args
         response = toggle_done_status(request, task_id = task_id, task_difficulty = task_difficulty)
         
-        # Ensure the updated instance of task is available for the test
+        # Ensure the updated instance of easy task is available for the test
         easy_task.refresh_from_db()
         
-        # Assert the task is now done
         self.assertEqual(easy_task.done_status, True)
         
-        # self.assertEqual(response.status_code, 301)
-
-        # Assert the user has 10 xp
-        # self.assertEqual(user.profile.exp_points, 10)
+        """ Assert xp gained from easy task is 10 """
+        self.assertEqual(request.user.profile.exp_points, 10)
+        
+        """ Assert task being marked as undone affects task.done_status and make user lose xp"""
+        # Run the view again to simulate task being marked as undone, pass in required args
+        response = toggle_done_status(request, task_id = task_id, task_difficulty = task_difficulty)
+        
+        # Ensure the updated instance of easy task is available for the test
+        easy_task.refresh_from_db()
+        
+        # Assert the task is now NOT done
+        self.assertEqual(easy_task.done_status, False)
+        
+        # Asset user xp has gone back to 0
+        self.assertEqual(request.user.profile.exp_points, 0)
+        
+    def test_toggle_done_status_on_easy_task_marks_task_as_not_done_if_done_and_minuses_10_xp(self):
+        """
+        Test the functionality involving toggle_done_status
+        """
+        # Create an easy task
+        easy_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task EA', task_difficulty = 'EA')
+        
+        # Grab the id and difficulty of the task
+        task_id = easy_task.id
+        task_difficulty = easy_task.task_difficulty
+        
+        # Make a request
+        request = self.factory.post('/tasks/done/{}/{}'.format(task_id, task_difficulty))
+        
+        # Set the user
+        request.user = self.user
+        
+        # Adding session
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        
+        # Adding messages
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+                
+        """ Assert task can be been marked done """
+        # Run the view, pass in required args
+        response = toggle_done_status(request, task_id = task_id, task_difficulty = task_difficulty)
+        
+        # Ensure the updated instance of easy task is available for the test
+        easy_task.refresh_from_db()
+        
+        self.assertEqual(easy_task.done_status, True)
+        
+        """ Assert xp gained from easy task is 10 """
+        self.assertEqual(request.user.profile.exp_points, 10)
