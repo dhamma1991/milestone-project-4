@@ -195,3 +195,40 @@ try:
     django_heroku.settings(locals())
 except ImportError:
     found = False
+    
+
+I know this is late but I ended up here with a search for my error 500 with DEBUG=False, in my case it did turn out to be the ALLOWED_HOSTS but I was using os.environ.get('variable') to populate the hosts, I did not notice this until I enabled logging, you can log all errors to file with the below and it will log even when DEBUG=False:
+
+# settings.py
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'mysite.log',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers':['file'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+        'MYAPP': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+    }
+}
