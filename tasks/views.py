@@ -17,6 +17,11 @@ from .forms import AddTaskForm
     
 @login_required
 def get_tasks(request):
+    """
+    This view deals with loading the user's tasks
+    Also deals with checking whether or not a day has ended
+    If a day has ended, users lose health per task not completed
+    """
     # Get the list of tasks for the current logged in user
     task_list = Task.objects.order_by('-created_date').filter(user=request.user)
     
@@ -120,7 +125,6 @@ def get_tasks(request):
     context = {
         'task_list': task_list,
         'current_login': current_login,
-        # 'my_message': my_message,
         'last_login': user.last_login
     }
     
