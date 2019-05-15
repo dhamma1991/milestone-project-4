@@ -228,26 +228,14 @@ These styles relate to the html content found in the tasks app templates
       color: #f5c116; }
   .tasks-main .tasks-ul li {
     margin-top: 20px;
-    height: 150px;
-    /* Increase the height of the list items with the viewport width */
-    /* This mixin used for media queries, using responsive design principles of mobile first */
     /* Target all but the last task 
         Increase the height*/
-    /* View Details Link */
     /* Task Done Button */
     /* /Task Done Button */
     /* Checkbox */
     /* /Checkbox */ }
-    @media (min-width: 601px) {
-      .tasks-main .tasks-ul li {
-        height: 200px; } }
     .tasks-main .tasks-ul li:not(:last-child) {
       padding: 10px; }
-    .tasks-main .tasks-ul li .view-detail-link-container {
-      /* Give the link some breathing room away from the mark done button
-          and checkbox icon, only needed on smaller viewports
-          but no need for media query here */
-      margin-bottom: 20px; }
     .tasks-main .tasks-ul li form {
       display: inline-block; }
       .tasks-main .tasks-ul li form .btn {

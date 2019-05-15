@@ -39,25 +39,11 @@ These styles relate to the html content found in the tasks app templates
     .tasks-ul {
         li {
             margin-top: $defaultMargin;
-            height: 150px;
-            
-            /* Increase the height of the list items with the viewport width */
-            @include mqMinWidth($matSmBreakpoint + 1px) {
-                height: 200px;
-            }
             
             /* Target all but the last task 
                 Increase the height*/
             &:not(:last-child) {
                 padding: 10px;
-            }
-            
-            /* View Details Link */
-            .view-detail-link-container {
-                /* Give the link some breathing room away from the mark done button
-                    and checkbox icon, only needed on smaller viewports
-                    but no need for media query here */
-                margin-bottom: 20px;
             }
             
             /* Task Done Button */
