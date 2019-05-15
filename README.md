@@ -68,8 +68,19 @@ jQuery 3.2.1
 chain-fade
 https://www.jqueryscript.net/animation/Sequential-Entrance-Animations-chain-fade.html
 
+BeFunky
+[link here]
+Used for adjustment of various app images
+https://imageresize.org/
+
 # REFERENCES
 Images
 
 Task Checkbox
 https://www.canva.com/media/MAAQottVXFI with custom colour modification
+
+Difficulty icons
+https://ux.stackexchange.com/questions/55284/what-is-the-best-way-to-show-complexity-or-difficulty-rate
+
+Logo
+https://www.canva.com/media/MAAWVMkQET8
