@@ -61,7 +61,7 @@
         {% if task_list %}
             <ul class="center-align flow-text tasks-ul">
             {% for task in task_list %}
-                <li class="row">
+                <li class="row card">
                     <div class="col s12 m3">
                         <!-- Task Name 
                             Truncate very long task names, this is to preserve the layout
@@ -70,9 +70,9 @@
                         <!-- /Task Name -->              
                     </div>
                     
-                    <div class="col s12 m3">
+                    <div class="col s12 m3 view-detail-link-container">
                         <!-- View Detail Link -->
-                        <a href="{% url 'tasks:detail' task.id %}">View Detail</a> 
+                        <a href="{% url 'tasks:detail' task.id %}">View Details</a> 
                         <!-- /View Detail Link -->                 
                     </div>
                     

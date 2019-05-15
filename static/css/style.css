@@ -232,11 +232,8 @@ These styles relate to the html content found in the tasks app templates
     /* Increase the height of the list items with the viewport width */
     /* This mixin used for media queries, using responsive design principles of mobile first */
     /* Target all but the last task 
-        Add a divider and thicken the height*/
-    /* Task Icon
-        The task icons require some positioning that
-        is different to the other icons on the page */
-    /* /Task Icon */
+        Increase the height*/
+    /* View Details Link */
     /* Task Done Button */
     /* /Task Done Button */
     /* Checkbox */
@@ -245,14 +242,12 @@ These styles relate to the html content found in the tasks app templates
       .tasks-main .tasks-ul li {
         height: 200px; } }
     .tasks-main .tasks-ul li:not(:last-child) {
-      padding: 10px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
-    .tasks-main .tasks-ul li .task-icon {
-      top: 3px;
-      /* This mixin used for media queries, using responsive design principles of mobile first */ }
-      @media (min-width: 660px) {
-        .tasks-main .tasks-ul li .task-icon {
-          top: 4px; } }
+      padding: 10px; }
+    .tasks-main .tasks-ul li .view-detail-link-container {
+      /* Give the link some breathing room away from the mark done button
+          and checkbox icon, only needed on smaller viewports
+          but no need for media query here */
+      margin-bottom: 20px; }
     .tasks-main .tasks-ul li form {
       display: inline-block; }
       .tasks-main .tasks-ul li form .btn {

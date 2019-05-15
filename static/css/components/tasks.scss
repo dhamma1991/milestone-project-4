@@ -47,23 +47,18 @@ These styles relate to the html content found in the tasks app templates
             }
             
             /* Target all but the last task 
-                Add a divider and thicken the height*/
+                Increase the height*/
             &:not(:last-child) {
                 padding: 10px;
-                border-bottom: 1px solid rgba(0,0,0,0.2);
             }
             
-            /* Task Icon
-                The task icons require some positioning that
-                is different to the other icons on the page */
-            .task-icon {
-                top: 3px;
-                
-                @include mqMinWidth(660px) {
-                    top: 4px;
-                }
+            /* View Details Link */
+            .view-detail-link-container {
+                /* Give the link some breathing room away from the mark done button
+                    and checkbox icon, only needed on smaller viewports
+                    but no need for media query here */
+                margin-bottom: 20px;
             }
-            /* /Task Icon */
             
             /* Task Done Button */
             form {
