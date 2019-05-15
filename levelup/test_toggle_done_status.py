@@ -216,3 +216,54 @@ class TestToggleDoneStatus(TestCase):
         
         """ Assert that the user is now level 2 """
         self.assertEqual(request.user.profile.level_rank, 2)
+        
+        """ Assert that the user has a new xp_threshold """
+        self.assertEqual(request.user.profile.xp_threshold, 200)
+        
+    def test_user_who_is_above_level_1_can_lose_level_if_they_go_below_0_xp(self):
+        """
+        Test that a user loses a level if fall below 0 xp
+        This would be the case if a user marks a task as undone and loses too much xp
+        """
+        # Create an ambitious task marked as done
+        amb_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task EA', task_difficulty = 'AM', done_status = True)
+        
+        # Grab the id and difficulty of the task
+        task_id = amb_task.id
+        task_difficulty = amb_task.task_difficulty
+        
+        # Make a request
+        request = self.factory.post('/tasks/done/{}/{}'.format(task_id, task_difficulty))
+        
+        # Set the user
+        request.user = self.user
+        
+        # Set the user as level 2
+        request.user.profile.level_rank = 2
+        # Set the user's xp threshold to 200
+        request.user.profile.xp_threshold = 200
+        
+        # Adding session
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        
+        # Adding messages
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+        
+        # Run the view, pass in required args. This sets the task as undone
+        response = toggle_done_status(request, task_id = task_id, task_difficulty = task_difficulty)
+        
+        # Ensure the updated instance of the user is available for the test
+        request.user.refresh_from_db()
+        
+        """ Assert that the user has 60 xp. An ambitious task being marked as undone loses 40xp
+            A level 2 user with 0 xp should therefore fall to level 1 with 60 xp (level 1 xp threshold should be 100)"""
+        self.assertEqual(request.user.profile.exp_points, 60)
+        
+        """ Assert that the user is now level 1 """
+        self.assertEqual(request.user.profile.level_rank, 1)
+        
+        """ Assert that the user has a new xp_threshold """
+        self.assertEqual(request.user.profile.xp_threshold, 100)
