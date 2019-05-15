@@ -62,7 +62,7 @@
             <ul class="center-align flow-text tasks-ul">
             {% for task in task_list %}
                 <li class="row card">
-                    <div class="col s12 m3">
+                    <div class="col s12">
                         <!-- Task Name 
                             Truncate very long task names, this is to preserve the layout
                             of the page -->
@@ -70,13 +70,13 @@
                         <!-- /Task Name -->              
                     </div>
                     
-                    <div class="col s12 m3 view-detail-link-container">
+                    <div class="col s12 view-detail-link-container">
                         <!-- View Detail Link -->
                         <a href="{% url 'tasks:detail' task.id %}">View Details</a> 
                         <!-- /View Detail Link -->                 
                     </div>
                     
-                    <div class="col s6 m3 ">
+                    <div class="col offset-s1 s5 offset-m3 m3 offset-xl4 xl2">
                         <!-- Done Button -->
                         <form method="POST" action="done/{{ task.id }}/{{ task.task_difficulty }}/">
                             {% csrf_token %}
@@ -88,7 +88,7 @@
                     </div>
                     
                     <!-- Done Status Icon -->
-                    <div class="col s6 m3">
+                    <div class="col s5 m3 xl2">
                         <div class="done-status">
                             {% if task.done_status %}
                                 <img src="{% static 'images/task-checkbox.svg' %}" alt="Check">
