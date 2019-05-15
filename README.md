@@ -48,6 +48,13 @@ I first attempted a simple test just checking that the index page can be reached
 
 I began using Django's test client in order to conduct tests on views that require a login. I tested that a user can access both the tasks and profile pages, tests which passed without issue. 
 
+{{{ Here's the bit where you found out marking a task as undone when xp is 0 doesnt work correctly }}}
+I then conducted a test which proved very useful, and showed me I had a hole in my application.
+
+Expected behaviour is that a user who marks a task as undone loses xp. If the user is higher than level 1, and their xp loss is enough to give them a negative xp amount, they should lose a level. An example of this working would be a level 2 user with 20 xp who marks an ambitious (40xp value) task as undone, should go back to level 1, but have 80 xp. This is because the xp_threshold for a level 1 user is 100. Note that if the user marks the ambitious task as done again, they should go back to the level they were before (in this case level 2) with the same xp as before (in this case, 20 xp).
+
+Through writing a test that tested the expected behaviour outlined above, I found that the expected behaviour does occur provided that the user does NOT have 0 xp when they mark a task as undone. So if the user has 20 xp at level 2, and marks an ambitious task as undone, they will indeed go to level 1 with 80 xp. However, if the user has 0 xp at level 2, and marks the same task as undone, they will not lose a level. In addition, the Django message framework passes through messsages saying that the user has both lost and gained a level (at the same time) This was of course not desired functionality, and I was not aware of this bug until I had conducted the appropriate test.
+
 # Technologies Used
 Django
 [link here]
