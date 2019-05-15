@@ -212,11 +212,9 @@ def toggle_done_status(request, task_id, task_difficulty):
     # If the user trying to mark the task as done is indeed the user who created the task,
     # allow them to carry out the action
     else:
+        # Set the task as done if not done and not done if done
         task.done_status = not task.done_status
         task.save()
-        
-        # Task Difficulty xp amounts
-        # This gets passed through from the template when the user
         
         # Set the base xp amount
         # Using a base amount allows multipliers to be applied to higher difficulties
@@ -320,7 +318,7 @@ def toggle_done_status(request, task_id, task_difficulty):
         # Save the updated user  
         user.save()
         
-        # And updated stats
+        # Save updated stats
         stats.save()
         
         return redirect('tasks:get_tasks')
