@@ -78,13 +78,13 @@
                     
                     <div class="col s12">
                         {% if task.task_difficulty == 'EA' %}
-                            <img src="{% static 'images/easy-icon.png' %}">
+                            <img src="{% static 'images/easy-icon.png' %}" alt="Task difficulty icon - easy" title="Task Difficulty - Easy">
                         {% elif task.task_difficulty == 'ME' %}
-                            <img src="{% static 'images/medium-icon.png' %}">
+                            <img src="{% static 'images/medium-icon.png' %}" alt="Task difficulty icon - medium" title="Task Difficulty - Medium">
                         {% elif task.task_difficulty == 'HA' %}
-                            <img src="{% static 'images/hard-icon.png' %}">
+                            <img src="{% static 'images/hard-icon.png' %}" alt="Task difficulty icon - hard" title="Task Difficulty - Hard">
                         {% elif task.task_difficulty == 'AM' %}
-                            <img src="{% static 'images/ambitious-icon.png' %}">
+                            <img src="{% static 'images/ambitious-icon.png' %}" alt="Task difficulty icon - easy" title="Task Difficulty - Ambitious">
                         {% endif %}
                     </div>
                     
