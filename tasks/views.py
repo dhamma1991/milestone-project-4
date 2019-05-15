@@ -32,8 +32,7 @@ def get_tasks(request):
     # last_login field
     # Only grab the current day, hour and minute etc. are not relevant
     # # # # # # # # IMPORTANT!!!!! Whilst testing, just set the 'day' argument in the replace function to the next day to simulate a day having passed
-    current_login = make_aware(datetime.datetime.now()).replace(
-        hour=0, minute=0, second=0, microsecond=0)
+    current_login = make_aware(datetime.datetime.now()).replace(hour=0, minute=0, second=0, microsecond=0)
     
     # If the user gets tasks on a new day
     if current_login > user.last_login:
@@ -95,10 +94,14 @@ def get_tasks(request):
                 # Reset the user xp
                 user.exp_points = 0
 
+        tasks_count = task_list.count()
+        
+        print(tasks_count)
+        
         # If the tasks_not_done var has remained zero (all tasks completed)
-        if not tasks_not_done:     
+        if not tasks_not_done and tasks_count > 0:     
             messages.success(request, "A new day has begun! You managed to complete all your tasks yesterday. Great work!")
-        else:
+        elif tasks_count > 0:
             # Inform the user that some tasks were not completed
             messages.warning(request, "Looks like you didn't fully complete you tasks yesterday!")
             # If a user higher than level 1 loses a level
@@ -113,7 +116,9 @@ def get_tasks(request):
                 messages.warning(request, "Total hitpoints lost: {}".format(hitpoints_lost))
                 
             # Inform users of the number of tasks they didn't complete
-            messages.info(request, "Tasks not completed: {}".format(tasks_not_done))
+            messages.warning(request, "Tasks not completed: {}".format(tasks_not_done))
+        else:
+            do_nothing = 1
         
         # Update user's last login to reflect the current day
         # The changes that occur above will occur again when another day has passed
