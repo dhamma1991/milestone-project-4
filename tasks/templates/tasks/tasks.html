@@ -76,6 +76,18 @@
                         <!-- /View Detail Link -->                 
                     </div>
                     
+                    <div class="col s12">
+                        {% if task.task_difficulty == 'EA' %}
+                            <img src="{% static 'images/easy-icon.png' %}">
+                        {% elif task.task_difficulty == 'ME' %}
+                            <img src="{% static 'images/medium-icon.png' %}">
+                        {% elif task.task_difficulty == 'HA' %}
+                            <img src="{% static 'images/hard-icon.png' %}">
+                        {% elif task.task_difficulty == 'AM' %}
+                            <img src="{% static 'images/ambitious-icon.png' %}">
+                        {% endif %}
+                    </div>
+                    
                     <div class="col offset-s1 s5 offset-m3 m3 offset-xl4 xl2">
                         <!-- Done Button -->
                         <form method="POST" action="done/{{ task.id }}/{{ task.task_difficulty }}/">
