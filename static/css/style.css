@@ -6,8 +6,6 @@
  *
  * Made By MaterializeCSS.com
  */
-/* Media Queries */
-/* /Media Queries */
 /* Materialize Breakpoints 
     These are the same values used by the Materialize framework's grid */
 /* /Materialize Breakpoints */
@@ -19,6 +17,8 @@
 /* /Colors */
 /* Structural */
 /* /Structural */
+/* Media Queries */
+/* /Media Queries */
 /*
 
 These classes assist in accomplishing various changes to elements or improving accessibility
@@ -230,12 +230,26 @@ These styles relate to the html content found in the tasks app templates
     margin-top: 20px;
     /* Target all but the last task 
         Increase the height*/
+    /* Task Difficulty Image */
+    /* /Task Difficulty Image */
     /* Task Done Button */
     /* /Task Done Button */
     /* Checkbox */
     /* /Checkbox */ }
     .tasks-main .tasks-ul li:not(:last-child) {
       padding: 10px; }
+    .tasks-main .tasks-ul li img {
+      /* Scale the img size with the viewport */
+      /* This mixin used for media queries, using responsive design principles of mobile first */
+      /* This mixin used for media queries, using responsive design principles of mobile first */ }
+      @media (min-width: 600px) {
+        .tasks-main .tasks-ul li img {
+          width: 55px;
+          height: 55px; } }
+      @media (min-width: 992px) {
+        .tasks-main .tasks-ul li img {
+          width: 65px;
+          height: 65px; } }
     .tasks-main .tasks-ul li form {
       display: inline-block; }
       .tasks-main .tasks-ul li form .btn {

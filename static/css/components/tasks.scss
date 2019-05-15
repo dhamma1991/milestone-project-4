@@ -46,6 +46,21 @@ These styles relate to the html content found in the tasks app templates
                 padding: 10px;
             }
             
+            /* Task Difficulty Image */
+            img {
+                /* Scale the img size with the viewport */
+                @include mqMinWidth($matSmBreakpoint) {
+                    width: 55px;
+                    height: 55px;
+                }
+                
+                @include mqMinWidth($matMeBreakpoint) {
+                    width: 65px;
+                    height: 65px;
+                }
+            }
+            /* /Task Difficulty Image */
+            
             /* Task Done Button */
             form {
                 display: inline-block;
