@@ -30,7 +30,7 @@ def get_tasks(request):
     
     # Grab the timestamp for the current request and make it into a format acceptable to the
     # last_login field
-    # Only grab the current day
+    # Only grab the current day, hour and minute etc. are not relevant
     # # # # # # # # IMPORTANT!!!!! Whilst testing, just set the 'day' argument in the replace function to the next day to simulate a day having passed
     current_login = make_aware(datetime.datetime.now()).replace(
         hour=0, minute=0, second=0, microsecond=0)
