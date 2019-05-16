@@ -181,6 +181,9 @@ def detail(request, task_id):
 
 @login_required
 def create_task(request):
+    """
+    Allow the user to add a task to their task list
+    """
     # If the user is posting data
     if request.method=="POST":
         # Construct the post form with user inputted data from the submitted form
