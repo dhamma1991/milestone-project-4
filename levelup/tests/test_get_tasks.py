@@ -18,9 +18,10 @@ class TestGetTasks(TestCase):
     """
     def setUp(self):
         """
-        Create a user
+        Create a user and a task
         """
-        user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+        user1 = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+        task1 = Task.objects.create(task_name = 'Test Task 1', task_difficulty = 'ME', user = user1)
         
     def test_can_get_tasks_page_with_user_logged_in(self):
         """
@@ -32,6 +33,9 @@ class TestGetTasks(TestCase):
         # Log in the user
         c.login(username='test_user', password='supersecretpa55')
         
-        # Assert the tasks page can be reached
+        # Go to the tasks page
         page = c.get("/tasks/")
+        """ Assert that the page is found """
         self.assertEqual(page.status_code, 200)
+        """ Assert that the template used is tasks.html """
+        self.assertTemplateUsed('tasks.html')
