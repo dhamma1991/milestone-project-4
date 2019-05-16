@@ -192,7 +192,7 @@ class TestToggleDoneStatus(TestCase):
         request.user = self.user
         
         # Give the user some XP. The threshold for a level 1 user defaults to 100 so 
-        # 90 xp should mean they only need 10 to level up
+        # 90 xp should mean they need at least 10 to level up
         request.user.profile.exp_points = 90
         
         # Adding session
@@ -267,3 +267,49 @@ class TestToggleDoneStatus(TestCase):
         
         """ Assert that the user has a new xp_threshold """
         self.assertEqual(request.user.profile.xp_threshold, 100)
+        
+    def test_user_who_levels_up_is_restored_to_100_hp(self):
+        """
+        Test that a user who gains a level is granted the full hitpoints value (100)
+        """
+        # Create an ambitious task
+        amb_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task EA', task_difficulty = 'AM')
+        
+        # Grab the id and difficulty of the task
+        task_id = amb_task.id
+        task_difficulty = amb_task.task_difficulty
+        
+        # Make a request
+        request = self.factory.post('/tasks/done/{}/{}'.format(task_id, task_difficulty))
+        
+        # Set the user
+        request.user = self.user
+        
+        # Give the user some XP. The threshold for a level 1 user defaults to 100 so 
+        # 90 xp should mean they need at least 10 to level up
+        request.user.profile.exp_points = 90
+        # Give the user less than 100 hp. This ensures that the hp being restored to 100 is obvious
+        request.user.profile.hitpoints = 50
+        
+        # Adding session
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        
+        # Adding messages
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+        
+        # Run the view, pass in required args
+        response = toggle_done_status(request, task_id = task_id, task_difficulty = task_difficulty)
+        
+        # Ensure the updated instance of the user is available for the test
+        request.user.refresh_from_db()
+        
+        """ First, assert that the user is now level 2 """
+        self.assertEqual(request.user.profile.level_rank, 2)
+        
+        """ Assert that the user's hp is now 100 """
+        self.assertEqual(request.user.profile.hitpoints, 100)
+        
+        
