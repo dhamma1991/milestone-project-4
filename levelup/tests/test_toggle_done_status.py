@@ -14,7 +14,7 @@ from django.test import Client
         
 class TestToggleDoneStatus(TestCase):
     """
-    Test the functionality involved with the toggle_done_status views
+    Test the functionality involved with the toggle_done_status view
     """
     def setUp(self):
         """

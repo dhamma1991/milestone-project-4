@@ -22,20 +22,6 @@ class TestLoginViews(TestCase):
         """
         user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
         
-    def test_can_get_tasks_page_with_user_logged_in(self):
-        """
-        With a user logged in, the app should be able to reach tasks.html
-        """
-        # Intialise Client
-        c = Client()
-        
-        # Log in the user
-        c.login(username='test_user', password='supersecretpa55')
-        
-        # Assert the tasks page can be reached
-        page = c.get("/tasks/")
-        self.assertEqual(page.status_code, 200)
-        
     def test_can_get_profile_page_with_user_logged_in(self):
         """
         With a user logged in, the app should be able to reach tasks.html
