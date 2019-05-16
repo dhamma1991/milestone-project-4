@@ -32,7 +32,7 @@ def get_tasks(request):
     # last_login field
     # Only grab the current day, hour and minute etc. are not relevant
     # # # # # # # # IMPORTANT!!!!! Whilst testing, just set the 'day' argument in the replace function to the next day to simulate a day having passed
-    current_login = make_aware(datetime.datetime.now()).replace(hour=0, minute=0, second=0, microsecond=0)
+    current_login = make_aware(datetime.datetime.now()).replace(day = 17, hour=0, minute=0, second=0, microsecond=0)
     
     # If the user gets tasks on a new day
     if current_login > user.last_login:
@@ -209,7 +209,6 @@ def toggle_done_status(request, task_id, task_difficulty):
     Apply any xp and level gains/losses
     Feedback to the user the actions that are taken
     """
-    
     # Get the task being toggled as done/not done
     task = get_object_or_404(Task, pk=task_id)
     
@@ -287,9 +286,13 @@ def toggle_done_status(request, task_id, task_difficulty):
                 # Set the new xp_threshold
                 # Each subsequent level gets harder to obtain!
                 user.xp_threshold += base_xp_threshold
+                # Ensure the user's hp is reset to 100
+                # Part of the reward for gaining a level is the return to full hp
+                user.hitpoints = 100
                 
                 # Feedback to the user
                 messages.success(request, "Well done! You've just gained a level!")
+                messages.success(request, "Any health lost has been restored to full")
             
         # Else, they lose xp. This is here in case a user mistakingly marks a task as done
         # Honesty is key but monitoring the user's activities is beyond the scope of this app!
