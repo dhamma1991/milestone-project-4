@@ -26,8 +26,15 @@ class TestViews(TestCase):
     
     def test_cannot_get_tasks_page_without_login(self):
         """
-        Since there is no authenticated user in the class yet, trying to get to the tasks page should get a 302 error, as a redirect
+        Since there is no authenticated user in the class yet, trying to get to the tasks page should get a 302 code, as a redirect
         to login should occur
         """
         page = self.client.get("/tasks/")
         self.assertEqual(page.status_code, 302)
+        
+    def test_get_404_page_for_url_that_doesnt_exist(self):
+        """
+        Test that the 404 page appears when it should
+        """
+        page = self.client.get('/blahfooblahfooblah')
+        self.assertEqual(page.status_code, 404)
