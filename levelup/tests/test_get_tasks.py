@@ -16,6 +16,12 @@ class TestGetTasks(TestCase):
     """
     Test the functionality involved with the get_tasks view
     """
+    def setUp(self):
+        """
+        Create a user
+        """
+        user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
+        
     def test_can_get_tasks_page_with_user_logged_in(self):
         """
         With a user logged in, the app should be able to reach tasks.html
