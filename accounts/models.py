@@ -1,8 +1,9 @@
 # Enable working with streams
 import io
 # Import Django components
-from datetime import date
+# from datetime import datetime
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage as storage
 # Enable support for image formats
@@ -26,7 +27,7 @@ class Profile(models.Model):
     # The user's last login is used to determine when task.done_status is refreshed
     # Default is when the user is created
     # A last login field is built into Django's User model. However, in my case I specifically only want the day, so I thought it easier to just add it here
-    last_login = models.DateTimeField(default = date.today)
+    last_login = models.DateTimeField(default = timezone.now())
     # If the user has donated, this is set to true
     has_donated = models.BooleanField(default = False)
     

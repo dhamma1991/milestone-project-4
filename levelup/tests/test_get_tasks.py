@@ -1,6 +1,5 @@
 # Import necessary modules so that tests can be conducted
 import datetime
-from datetime import timedelta
 # Import Django components
 from django.test import TestCase, RequestFactory
 from django.shortcuts import get_object_or_404
@@ -62,7 +61,7 @@ class TestGetTasksRequestFactory(TestCase):
             # every time the tests run, the get_tasks function will treat
             # the user as having logged in on a new day, triggering the task
             # reset functionality enabling it to be tested
-            last_login = make_aware(datetime.datetime(d.year, d.month, d.day)))
+            last_login = datetime.datetime.now())
         
     def test_user_with_an_uncompleted_easy_task_loses_10_hitpoints(self):
         # Create an easy task
