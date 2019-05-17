@@ -8,7 +8,7 @@ class TaskTest(TestCase):
     """
     def test_task_creation(self):
         """
-        Test to ensure when a task is created it is an instance of the Task model
+        Test to ensure new instances of the Task model are created correctly
         """
         # Create a user
         user = User.objects.create_user(username = 'test_user', email = None, password = 'supersecretpa55')
@@ -24,3 +24,5 @@ class TaskTest(TestCase):
         
         """ Assert task is an instance of Task """
         self.assertTrue(isinstance(task, Task))
+        """ Assert the __str__ function is the same as task_name """
+        self.assertEqual(task.__str__(), task.task_name)
