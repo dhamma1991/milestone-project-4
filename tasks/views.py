@@ -1,9 +1,10 @@
 # Import datetime for date and time manipulation
-import datetime
+# import datetime
 # Import Django components
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
+from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -32,7 +33,7 @@ def get_tasks(request):
     # last_login field
     # Only grab the current day, hour and minute etc. are not relevant
     # # # # # # # # IMPORTANT!!!!! Whilst testing, just set the 'day' argument in the replace function to the next day to simulate a day having passed
-    current_login = make_aware(datetime.datetime.now()).replace(hour=0, minute=0, second=0, microsecond=0)
+    current_login = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
     
     # If the user gets tasks on a new day
     if current_login > user.last_login:
