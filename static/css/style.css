@@ -282,9 +282,17 @@ These styles relate to the html content found in the tasks app templates
         height: 30px;
         padding: 2px; }
 
-.task-detail-help-text {
-  margin-bottom: 40px; }
+/* Task Detail and Add Task Form */
+/* Help Text */
+.task-form-help-text {
+  margin-bottom: 40px;
+  /* Task Difficulty Helper Text Title 
+      This is found on the add-task form */
+  /* /Task Difficulty Helper Text Title */ }
+  .task-form-help-text .difficulty-title {
+    font-size: 1.5rem; }
 
+/* /Help Text */
 #div_id_task_name {
   margin-bottom: 30px; }
 
@@ -330,6 +338,7 @@ These styles relate to the html content found in the tasks app templates
   margin-top: 20px; }
 
 /* /Task Detail and Add Task Page Buttons */
+/* /Task Detail and Add Task Form */
 /*
 
 Styles relating to the content found on stats.html

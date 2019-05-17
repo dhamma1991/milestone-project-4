@@ -102,9 +102,21 @@ These styles relate to the html content found in the tasks app templates
     /* /Tasks List */
 }
 
-.task-detail-help-text {
+
+
+/* Task Detail and Add Task Form */
+/* Help Text */
+.task-form-help-text {
     margin-bottom: $defaultMargin * 2;
+    
+    /* Task Difficulty Helper Text Title 
+        This is found on the add-task form */
+    .difficulty-title {
+        font-size: 1.5rem;
+    }
+    /* /Task Difficulty Helper Text Title */
 }
+/* /Help Text */
 
 #div_id_task_name {
     margin-bottom: $defaultMargin + 10px; // Space out the form elements better
@@ -169,3 +181,4 @@ These styles relate to the html content found in the tasks app templates
     margin-top: $defaultMargin;
 }
 /* /Task Detail and Add Task Page Buttons */
+/* /Task Detail and Add Task Form */
