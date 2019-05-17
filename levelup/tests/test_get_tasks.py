@@ -95,6 +95,102 @@ class TestGetTasksRequestFactory(TestCase):
         """ Assert that the user now has 90 hp """
         self.assertEqual(request.user.profile.hitpoints, 90)
         
+    def test_user_with_an_uncompleted_medium_task_loses_20_hitpoints(self):
+        """
+        Test that a user with a medium task not completed when a new day begins
+        loses 20 hp
+        """
+        # Create a medium task
+        medium_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task ME', task_difficulty = 'ME')
+        
+        # Make a request
+        request = self.factory.get('/tasks/')
+        
+        # Set the user
+        request.user = self.user
+        
+        # Adding session
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        
+        # Adding messages
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+        
+        # Run the view
+        response = get_tasks(request)
+        
+        # Ensure the updated instance of user is available
+        request.user.refresh_from_db()
+        
+        """ Assert that the user now has 80 hp """
+        self.assertEqual(request.user.profile.hitpoints, 80)
+
+    def test_user_with_an_uncompleted_hard_task_loses_30_hitpoints(self):
+        """
+        Test that a user with a hard task not completed when a new day begins
+        loses 30 hp
+        """
+        # Create a hard task
+        hard_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task HA', task_difficulty = 'HA')
+        
+        # Make a request
+        request = self.factory.get('/tasks/')
+        
+        # Set the user
+        request.user = self.user
+        
+        # Adding session
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        
+        # Adding messages
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+        
+        # Run the view
+        response = get_tasks(request)
+        
+        # Ensure the updated instance of user is available
+        request.user.refresh_from_db()
+        
+        """ Assert that the user now has 70 hp """
+        self.assertEqual(request.user.profile.hitpoints, 70)
+        
+    def test_user_with_an_uncompleted_ambitious_task_loses_40_hitpoints(self):
+        """
+        Test that a user with an ambitious task not completed when a new day begins
+        loses 40 hp
+        """
+        # Create an ambitious task
+        ambitious_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task AM', task_difficulty = 'AM')
+        
+        # Make a request
+        request = self.factory.get('/tasks/')
+        
+        # Set the user
+        request.user = self.user
+        
+        # Adding session
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        
+        # Adding messages
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+        
+        # Run the view
+        response = get_tasks(request)
+        
+        # Ensure the updated instance of user is available
+        request.user.refresh_from_db()
+        
+        """ Assert that the user now has 60 hp """
+        self.assertEqual(request.user.profile.hitpoints, 60)
+        
     def test_user_with_an_uncompleted_easy_task_and_a_complete_medium_task_loses_10_hitpoints(self):
         """
         Test that a user with an easy task not completed when a new day begins
@@ -105,6 +201,7 @@ class TestGetTasksRequestFactory(TestCase):
         easy_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task EA', task_difficulty = 'EA')
         # Create a medium task with a done_status of true
         medium_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task ME', task_difficulty = 'ME', done_status = True)
+        
         # Make a request
         request = self.factory.get('/tasks/')
         
@@ -135,4 +232,49 @@ class TestGetTasksRequestFactory(TestCase):
         """ Assert that the done medium task is now not done since a new day has begun """
         self.assertEqual(medium_task.done_status, False)
         
+    def user_who_goes_below_0_hp_loses_a_level_who_is_above_level_1(self):
+        """
+        Test that a level 2 or above user loses a level if they go below
+        0 hp from uncompleted tasks
+        """
+        # Create an easy task
+        easy_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task EA', task_difficulty = 'EA')
+        # Create a medium task
+        medium_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task ME', task_difficulty = 'ME')
+        # With these two tasks, the user should lose 30 hp in total
+        
+        # Make a request
+        request = self.factory.get('/tasks/')
+        
+        # Set the user
+        request.user = self.user
+        
+        # Set the user to have 30 hp
+        request.user.profile.hitpoints = 30
+        
+        # Set the user to be level 2
+        request.user.profile.level_rank = 2
+        
+        # Adding session
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        
+        # Adding messages
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+        
+        # Run the view
+        response = get_tasks(request)
+        
+        # Ensure the updated instance of user is available
+        request.user.refresh_from_db()
+        
+        """ Assert that the user now has 100 hp 
+            When going to 0 hp, the user's hp is reset to 100
+            If they are level 2 or above, they also lose a level """
+        self.assertEqual(request.user.profile.hitpoints, 100)
+        
+        """ Assert that the formerly level 2 user is now level 1 """
+        self.assertEqual(request.user.profile.level_rank, 1) 
         
