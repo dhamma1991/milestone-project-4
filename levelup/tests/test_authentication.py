@@ -21,5 +21,6 @@ class LogInTest(TestCase):
         """
         # Send login data
         response = self.client.post('/login/', self.credentials, follow=True)
-        # The user should be logged in
+        
+        """ Assert the user is logged in """
         self.assertTrue(response.context['user'].is_active)
