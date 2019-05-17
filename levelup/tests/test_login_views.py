@@ -26,14 +26,11 @@ class TestLoginViews(TestCase):
         """
         With a user logged in, the app should be able to reach tasks.html
         """
-        # Intialise Client
-        c = Client()
-        
         # Log in the user
-        c.login(username='test_user', password='supersecretpa55')
+        self.client.login(username='test_user', password='supersecretpa55')
         
         # Go to the profile page
-        page = c.get("/profile/")
+        page = self.client.get("/profile/")
         
         """ Assert that the profile page is found """
         self.assertEqual(page.status_code, 200)
@@ -44,11 +41,8 @@ class TestLoginViews(TestCase):
         """
         A task that is created defaults to not done
         """
-        # Intialise Client
-        c = Client()
-        
         # Log in the user
-        c.login(username='test_user', password='supersecretpa55')
+        self.client.login(username='test_user', password='supersecretpa55')
         
         # Create a task with a difficulty of easy
         task = Task(task_name = 'Test Task', task_difficulty = 'EA')
