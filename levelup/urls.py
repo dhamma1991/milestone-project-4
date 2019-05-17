@@ -18,7 +18,7 @@ urlpatterns = [
     # Stats app urls
     path('stats/', include('stats.urls')),
     # About url, go to the about page
-    path('get_started/', views.get_started, name='get_started'),
+    path('about/', views.about, name='about'),
 ]
 
 # When in development, append media files to urlpatterns containing MEDIA_URL

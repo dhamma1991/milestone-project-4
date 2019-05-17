@@ -17,7 +17,7 @@ def index(request):
     return render(request, 'index.html')
 
 """ 2. The get started (about) view """
-def get_started(request):
+def about(request):
     """
     Render about.html
     """

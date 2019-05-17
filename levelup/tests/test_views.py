@@ -27,6 +27,31 @@ class TestViews(TestCase):
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, "index.html")
         
+    def test_get_about_page(self):
+        """
+        Test that users are able to reach the about page
+        """
+        # Go to the url
+        page = self.client.get('/about/')
+        
+        """ Assert that the about page can be reached and that the template used is about.html """
+        self.assertEqual(page.status_code, 200)
+        self.assertTemplateUsed(page, "about.html")    
+        
+    def test_get_stats_page(self):
+        """
+        Ensure that the stats page can be reached
+        """
+        # Unless an instance of StatsModel exists, navigating to /stats/ throws a 404 error
+        stats = StatsModel.objects.create(stats_name = 'Totals')
+        
+        # Go to the url
+        page = self.client.get('/stats/')
+        
+        """ Assert that the stats page can be reached and that the template used is stats.html """
+        self.assertEqual(page.status_code, 200)
+        self.assertTemplateUsed(page, "stats/stats.html")    
+        
     def test_get_signup_page(self):
         """
         Ensure that the signup page can be reached
@@ -48,20 +73,6 @@ class TestViews(TestCase):
         """ Assert that the login page can be reached and that the template used is login.html """
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, "accounts/login.html")    
-        
-    def test_get_stats_page(self):
-        """
-        Ensure that the stats page can be reached
-        """
-        # Unless an instance of StatsModel exists, navigating to /stats/ throws a 404 error
-        stats = StatsModel.objects.create(stats_name = 'Totals')
-        
-        # Go to the url
-        page = self.client.get('/stats/')
-        
-        """ Assert that the stats page can be reached and that the template used is stats.html """
-        self.assertEqual(page.status_code, 200)
-        self.assertTemplateUsed(page, "stats/stats.html")    
         
     def test_cannot_get_tasks_page_without_login(self):
         """
