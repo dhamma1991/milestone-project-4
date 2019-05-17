@@ -343,11 +343,8 @@ Styles relating to the content found on stats.html
 These styles relate to the content found on about.html
 
 */
-.about-main article {
-  /* Give the article a bit more breathing room away from the footer */
-  margin-bottom: 80px; }
-  .about-main article p:last-child {
-    font-size: 1.5rem; }
+.about-main article p:last-child {
+  font-size: 1.5rem; }
 
 .icon-block {
   padding: 0 15px; }
