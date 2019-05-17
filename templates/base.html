@@ -56,7 +56,7 @@
                 <!-- Conditional Nav Links 
                     The last links that get displayed depends on whether or not a user is authenticated
                     If a user is authenticated, the links are Tasks, Donate and the User Dropdown
-                    If no user is authenticated, the links are Login and Create accounts -->
+                    If no user is authenticated, the links are Login and Sign Up -->
                 {% if user.is_authenticated %}
                     <!-- Donate -->
                     <li>
@@ -84,11 +84,11 @@
                     </li>
                     <!-- /Login -->
                     
-                    <!-- Create Account -->
+                    <!-- Sign Up -->
                     <li>
-                        <a href="{% url 'sign_up' %}">Create Account</a>
+                        <a href="{% url 'sign_up' %}">Sign Up</a>
                     </li>
-                    <!-- /Create Account -->
+                    <!-- /Sign Up -->
                 {% endif %}
                 <!-- /Conditional Nav Links -->
             </ul>
@@ -128,11 +128,11 @@
                     </li>
                     <!-- /Login -->
                     
-                    <!-- Create Account -->
+                    <!-- Sign Up -->
                     <li>
-                        <a href="{% url 'sign_up' %}">Create Account</a>
+                        <a href="{% url 'sign_up' %}">Sign Up</a>
                     </li>
-                    <!-- /Create Account -->
+                    <!-- /Sign Up -->
                 {% endif %}
             </ul>
             <!-- /Mobile Nav -->
