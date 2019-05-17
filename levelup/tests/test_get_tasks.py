@@ -1,9 +1,8 @@
 # Import necessary modules so that tests can be conducted
-import datetime
+from datetime import timedelta
 # Import Django components
 from django.test import TestCase, RequestFactory
-from django.shortcuts import get_object_or_404
-from django.utils.timezone import make_aware
+from django.utils import timezone
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.contrib.messages.storage.fallback import FallbackStorage
 # Import models
@@ -53,17 +52,22 @@ class TestGetTasksRequestFactory(TestCase):
         # Initialise RequestFactory
         self.factory = RequestFactory()
         # Create a user for ReqestFactory
-        # Set their login as a date in the past
         self.user = User.objects.create_user(username = 'test_user_factory', 
             email = None,
-            password = 'supersecretpa55', 
-            # Setting the user's last login to be 7 days ago means that
-            # every time the tests run, the get_tasks function will treat
-            # the user as having logged in on a new day, triggering the task
-            # reset functionality enabling it to be tested
-            last_login = datetime.datetime.now())
+            password = 'supersecretpa55')
+        
+        # Set the user's last login as a date in the past   
+        # Setting the user's last login to be 2 days ago means that
+        # every time the tests run, the get_tasks function will treat
+        # the user as having logged in on a new day, triggering the task
+        # reset functionality, enabling it to be tested
+        self.user.profile.last_login = timezone.now() - timezone.timedelta(days = 2)
         
     def test_user_with_an_uncompleted_easy_task_loses_10_hitpoints(self):
+        """
+        Test that a user with an easy task not completed when a new day begins
+        loses 10 hp
+        """
         # Create an easy task
         easy_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task EA', task_difficulty = 'EA')
         
@@ -90,5 +94,45 @@ class TestGetTasksRequestFactory(TestCase):
         
         """ Assert that the user now has 90 hp """
         self.assertEqual(request.user.profile.hitpoints, 90)
+        
+    def test_user_with_an_uncompleted_easy_task_and_a_complete_medium_task_loses_10_hitpoints(self):
+        """
+        Test that a user with an easy task not completed when a new day begins
+        loses 10 hp
+        With a medium task complete, this medium task should not affect their hp
+        """
+        # Create an easy task
+        easy_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task EA', task_difficulty = 'EA')
+        # Create a medium task with a done_status of true
+        medium_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task ME', task_difficulty = 'ME', done_status = True)
+        # Make a request
+        request = self.factory.get('/tasks/')
+        
+        # Set the user
+        request.user = self.user
+        
+        # Adding session
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        
+        # Adding messages
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+        
+        # Run the view
+        response = get_tasks(request)
+        
+        # Ensure the updated instance of user is available
+        request.user.refresh_from_db()
+        
+        # Ensure that the updated instance of medium_task is available
+        medium_task.refresh_from_db()
+        
+        """ Assert that the user now has 90 hp """
+        self.assertEqual(request.user.profile.hitpoints, 90)
+        
+        """ Assert that the done medium task is now not done since a new day has begun """
+        self.assertEqual(medium_task.done_status, False)
         
         
