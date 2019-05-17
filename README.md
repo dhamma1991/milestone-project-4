@@ -32,9 +32,13 @@ Since I do intend to continue developing this project I left the levelsystem app
 
 # Testing
 
-Most of the testing was conducted manually. The app is not particularly complex, so development time was spent testing "on the go" with features being tested as they were added. The small nature of the app meant that if other features were breaking as new ones were added, this was likely to be obvious.
+Automated testing was conducted using Django's built-in test framework (TestCase). Although an attempt was made to be as comprehensive as possible with automating testing, it was never a desired outcome to achieve 100% coverage. This was partly due to the app's reliance on external libraries (the built-in components of Django for example would be expected to be well-tested), and also due to my (previous) low familiarity with unit testing. I did not want to over-complicate things for myself by investing too much time learning how to test comprehensively, when that time could be spent on improving the app. My philosophy towards automating testing was therefore to ensure that the core areas of functionality (e.g. the tasks being marked as done/undone, xp gains/loses, the levelling system) were included within testing.
 
-Nevertheless, automated testing was conducted using Django's built-in test framework (TestCase), as much a demonstration of skill as it was a useful tool in this app's case. This is not in any way an attack on the the usefulness of automated testing in many cases, which is clearly essential especially for larger projects.
+I would consider that my development approach was semi-test driven. I built much of the core functionality of the app without testing, implemented testing maybe 75% of the way through the app's development, and then used the tests written to alert me to any problems with features breaking when new features were added.
+
+I found this approach worked for me. I was able to gain familiarity with Django prior to implementing testing. Then I was able to gain familiarity with testing as I was refining my knowledge of Django.
+
+# # Automated Testing Process
 
 Sanity tests were conducted first, these can be found in levelup/tests.py. Simple assertion tests were used to check that the test framework was functioning correctly.
 
@@ -46,7 +50,7 @@ I then moved to testing views. Much of the more custom functionality the app pos
 
 I first attempted a simple test just checking that the index page can be reached by using self.client.get("/"). At first I got a Value Error stating: Missing staticfiles manifest entry for 'css/style.css'. After some googling I followed the advice in [this stackoverflow thread](Missing staticfiles manifest entry for 'css/style.css') and managed to fix the error by running python manage.py collectstatic. This fixed the error, and the first simple test passed.
 
-I began using Django's test client in order to conduct tests on views that require a login. I tested that a user can access both the tasks and profile pages, tests which passed without issue. 
+I began using Django's test suite in order to conduct tests on views that require a login. I tested that a user can access both the tasks and profile pages, tests which passed without issue. 
 
 {{{ Here's the bit where you found out marking a task as undone when xp is 0 doesnt work correctly }}}
 I then conducted a test which proved very useful, and showed me I had a hole in my application.
