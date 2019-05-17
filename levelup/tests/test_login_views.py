@@ -49,6 +49,20 @@ class TestLoginViews(TestCase):
         
         """ Assert task.done_status is false """
         self.assertEqual(task.done_status, False)
+        
+    def test_user_can_reach_donate_page(self):
+        """
+        Test that the user is able to get to donate.html
+        """
+        # Log in the user
+        self.client.login(username='test_user', password='supersecretpa55')
+        
+        # Go to donate.html
+        page = self.client.get('/donate/')
+        
+        """ Assert that donate.html is reached """
+        self.assertEqual(page.status_code, 200)
+        self.assertTemplateUsed(page, 'accounts/donate.html')
     
     # def test_easy_task_completion_gives_10_xp(self):
     #     """

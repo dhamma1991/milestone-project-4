@@ -94,3 +94,4 @@ class TestViews(TestCase):
         
         """ Assert that a 404 error is thrown """
         self.assertEqual(page.status_code, 404)
+        self.assertTemplateUsed(page, '404.html')
