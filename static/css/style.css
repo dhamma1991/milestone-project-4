@@ -60,9 +60,6 @@ These classes assist in accomplishing various changes to elements or improving a
 .def-margin-bottom {
   margin-bottom: 20px; }
 
-.margin-bottom-60 {
-  margin-bottom: 60px; }
-
 /*
 
 These styles relate to elements found across multiple pages
@@ -143,6 +140,11 @@ h2 {
 /* /Site Buttons */
 /* Anchor Links */
 /* /Anchor Links */
+/* Main Content */
+main {
+  margin-bottom: 60px !important; }
+
+/* /Main Content */
 /* Footer */
 .page-footer {
   padding-top: 0; }
