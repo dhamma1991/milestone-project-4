@@ -60,6 +60,9 @@ These classes assist in accomplishing various changes to elements or improving a
 .def-margin-bottom {
   margin-bottom: 20px; }
 
+.margin-bottom-60 {
+  margin-bottom: 60px; }
+
 /*
 
 These styles relate to elements found across multiple pages
