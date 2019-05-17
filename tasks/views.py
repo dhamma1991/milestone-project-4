@@ -96,8 +96,6 @@ def get_tasks(request):
 
         tasks_count = task_list.count()
         
-        print(tasks_count)
-        
         # If the tasks_not_done var has remained zero (all tasks completed)
         if not tasks_not_done and tasks_count > 0:     
             messages.success(request, "A new day has begun! You managed to complete all your tasks yesterday. Great work!")

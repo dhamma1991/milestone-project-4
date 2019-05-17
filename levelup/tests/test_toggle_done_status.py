@@ -9,7 +9,7 @@ from tasks.models import Task
 from stats.models import StatsModel
 # Import views
 from tasks.views import toggle_done_status
-# Client can be used to act as a dummy web browser, it also gives access to some useful methods, such as login()
+# Import Client
 from django.test import Client
         
 class TestToggleDoneStatus(TestCase):
