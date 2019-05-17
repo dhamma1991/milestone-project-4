@@ -32,9 +32,13 @@ class TestLoginViews(TestCase):
         # Log in the user
         c.login(username='test_user', password='supersecretpa55')
         
-        # Assert the tasks page can be reached
+        # Go to the profile page
         page = c.get("/profile/")
+        
+        """ Assert that the profile page is found """
         self.assertEqual(page.status_code, 200)
+        """ Assert that profile.html is used as the template """
+        self.assertTemplateUsed('profile.html')
         
     def test_newly_created_task_is_not_done(self):
         """
@@ -49,7 +53,7 @@ class TestLoginViews(TestCase):
         # Create a task with a difficulty of easy
         task = Task(task_name = 'Test Task', task_difficulty = 'EA')
         
-        # Assert task.done_status is false
+        """ Assert task.done_status is false """
         self.assertEqual(task.done_status, False)
     
     # def test_easy_task_completion_gives_10_xp(self):
