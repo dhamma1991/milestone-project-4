@@ -17,7 +17,8 @@ class TestAddTaskForm(TestCase):
             'task_name': 'Do Tests', 
             'task_difficulty': 'EA'
         })
-        # Check that form.is_valid() is true
+        
+        """ Assert that form.is_valid() is true """
         self.assertTrue(form.is_valid())
         
     def test_add_task_form_is_invalid_with_missing_name(self):
@@ -25,7 +26,8 @@ class TestAddTaskForm(TestCase):
         Test that the add task form is invalid if the required task_name field is missing
         """
         form = AddTaskForm({'task_name': ''})
-        # Form can not be valid because the value is missing so should assert false
+        
+        """ The form can not be valid because the value is missing so should assert false """
         self.assertFalse(form.is_valid())
         
 class TestCreateAccountForm(TestCase):
@@ -39,7 +41,8 @@ class TestCreateAccountForm(TestCase):
             'password1': 'testpass98765',
             'password2': 'testpass98765'
         })
-        # Test the form is valid
+        
+        """ Assert the form is valid """
         self.assertTrue(form.is_valid())
         
     def test_password1_and_password2_match(self):
@@ -52,5 +55,6 @@ class TestCreateAccountForm(TestCase):
             'password1': 'iamnotamatchingpassword123',
             'password2': 'testpass98765'   
         })
-        # The two passwords above do not match, so this should be false
+        
+        """ The two passwords above do not match, so this should assert false """
         self.assertFalse(form.is_valid())

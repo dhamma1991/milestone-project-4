@@ -35,6 +35,7 @@ class TestGetTasks(TestCase):
         
         # Go to the tasks page
         page = c.get("/tasks/")
+        
         """ Assert that the page is found """
         self.assertEqual(page.status_code, 200)
         """ Assert that the template used is tasks.html """
