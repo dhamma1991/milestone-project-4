@@ -27,14 +27,11 @@ class TestGetTasks(TestCase):
         """
         With a user logged in, the app should be able to reach tasks.html
         """
-        # Intialise Client
-        c = Client()
-        
         # Log in the user
-        c.login(username='test_user', password='supersecretpa55')
+        self.client.login(username='test_user', password='supersecretpa55')
         
         # Go to the tasks page
-        page = c.get("/tasks/")
+        page = self.client.get("/tasks/")
         
         """ Assert that the page is found """
         self.assertEqual(page.status_code, 200)
