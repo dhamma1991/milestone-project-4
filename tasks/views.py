@@ -32,7 +32,7 @@ def get_tasks(request):
     # last_login field
     # Only grab the current day, hour and minute etc. are not relevant
     # # # # # # # # IMPORTANT!!!!! Whilst testing, just set the 'day' argument in the replace function to the next day to simulate a day having passed
-    current_login = make_aware(datetime.datetime.now()).replace(day = 17, hour=0, minute=0, second=0, microsecond=0)
+    current_login = make_aware(datetime.datetime.now()).replace(hour=0, minute=0, second=0, microsecond=0)
     
     # If the user gets tasks on a new day
     if current_login > user.last_login:
