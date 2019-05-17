@@ -1,4 +1,7 @@
 .index-main {
+    /* Reset the margin-bottom which is applied on other <main> elements */
+    margin-bottom: 0!important;
+    
     h1 {
         /* This is the default Materialize h1 size, it is reapplied here so that the h1 declarations in structure.scss don't overwrite it */
         font-size: 4.2rem;

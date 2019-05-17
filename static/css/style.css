@@ -159,17 +159,20 @@ main {
 
 /* /Index Fade In Effect */
 /* /Footer */
-.index-main h1 {
-  /* This is the default Materialize h1 size, it is reapplied here so that the h1 declarations in structure.scss don't overwrite it */
-  font-size: 4.2rem; }
-  .index-main h1 img {
-    position: relative;
-    max-width: 85px;
-    top: 21px;
-    right: 12px; }
-.index-main a {
-  color: #fdfdfd;
-  text-decoration: underline; }
+.index-main {
+  /* Reset the margin-bottom which is applied on other <main> elements */
+  margin-bottom: 0 !important; }
+  .index-main h1 {
+    /* This is the default Materialize h1 size, it is reapplied here so that the h1 declarations in structure.scss don't overwrite it */
+    font-size: 4.2rem; }
+    .index-main h1 img {
+      position: relative;
+      max-width: 85px;
+      top: 21px;
+      right: 12px; }
+  .index-main a {
+    color: #fdfdfd;
+    text-decoration: underline; }
 
 /*
 
