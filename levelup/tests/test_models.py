@@ -23,7 +23,7 @@ class ModelTest(TestCase):
         
         """ Assert task is an instance of Task """
         self.assertTrue(isinstance(task, Task))
-        """ Assert the __str__ function is the same as task_name """
+        """ Assert that the correct string representation of the object is returned """
         self.assertEqual(task.__str__(), task.task_name)
         
     def test_profile_creation(self):
@@ -36,3 +36,6 @@ class ModelTest(TestCase):
         """ Assert that an instance of Profile was created along with user
             and that user.profile is an instance of Profile """
         self.assertTrue(isinstance(user.profile, Profile))
+        
+        """ Assert that the correct string representation of the object is returned """
+        self.assertEqual(user.profile.__str__(), '%s Profile' % user.username)
