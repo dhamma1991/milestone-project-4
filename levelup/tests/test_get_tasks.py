@@ -232,7 +232,7 @@ class TestGetTasksRequestFactory(TestCase):
         """ Assert that the done medium task is now not done since a new day has begun """
         self.assertEqual(medium_task.done_status, False)
         
-    def user_who_goes_below_0_hp_loses_a_level_who_is_above_level_1(self):
+    def test_user_who_goes_below_0_hp_loses_a_level_who_is_above_level_1(self):
         """
         Test that a level 2 or above user loses a level if they go below
         0 hp from uncompleted tasks
