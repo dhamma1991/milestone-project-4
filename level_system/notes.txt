@@ -1,0 +1,5 @@
+The level_system app is currently redundant. It was planned to use this app to incorporate the level mechanic. A model would be used to handle the xp_thresholds for various levels, as well as special mechanics for certain level milestones (e.g. a user who reached level 10 would get a congratulatory message).
+
+In the end it was decided to simply incorporate the level system into the tasks views, since much of the functionality I felt that the level_system app was implementing contained too much ‘feature creep’. Simplifying it meant that the level_system app was mostly unnecessary.
+
+The app has been kept because in a future version of LevelUp it will almost certainly become necessary, as I do not want to lean on the tasks views too much.
