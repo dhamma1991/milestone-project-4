@@ -60,22 +60,6 @@ Expected behaviour is that a user who marks a task as undone loses xp. If the us
 Through writing a test that tested the expected behaviour outlined above, I found that the expected behaviour does occur provided that the user does NOT have 0 xp when they mark a task as undone. So if the user has 20 xp at level 2, and marks an ambitious task as undone, they will indeed go to level 1 with 80 xp. However, if the user has 0 xp at level 2, and marks the same task as undone, they will not lose a level. In addition, the Django message framework passes through messsages saying that the user has both lost and gained a level (at the same time) This was of course not desired functionality, and I was not aware of this bug until I had conducted the appropriate test.
 
 # Technologies Used
-Django
-[link here]
-
-Materialize 1.0.0
-https://materializecss.com/
-
-jQuery 3.2.1
-[link here]
-
-chain-fade
-https://www.jqueryscript.net/animation/Sequential-Entrance-Animations-chain-fade.html
-
-BeFunky
-[link here]
-Used for adjustment of various app images
-https://imageresize.org/
 
 # REFERENCES
 Images
