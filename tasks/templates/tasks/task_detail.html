@@ -28,20 +28,20 @@
             
             <div class="row center-align task-page-btns">
                 <!-- Edit Button -->
-                <div class="col s12 m6">
+                <div class="col s12 m4">
                     <button class="waves-effect waves-light btn theme-cyan" type="submit">Edit Task</button>                       
                 </div>
                 <!-- /Edit Button -->
 
                 <!-- Delete Button -->                
-                <div class="col s12 m6">
+                <div class="col s12 m4">
                     <input type="submit" value="Delete Task" formaction="delete/" class="waves-effect waves-light btn red">                    
                 </div>
                 <!-- /Delete Button -->
                 
                 <!-- Cancel Button -->
-                <div class="center-align">
-                    <a class="waves-effect waves-light btn red task-detail-cancel" href="{% url 'tasks:get_tasks' %}">Cancel</a>
+                <div class="col s12 m4">
+                    <a href="{% url 'tasks:get_tasks' %}">CANCEL</a>
                 </div>
                 <!-- /Cancel Button -->
             </div>

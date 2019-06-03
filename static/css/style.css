@@ -306,36 +306,19 @@ These styles relate to the html content found in the tasks app templates
 
 /* Task Detail and Add Task Page Buttons */
 .task-page-btns {
-  /* Target the Add and Edit task button */
-  /* Target the Delete button */
-  /* Target the Cancel link */ }
+  /* Target the 'button' divs */ }
   .task-page-btns .btn {
-    padding: 0; }
-  .task-page-btns button {
-    margin-bottom: 20px;
-    width: 140px;
-    cursor: pointer;
-    /* Once the m6 layout kicks in, margin bottom is not needed */
-    /* This mixin used for media queries, using responsive design principles of mobile first */ }
-    @media (min-width: 600px) {
-      .task-page-btns button {
-        margin-bottom: 0; } }
-  .task-page-btns i {
+    padding: 0;
     width: 140px; }
-    .task-page-btns i input {
-      color: white;
-      cursor: pointer;
-      /* Ensure the clickable area of the input matches the width and height of the container */
-      width: inherit;
-      height: inherit; }
-  .task-page-btns a {
-    min-width: 140px; }
-
-/* Specifically target the Cancel link on task-detail */
-.task-detail-cancel {
-  /* Since there are 3 buttons on task-detail as opposed to 2 on add-task,
-      the third buton (Cancel) needs spacing away from the other 2 */
-  margin-top: 20px; }
+  .task-page-btns input {
+    color: white;
+    cursor: pointer;
+    /* Ensure the clickable area of the input matches the width and height of the container */
+    width: inherit;
+    height: inherit; }
+  .task-page-btns div {
+    margin-top: 30px;
+    line-height: 36px; }
 
 /* /Task Detail and Add Task Page Buttons */
 /* /Task Detail and Add Task Form */

@@ -102,8 +102,6 @@ These styles relate to the html content found in the tasks app templates
     /* /Tasks List */
 }
 
-
-
 /* Task Detail and Add Task Form */
 /* Help Text */
 .task-form-help-text {
@@ -140,45 +138,22 @@ These styles relate to the html content found in the tasks app templates
 .task-page-btns {
     .btn {
         padding: 0;
-    }
-    
-    /* Target the Add and Edit task button */
-    button {
-        margin-bottom: $defaultMargin;
         width: 140px;
-        cursor: pointer;
-        
-        /* Once the m6 layout kicks in, margin bottom is not needed */
-        @include mqMinWidth($matSmBreakpoint) {
-            margin-bottom: 0;
-        }
     }
-    
-    /* Target the Delete button */
-    i {
-        width: 140px;
-        
-        input {
-            color: white;
-            cursor: pointer;
-            /* Ensure the clickable area of the input matches the width and height of the container */
-            width: inherit;
-            height: inherit;
-        }
-    }
-    
-    /* Target the Cancel link */
-    a {
-        // margin-left: 10px;
-        min-width: 140px;
-    }
-}
 
-/* Specifically target the Cancel link on task-detail */
-.task-detail-cancel {
-    /* Since there are 3 buttons on task-detail as opposed to 2 on add-task,
-        the third buton (Cancel) needs spacing away from the other 2 */
-    margin-top: $defaultMargin;
+    input {
+        color: white;
+        cursor: pointer;
+        /* Ensure the clickable area of the input matches the width and height of the container */
+        width: inherit;
+        height: inherit;
+    }
+    
+    /* Target the 'button' divs */
+    div {
+        margin-top: $defaultMargin * 1.5;
+        line-height: 36px;
+    }
 }
 /* /Task Detail and Add Task Page Buttons */
 /* /Task Detail and Add Task Form */
