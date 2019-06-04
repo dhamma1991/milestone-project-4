@@ -179,7 +179,7 @@ AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 
 # If a user uploads a file that has the same name as a file another user has
-# uploaded, that shouldn't change all user's files
+# uploaded, that shouldn't change all user's files that happen to have the same name
 AWS_S3_FILE_OVERWRITE = False
 # Setting this to none possibly prevents issues from occurring with djangp storage
 AWS_DEFAULT_ACL = None
