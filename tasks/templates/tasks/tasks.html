@@ -20,7 +20,7 @@
                     {{ request.user.username }}
                 </div>
                 
-                <div class="col s12 m3 flow-text center-align">
+                <div class="col s12 m3 flow-text center-align" title="Your current hitpoints. You lose hitpoints when you have uncompleted tasks at the end of the day. When you gain a level, any lost hitpoints will be restored.">
                     <i class="material-icons flow-text hp-icon">local_hospital</i>
                     
                     {{ user.profile.hitpoints }}/100hp
@@ -34,7 +34,7 @@
                     Level {{ user.profile.level_rank }}
                 </div>
                 
-                <div class="col s12 m3 flow-text center-align">
+                <div class="col s12 m3 flow-text center-align" title="Your current experience. You gain experience through completing tasks. Once you reach the experience threshold for your current level, you will gain a new level. Higher levels require progressively more experience to obtain.">
                     <i class="material-icons flow-text xp-icon">grade</i>
                     
                     {{ user.profile.exp_points}}/{{ user.profile.xp_threshold }}xp
