@@ -47,11 +47,18 @@ These styles relate to elements found across multiple pages
     li:nth-child(1) {
         position: absolute;
         right: 0%;
+        top: 5.3%;
+        
+        /* Adjust the close button position as the page layout changes */
+        @include mqMinWidth($matSmBreakpoint + 1px) {
+            top: 6.2%;
+            
+        }
     }
     
     /* Select all but the first li (the first li is the close button, so basically select all messages) */
     li:nth-child(n+2) {
-        padding: 10px 0;  
+        padding: 10px 35px;  
     }
     
     /* Success Messages

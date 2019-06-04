@@ -110,9 +110,15 @@ These styles relate to elements found across multiple pages
   /* Message Close Icon */ }
   .django-messages li:nth-child(1) {
     position: absolute;
-    right: 0%; }
+    right: 0%;
+    top: 5.3%;
+    /* Adjust the close button position as the page layout changes */
+    /* This mixin used for media queries, using responsive design principles of mobile first */ }
+    @media (min-width: 601px) {
+      .django-messages li:nth-child(1) {
+        top: 6.2%; } }
   .django-messages li:nth-child(n+2) {
-    padding: 10px 0; }
+    padding: 10px 35px; }
   .django-messages .success {
     background-color: #beffbe; }
   .django-messages .warning {
