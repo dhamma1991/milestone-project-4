@@ -193,6 +193,7 @@ def create_task(request):
             task = form.save(commit=False)
             task.user = request.user
             task.save()
+            messages.success(request, "Task created!")
             return redirect('tasks:get_tasks')
       
      # Else just render an empty form      
