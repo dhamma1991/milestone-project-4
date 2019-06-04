@@ -30,37 +30,6 @@ However, in the end, for the first release of the app I found it much easier to 
 
 Since I do intend to continue developing this project I left the levelsystem app in place. This will be built upon for a subsequent release. It will be noted that levelsystem is not included in Django's installed apps.
 
-# Testing
-
-Automated testing was conducted using Django's built-in test framework (TestCase). Although an attempt was made to be as comprehensive as possible with automating testing, it was never a desired outcome to achieve 100% coverage. This was partly due to the app's reliance on external libraries (the built-in components of Django for example would be expected to be well-tested), and also due to my (previous) low familiarity with unit testing. I did not want to over-complicate things for myself by investing too much time learning how to test comprehensively, when that time could be spent on improving the app. My philosophy towards automating testing was therefore to ensure that the core areas of functionality (e.g. the tasks being marked as done/undone, xp gains/loses, the levelling system) were included within testing.
-
-I would consider that my development approach was semi-test driven. I built much of the core functionality of the app without testing, implemented testing maybe 75% of the way through the app's development, and then used the tests written to alert me to any problems with features breaking when new features were added.
-
-I found this approach worked for me. I was able to gain familiarity with Django prior to implementing testing. Then I was able to gain familiarity with testing as I was refining my knowledge of Django.
-
-# # Automated Testing Process
-
-Sanity tests were conducted first, these can be found in levelup/tests.py. Simple assertion tests were used to check that the test framework was functioning correctly.
-
-Building up from there, I tested some of the built-in Django components, starting with the forms. I tested the AddTaskForm and UserCreationForm, checking that objects can be created successfully and that form.is_valid is true and false in cases where it should be true and false. No issues were detected during the tests. The tests themselves can be found within levelup/test_forms.py.
-
-I then moved to testing authentication. I was not expecting any problems here, since I am using the default Django authentication system. I tested that a user with some credentials was able to successfully log on. This test was fine, the test can be found in test_authentication.
-
-I then moved to testing views. Much of the more custom functionality the app possesses can be found within the views, so I focused particularly on these tests during the testing process. These tests can be found in test_views.py.
-
-I first attempted a simple test just checking that the index page can be reached by using self.client.get("/"). At first I got a Value Error stating: Missing staticfiles manifest entry for 'css/style.css'. After some googling I followed the advice in [this stackoverflow thread](Missing staticfiles manifest entry for 'css/style.css') and managed to fix the error by running python manage.py collectstatic. This fixed the error, and the first simple test passed.
-
-I began using Django's test suite in order to conduct tests on views that require a login. I tested that a user can access both the tasks and profile pages, tests which passed without issue. 
-
-{{{ Here's the bit where you found out marking a task as undone when xp is 0 doesnt work correctly }}}
-I then conducted a test which proved very useful, and showed me I had a hole in my application.
-
-Expected behaviour is that a user who marks a task as undone loses xp. If the user is higher than level 1, and their xp loss is enough to give them a negative xp amount, they should lose a level. An example of this working would be a level 2 user with 20 xp who marks an ambitious (40xp value) task as undone, should go back to level 1, but have 80 xp. This is because the xp_threshold for a level 1 user is 100. Note that if the user marks the ambitious task as done again, they should go back to the level they were before (in this case level 2) with the same xp as before (in this case, 20 xp).
-
-Through writing a test that tested the expected behaviour outlined above, I found that the expected behaviour does occur provided that the user does NOT have 0 xp when they mark a task as undone. So if the user has 20 xp at level 2, and marks an ambitious task as undone, they will indeed go to level 1 with 80 xp. However, if the user has 0 xp at level 2, and marks the same task as undone, they will not lose a level. In addition, the Django message framework passes through messsages saying that the user has both lost and gained a level (at the same time) This was of course not desired functionality, and I was not aware of this bug until I had conducted the appropriate test.
-
-# Technologies Used
-
 # REFERENCES
 Images
 
