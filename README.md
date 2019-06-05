@@ -68,7 +68,7 @@
 
 --------------------
 ## 1. Introduction
-This project is a ‘gamified’ productivity task manager app called LevelUp. The purpose of this app is to serve as a task manager that a user can use to track completion of daily tasks in their personal life that they wish to perform. The ‘gamified’ element is borrowed from RPG-type games, allowing the user to gain experience points within the app through completing their real-life tasks. Upon gaining enough experience points, the user gains levels within the app, with higher levels becoming progressively harder to obtain. Failing to complete tasks on a daily basis leads to the user losing ‘hitpoints’, and once the user reaches 0 hitpoints they lose a level.
+This project is a ‘gamified’ productivity task manager app called LevelUp. The purpose of this app is to serve as a task manager that a user can use to track completion of daily tasks in their personal life. The ‘gamified’ element is borrowed from RPG-type games, allowing the user to gain experience points within the app through completing their real-life tasks. Upon gaining enough experience points, the user gains levels within the app, with higher levels becoming progressively harder to obtain. Failing to complete tasks on a daily basis leads to the user losing ‘hitpoints’, and once the user reaches 0 hitpoints they lose a level.
 
 LevelUp borrows many concepts from real-world apps such as [Habitica](https://habitica.com/) and [LifeRPG](https://www.reddit.com/r/LifeRPG/). I have been a personal user of Habitica for many years, and LevelUp could be considered to be a minimal, stripped-down version of Habitica without the fantasy-RPG elements.
 ## 2. UX
