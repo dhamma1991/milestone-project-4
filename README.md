@@ -16,7 +16,7 @@
 
 [3. Features](#3-features)
 
-[3.1. Authentication System](#31-an-authentication-system)
+[3.1. Authentication System](#31-authentication-system)
 
 [3.2. User Profile System](#32-user-profile-system)
 
