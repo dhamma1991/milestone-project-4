@@ -68,7 +68,7 @@
 
 --------------------
 ## 1. Introduction
-This project is a ‘gamifed’ productivity task manager app called LevelUp. The purpose of this app is to serve as a task manager that a user can use to track completion of daily tasks in their personal life that they wish to perform. The ‘gamified’ element is borrowed from RPG-type games, allowing the user to gain experience points within the app through completing their real-life tasks. Upon gaining enough experience points, the user gains levels within the app, with higher levels becoming progressively harder to obtain. Failing to complete tasks on a daily basis leads to the user losing ‘hitpoints’, and once the user reaches 0 hitpoints they lose a level.
+This project is a ‘gamified’ productivity task manager app called LevelUp. The purpose of this app is to serve as a task manager that a user can use to track completion of daily tasks in their personal life that they wish to perform. The ‘gamified’ element is borrowed from RPG-type games, allowing the user to gain experience points within the app through completing their real-life tasks. Upon gaining enough experience points, the user gains levels within the app, with higher levels becoming progressively harder to obtain. Failing to complete tasks on a daily basis leads to the user losing ‘hitpoints’, and once the user reaches 0 hitpoints they lose a level.
 
 LevelUp borrows many concepts from real-world apps such as [Habitica](https://habitica.com/) and [LifeRPG](https://www.reddit.com/r/LifeRPG/). I have been a personal user of Habitica for many years, and LevelUp could be considered to be a minimal, stripped-down version of Habitica without the fantasy-RPG elements.
 ## 2. UX
@@ -195,7 +195,7 @@ Allows Django to parse database URLs.
 ### [Pillow](https://pillow.readthedocs.io/en/stable/)
 Pillow is a PIL fork that allows Python to be used to manipulate image files.
 ### [Psycopg2](https://pypi.org/project/psycopg2/)
-Allows Python to communicate with LevelUp’s production postgreSQL database.
+Allows Python to communicate with LevelUp’s production PostgreSQL database.
 ### [Whitenoise 4.1.2](http://whitenoise.evans.io/en/stable/)
 Used to integrate the app’s static files, which eases the process of deploying the app on Heroku.
 ### [Stripe](https://stripe.com/)
@@ -274,7 +274,7 @@ Lastly, I asked User X to update the profile picture for their account, although
 User X commented that they liked the overall design of the app, and thought it looked sleek and modern. 
 
 ### 7.4. Automated Testing
-Automated testing was conducted using Django's built-in test framework (TestCase). Although an attempt was made to be as comprehensive as possible with automating testing, it was never a desired outcome to achieve 100% coverage. This was partly due to the app's reliance on external libraries (the built-in components of Django for example would be expected to be well-tested), and also due to my (previous) low familiarity with unit testing. I did not want to over-complicate things for myself by investing too much time learning how to test comprehensively, when that time could be spent on improving the app. My philosophy towards automating testing was therefore to ensure that the core areas of functionality (e.g. the tasks being marked as done/undone, xp gains/loses, the levelling system) were included within testing.
+Automated testing was conducted using Django's built-in test framework (TestCase). Although an attempt was made to be as comprehensive as possible with automating testing, it was never a desired outcome to achieve 100% coverage. This was partly due to the app's reliance on external libraries (the built-in components of Django for example would be expected to be well-tested), and also due to my (previous) low familiarity with unit testing. I did not want to over-complicate things for myself by investing too much time learning how to test comprehensively, when that time could be spent on improving the app. My philosophy towards automating testing was therefore to ensure that the core areas of functionality (e.g. the tasks being marked as done/undone, xp gains/losses, the levelling system) were included within testing.
 
 I would consider that my development approach was semi-test driven. I built much of the core functionality of the app without testing, implemented testing maybe 75% of the way through the app's development, and then used the tests written to alert me to any problems with features breaking when new features were added.
 
@@ -288,7 +288,7 @@ I then moved to testing authentication. I was not expecting any problems here, s
 
 I then moved to testing views. Much of the more custom functionality the app possesses can be found within the views, so I focused particularly on these tests during the testing process. These tests can be found in test_views.py.
 
-I first attempted a simple test just checking that the index page can be reached by using self.client.get("/"). At first I got a Value Error stating: Missing staticfiles manifest entry for 'css/style.css'. After some googling I followed the advice in [this stackoverflow thread](https://stackoverflow.com/questions/44160666/valueerror-missing-staticfiles-manifest-entry-for-favicon-ico) and managed to fix the error by running python manage.py collectstatic. This fixed the error, and the first simple test passed.
+I first attempted a simple test just checking that the index page can be reached by using self.client.get("/"). At first, I got a Value Error stating: Missing staticfiles manifest entry for 'css/style.css'. After some googling, I followed the advice in [this stackoverflow thread](https://stackoverflow.com/questions/44160666/valueerror-missing-staticfiles-manifest-entry-for-favicon-ico) and managed to fix the error by running python manage.py collectstatic. This fixed the error, and the first simple test passed.
 
 I began using Django's test suite in order to conduct tests on views that require a login. I tested that a user can access both the tasks and profile pages, tests which passed without issue. 
 
@@ -298,7 +298,7 @@ In one case, expected behaviour is that a user who marks a task as undone loses 
 
 Through writing a test that tested the expected behaviour outlined above, I found that the expected behaviour does occur provided that the user does NOT have 0 xp when they mark a task as undone. So if the user has 20 xp at level 2, and marks an ambitious task as undone, they will indeed go to level 1 with 80 xp. However, if the user has 0 xp at level 2, and marks the same task as undone, they will not lose a level. In addition, the Django message framework passed through messages saying that the user had both lost and gained a level (at the same time) This was of course not desired functionality, and I was not aware of this bug until I had conducted the appropriate test.
 
-In order to pass this test I had to make modifications to the toggle_done_status view, mainly by ensuring that the ‘leftover’ variable used within the view is calculated correctly.
+In order to pass this test, I had to make modifications to the toggle_done_status view, mainly by ensuring that the ‘leftover’ variable used within the view is calculated correctly.
 
 I continued to write more tests, with the end number of tests for the current release of the app numbering 32. All tests currently pass.
 ### 7.5. Browser and Responsiveness Testing
@@ -337,7 +337,7 @@ Normally set to ‘1’ (when in development). This just enables Django’s debu
 #### DJANGO_SECRET_KEY
 Anyone wishing to run LevelUp locally will have to generate a Django secret key and assign the value to this variable.
 #### EMAIL_USER and EMAIL_PASSWORD
-The password reset functionality makes use of a gmail account I created for the app. Anyone wishing to run the app locally and make use of the password reset functionality would need to configure an email account to work with the app.
+The password reset functionality makes use of a Gmail account I created for the app. Anyone wishing to run the app locally and make use of the password reset functionality would need to configure an email account to work with the app.
 #### STRIPE_SEC_KEY
 This is used by Stripe in order to facilitate the donations system on the app. A local deployment would need to set up a Stripe account and configure the app to that account.
 #### AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME
@@ -354,6 +354,7 @@ https://www.canva.com/media/MAAWVMkQET8
 I received inspiration for this project mainly from [Habitica] https://habitica.com/).
 #### Code Acknowledgements
 Other developer’s code that I have reused is indicated within the code itself by comments.
+
 
 
 
