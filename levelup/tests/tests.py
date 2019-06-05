@@ -2,7 +2,6 @@
 import os
 from django.conf import settings
 from django.test import TestCase
-# from django.conf import settings
 
 class TestDjango(TestCase):
     """ Ensure the test framework is functioning """
