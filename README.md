@@ -30,23 +30,12 @@
 
 [4. Features Left to Implement](#4-features-left-to-implement)
 
-[4.1 'First' and 'Last' buttons on the charts page](#41-first-and-last-buttons-on-the-charts-page)
-
-[4.2. Custom pagination](#42-custom-pagination)
-
-[4.3. User Authentication System](#43-user-authentication-system)
-
 ----------
 
 [5. How Existing Features Fulfil User Requirements](#5-how-existing-features-fulfil-user-requirements)
 
-[5.1. Hardcore Sharer](#51-hardcore-sharer)
-
-[5.2. Chart Observer](#52-chart-observer)
-
-[5.3. Music Socialite](#53-music-socialite)
-
 ----------
+
 [6. Technologies Used](#6-technologies-used)
 
 ----------
@@ -55,13 +44,15 @@
 
 [7.1. Code Validation](#71-code-validation)
 
-[7.2. User Stories Testing](#72-user-stories-testing)
+[7.2. Manual Testing](#72-manual-testing)
 
 [7.3. Other Manual Testing](#73-other-manual-testing)
 
-[7.4. Browser and Responsiveness Testing](#74-browser-and-responsiveness-testing)
+[7.4. Automated Testing](#74-automated-testing)
 
-[7.5. Known Issues](#75-known-issues)
+[7.5. Browser and Responsiveness Testing](#74-browser-and-responsiveness-testing)
+
+[7.6. Known Issues](#76-known-issues)
 
 ----------
 
@@ -282,7 +273,7 @@ Lastly, I asked User X to update the profile picture for their account, although
 
 User X commented that they liked the overall design of the app, and thought it looked sleek and modern. 
 
-### Automated Testing
+### 7.4. Automated Testing
 Automated testing was conducted using Django's built-in test framework (TestCase). Although an attempt was made to be as comprehensive as possible with automating testing, it was never a desired outcome to achieve 100% coverage. This was partly due to the app's reliance on external libraries (the built-in components of Django for example would be expected to be well-tested), and also due to my (previous) low familiarity with unit testing. I did not want to over-complicate things for myself by investing too much time learning how to test comprehensively, when that time could be spent on improving the app. My philosophy towards automating testing was therefore to ensure that the core areas of functionality (e.g. the tasks being marked as done/undone, xp gains/loses, the levelling system) were included within testing.
 
 I would consider that my development approach was semi-test driven. I built much of the core functionality of the app without testing, implemented testing maybe 75% of the way through the app's development, and then used the tests written to alert me to any problems with features breaking when new features were added.
@@ -310,7 +301,7 @@ Through writing a test that tested the expected behaviour outlined above, I foun
 In order to pass this test I had to make modifications to the toggle_done_status view, mainly by ensuring that the ‘leftover’ variable used within the view is calculated correctly.
 
 I continued to write more tests, with the end number of tests for the current release of the app numbering 32. All tests currently pass.
-### 7.4. Browser and Responsiveness Testing
+### 7.5. Browser and Responsiveness Testing
 The app was primarily tested on Google Chrome version 74.0.3729.169 on a Windows PC with a default maximised screen size of 1936px. 
 
 In addition to Google Chrome's developer tools where mobile devices can be simulated, an iPhone 7 running iOS v11.3 was used to test the app with its native Safari browser. The website was also tested on Firefox v66.0.3, Safari v12.1.1 (on a MacBook Pro 15-inch Retina) and Edge v42.17134.1.0.
@@ -322,7 +313,7 @@ No issues were detected on any of the tested browsers in terms of either layout 
 In addition to modern browser testing, the app was tested on IE version 11.0.9600.19130. On this browser, none of the charts were rendered. After some searching, I found that DC.js is tested in IE but that [mine wasn’t the only issue] https://stackoverflow.com/questions/50047687/dc-js-im-facing-issues-rendering-the-dc-js-dashboards-in-ie-11) and that issues relating to DC.js working with IE [have been documented](https://github.com/dc-js/dc.js/issues/1334).
 
 Due to IE being a legacy browser, and with Windows 10 (and Edge) becoming more and more common, I adopted to not support IE in any of its incarnations. To this effect, a user trying to view the app on IE will see a page similar to the no-js functionality, asking them to upgrade their browser.
-### 7.5. Known Issues
+### 7.6. Known Issues
 There are several issues with the app that were not tackled in the current release, mainly because of the time it would have taken to implement fixes.
 #### User email is not unique
 The default Django User model utilised in the app does not require the user to sign up with a unique email, just a unique username. This has the potential to cause problems for the password reset functionality; if more than one username is associated with the same email address, two emails will be send to that email address when that email is used in the password reset process, with the ability to reset both user accounts from the same email.
