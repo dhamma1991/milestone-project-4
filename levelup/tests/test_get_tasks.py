@@ -255,6 +255,9 @@ class TestGetTasksRequestFactory(TestCase):
         # Set the user to be level 2
         request.user.profile.level_rank = 2
         
+        # Set the appropriate xp_threshold for a level 2 user
+        request.user.profile.xp_threshold = 200
+        
         # Adding session
         middleware = SessionMiddleware()
         middleware.process_request(request)
@@ -277,4 +280,63 @@ class TestGetTasksRequestFactory(TestCase):
         
         """ Assert that the formerly level 2 user is now level 1 """
         self.assertEqual(request.user.profile.level_rank, 1) 
+        
+        """ Assert that the user has the correct xp_threshold for level 1"""
+        self.assertEqual(request.user.profile.xp_threshold, 100) 
+        
+    def test_user_who_goes_below_0_hp_loses_a_level_who_is_above_level_1_but_has_100hp(self):
+        """
+        Test that a level 2 or above user loses a level if they go below
+        0 hp from uncompleted tasks
+        Ensure that the user always has 100 hp, and that once they lose a level
+        they do not lose any further hp from further uncompleted tasks
+        """
+        # Create an easy task
+        easy_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task EA', task_difficulty = 'EA')
+        # Create a medium task
+        medium_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task ME', task_difficulty = 'ME')
+        # Create an ambitious task
+        ambitious_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task AM', task_difficulty = 'AM')
+        # With these three tasks, the user should lose 70 hp in total
+        
+        # Make a request
+        request = self.factory.get('/tasks/')
+        
+        # Set the user
+        request.user = self.user
+        
+        # Set the user to have 30 hp
+        request.user.profile.hitpoints = 30
+        
+        # Set the user to be level 3
+        request.user.profile.level_rank = 3
+        
+        # Set the appropriate xp_threshold for a level 3 user
+        request.user.profile.xp_threshold = 300
+        
+        # Adding session
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        
+        # Adding messages
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+        
+        # Run the view
+        response = get_tasks(request)
+        
+        # Ensure the updated instance of user is available
+        request.user.refresh_from_db()
+        
+        """ Assert that the user now has 100 hp 
+            When going to 0 hp, the user's hp is reset to 100
+            If they are level 2 or above, they also lose a level """
+        self.assertEqual(request.user.profile.hitpoints, 100)
+        
+        """ Assert that the formerly level 2 user is now level 2 """
+        self.assertEqual(request.user.profile.level_rank, 2) 
+        
+        """ Assert that the user has the correct xp_threshold for level 2"""
+        self.assertEqual(request.user.profile.xp_threshold, 200) 
         

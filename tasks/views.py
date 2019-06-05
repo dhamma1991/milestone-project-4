@@ -32,7 +32,6 @@ def get_tasks(request):
     # Grab the timestamp for the current request and make it into a format acceptable to the
     # last_login field
     # Only grab the current day, hour and minute etc. are not relevant
-    # # # # # # # # IMPORTANT!!!!! Whilst testing, just set the 'day' argument in the replace function to the next day to simulate a day having passed
     current_login = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
     
     # If the user gets tasks on a new day
@@ -79,21 +78,21 @@ def get_tasks(request):
             # Save any changes to task model
             task.save()
         
-            # If the user has lost all their hitpoints
-            if user.hitpoints <= 0:
-                # Users who are level 1 when they lose all their hitpoints can not go below level 1
-                if not user.level_rank == 1:
-                    user_lost_level = True
-                    # Reduce the user's level
-                    user.level_rank -=1
-                    # And set the new xp_threshold
-                    user.xp_threshold -= 100
-                else:
-                    user_is_level_one = True
-                # Reset the user's hitpoints
-                user.hitpoints = 100
-                # Reset the user xp
-                user.exp_points = 0
+        # If the user has lost all their hitpoints
+        if user.hitpoints <= 0:
+            # Users who are level 1 when they lose all their hitpoints can not go below level 1
+            if not user.level_rank == 1:
+                user_lost_level = True
+                # Reduce the user's level
+                user.level_rank -=1
+                # And set the new xp_threshold
+                user.xp_threshold -= 100
+            else:
+                user_is_level_one = True
+            # Reset the user's hitpoints
+            user.hitpoints = 100
+            # Reset the user xp
+            user.exp_points = 0
 
         tasks_count = task_list.count()
         
