@@ -262,8 +262,9 @@ class TestGetTasksRequestFactory(TestCase):
         # Ensure the updated instance of user is available
         request.user.refresh_from_db()
         
-        # Ensure that the updated instance of medium_task is available
+        # Ensure that the updated instance of medium_task and easy_task are available
         medium_task.refresh_from_db()
+        easy_task.refresh_from_db()
         
         """ Assert that the user has 100hp """
         self.assertEqual(request.user.profile.hitpoints, 100)
