@@ -1,4 +1,4 @@
-# Milestone Project 4 – LevelUp Gamified Productivity Task Manager App Built with Django
+# Milestone Project 4 – LevelUp - A Gamified Productivity Task Manager App Built with Django
 
 [![Build Status](https://travis-ci.org/dhamma1991/milestone-project-4.svg?branch=master)](https://travis-ci.org/dhamma1991/milestone-project-4)
 
@@ -50,7 +50,7 @@
 
 [7.4. Automated Testing](#74-automated-testing)
 
-[7.5. Browser and Responsiveness Testing](#74-browser-and-responsiveness-testing)
+[7.5. Browser and Responsiveness Testing](#75-browser-and-responsiveness-testing)
 
 [7.6. Known Issues](#76-known-issues)
 
