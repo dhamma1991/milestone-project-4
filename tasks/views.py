@@ -1,5 +1,3 @@
-# Import datetime for date and time manipulation
-# import datetime
 # Import Django components
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect

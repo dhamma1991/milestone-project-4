@@ -8,8 +8,11 @@
 
 {% block content %}
     <main class="container">
+        <!-- Page Heading -->
         <h1 class="center-align">Login</h1>
+        <!-- /Page Heading -->
         
+        <!-- Login Form -->
         <form class="user-form" method="POST">
             {% csrf_token %}
             
@@ -28,5 +31,6 @@
                 <p>Don't have an account yet? <a href="{% url 'sign_up' %}">Sign Up</a></p>
             </div>
         </form>
+        <!-- /Login Form -->
     </main>
 {% endblock %}

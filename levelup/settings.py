@@ -23,10 +23,6 @@ else:
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
 # Django Secret Key
 if os.environ.get('TRAVIS_BUILD'):
     SECRET_KEY = 'wt5xd3fx+bgh+vo^hj!%l&-nag7ginpz7e@6t)gcf#(_@0ecjk'
@@ -125,8 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
 LOGIN_REDIRECT_URL = 'tasks:get_tasks'
 # Set the url where Django looks for login functionality
 LOGIN_URL = 'login'
-# And successful logout
-# LOGOUT_REDIRECT_URL = 'index'
 
 # Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

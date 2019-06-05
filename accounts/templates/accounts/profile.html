@@ -12,6 +12,7 @@
         <h1 class="center-align">Your Profile</h2>
         <!-- /Page Heading -->
     
+        <!-- Profile Image, Username and Email -->
         <div class="center-align">
             <img src="{{ user.profile.image.url }}">
 
@@ -19,7 +20,9 @@
 
             <p>{{ user.email }}</p>
         </div>
+        <!-- /Profile Image, Username and Email -->
 
+        <!-- Forms -->
         <form class="user-form" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset>
@@ -34,5 +37,6 @@
                 <button class="waves-effect waves-light btn theme-cyan" type="submit">Update</button>
             </div>
         </form>
+        <!-- /Forms -->
     </main>
 {% endblock %}
