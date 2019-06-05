@@ -72,19 +72,19 @@ This project is a ‘gamified’ productivity task manager app called LevelUp. T
 
 LevelUp borrows many concepts from real-world apps such as [Habitica](https://habitica.com/) and [LifeRPG](https://www.reddit.com/r/LifeRPG/). I have been a personal user of Habitica for many years, and LevelUp could be considered to be a minimal, stripped-down version of Habitica without the fantasy-RPG elements.
 ## 2. UX
-LevelUp is aimed at productivity-minded people. The expected type of user would be someone who has used more than one productivity app, perhaps including other task managers and scheduler apps. The expected type of user is expected to be someone high-achieving (or someone who aims to become high-achieving) in their personal goals, or simply someone who wants to try a novel way of motivating themselves to do daily tasks. 
+LevelUp is aimed at productivity-minded people. The expected type of user would be someone who has used more than one type of productivity app, perhaps including other task managers and scheduler apps. The expected type of user is expected to be someone high-achieving (or someone who aims to become high-achieving) in their personal goals, or simply someone who wants to try a novel way of motivating themselves to do daily tasks. 
 
 The typical user will need to be able to:
 
 1. Have access to an easy to use authentication system that enables the personalised functionality of the app.
 
-2. An easy way to add tasks.
+2. Have an easy way to add tasks.
 
 3. See a clearly organised and easy to decipher task page.
 
-4. ‘At a glance’ overview of the user’s current stats (hitpoints and experience points).
+4. Have ‘at a glance’ overview of the user’s current stats (hitpoints and experience points).
 
-5. Information explaining the mechanics of the app to the user. This could be in the form of a dedicated tutorial page for the app, tooltips scattered throughout the app, or a combination of both.
+5. See information explaining the mechanics of the app to the user. This could be in the form of a dedicated tutorial page for the app, text elements explaining various features spread throughout the app, or a combination of both these features.
 
 ### 2.1. Wireframes
 Prior to work beginning on the app, wireframes were created to aid the design process and provide direction during actual coding. These can be found in the "wireframes" folder in the root directory of the project.
@@ -98,21 +98,21 @@ As previously mentioned in the [introduction](#1-introduction), LevelUp is a gam
 The user is able to create an account with a unique username. Within the app, the user is able to update their details and add a profile picture. There is functioning password reset functionality, so that a user who chooses to reset their password will get a password reset email sent to their inbox.
 
 ### 3.2. User Profile System
-This profile system uses a one-to-one relationship with Django’s built in model User in order to add functionality that is required by LevelUp, in particular the hitpoints and experience system. 
+This profile system uses a one-to-one relationship with Django’s built in User model in order to add functionality that is required by LevelUp, in particular the hitpoints and experience system. 
 
 Hitpoints range from 0 to 100. If users fail to complete tasks by the end of the day (currently 0:00 UTC), then the difficulty of the task determines how many hitpoints they will lose, with more difficult tasks causing the user to lose more hitpoints. If the user reaches 0 hitpoints, they will lose a level (with the exception of if they are level 1; level 0 or below do not exist on the app). Once a user gains a new level, any lost hitpoints will be regained.
 
-**Note**: It may be hard to see the task refresh and hitpoint loss functionality in action, as by its nature it only becomes apparent after a login has occurred after the reset time of 0:00 UTC. A user has been created on the heroku deployment with the username of **User123** and password of **password123**. This user has some uncompleted tasks, and anyone wishing to view the hitpoint loss functionality at work can log in as this user.
+**Note**: It may be hard to see the task refresh and hitpoint loss functionality in action, as by its nature it only becomes apparent after a login has occurred after the reset time of 0:00 UTC. A user has been created on the Heroku deployment with the username of **User123** and password of **password123**. This user should have some uncompleted tasks (provided no one logs in and marks them as done), and anyone wishing to view the hitpoint loss functionality at work can log in as this user.
 
 Experience is gained through completing tasks. The amount of experience gained depends on the difficulty of the tasks, with more difficult tasks granting more experience. At every level, users must reach a certain experience threshold in order to gain the next level. The experience threshold gradually gets higher as the user gains levels, with the experience threshold for level 1 being 100, level 2 being 200, level 3 being 300 and so on. Once the user reaches a new level, their experience is reset to 0 and their hitpoints are restored to 100.
 
 ### 3.3. Tasks
-The tasks page contains daily tasks that the user creates that the user can mark as done. At a specified point in time (currently 0:00 UTC) the user’s tasks ‘refresh’, and are marked as not done ready for the start of a new day. Any tasks not done mean the user loses hitpoints. 
+The tasks page contains daily tasks that the user creates that the user can mark as done. At a specified point in time (currently 0:00 UTC) the user’s tasks ‘refresh’, and are marked as not done ready for the start of a new day. Any tasks that have not been marked as done will cause the user to lose hitpoints. 
 
 It should be noted that the task refresh system is only active on the days that the user is. For example, if the user does not log in to the app for 3 days, this does not mean that they lose 3 days’ worth of hitpoints. This was implemented to ensure that the user is not punished too much if they are unable or unwilling to log in to the app for a sustained period of time.
 
 ### 3.4. Add and Edit Task Forms
-Users are able to use forms within the app to both add and edit tasks. Users can give tasks a name, some optional tasks notes, and a difficulty. The task difficulty can be picked by the user from 4 options; easy, medium, hard and ambitious, representing 10, 20, 30, and 40 xp gain and hp loss respectively. Tasks can be edited at any time and the difficulty adjusted with no limitations or penalties.
+Users are able to use forms within the app to both add and edit tasks. Users can give each task a name, some optional task notes, and a difficulty. The task difficulty can be picked by the user from 4 options; easy, medium, hard and ambitious, representing 10, 20, 30, and 40 xp gain and hp loss respectively. Tasks can be edited at any time and the difficulty adjusted with no limitations or penalties.
 
 ### 3.5. Integration with Stripe
 Stripe payment processing is used to facilitate payment processing within the app. This integration is fairly basic, and consists of the user being able to donate a pre-defined amount (5 USD) to the developers of the app as a thank you for their hard work. Users who donate have their username added to a thank you list that is displayed on donate.html.
@@ -122,12 +122,12 @@ Some features are left open to the idea of implementation but were not featured 
 ### Customised days when tasks have to be completed
 Currently, each task the user creates must be completed every day. This does not allow the user to specify certain days that the task does not need to be completed. For example, a user may want to go to the gym 4 days a week. They could set their gym daily task to only be active on 4 out of the 7 days of the week, and on the other days, the task is inactive and does not cause the user to lose hitpoints if it has not been marked as done.
 
-I’m not sure how this functionality could be implemented at present, but it would certainly involve the Python module datetime.date. This would allow days of the week to be used in the program. The task could perhaps run a check during each sync-time (when the app checks for non-completed dailies), seeing if there are any tasks that do not need to be completed on the next coming day. A new Boolean field in the tasks model would also probably be necessary, indicating whether or not a task is required to be completed on a given day.
+I’m not sure how this functionality could be implemented at present, but it would certainly involve the Python module datetime.date. This would allow days of the week to be used in the program. The task could perhaps run a check during each sync-time (when the app checks for non-completed dailies), seeing if there are any tasks that do not need to be completed on the next coming day. A new Boolean field in the Task model would also probably be necessary, indicating whether or not a task is required to be completed on a given day.
 
 ### A mechanic for hitpoint recovery other than levelling up
-Currently, a user on less than 100 hitpoints has no way to recover their hitpoints other than by gaining enough experience to gain a level. With the increases in the experience threshold required by users in order to gain higher levels, this has the potential to make the app overly difficulty to make progress in without some system way of being able to regain hitpoints without levelling up.
+Currently, a user on less than 100 hitpoints has no way to recover their hitpoints other than by gaining enough experience to gain a level. With the increases in the experience threshold required by users in order to gain higher levels, this has the potential to make the app overly difficulty to make progress in without some way of being able to regain hitpoints without levelling up.
 
-A potential solution to this would be to implement a system of ‘gold’, as found in Habitica. The user could use this in-app currency to purchase ‘healing potions’ (again to borrow from Habitica) which would allow the user to recover hitpoints.
+A potential solution to this problem would be to implement a system of ‘gold’, as found in Habitica. The user could use this in-app currency to purchase ‘healing potions’ (again to borrow from Habitica) which would allow the user to recover hitpoints.
 
 Implementing such a system would, at the minimum, require an overhaul of the front-end to provide a visual indicator of the amount of in-game currency the user has, as well as somewhere that they can buy and use the healing mechanic. In addition, there would need to be modifications to the Profile model, associating these healing mechanic items with the user’s profile. New views would need to be written handing how the hitpoints are gained.
 ### Email authentication
@@ -149,19 +149,19 @@ In the current release of LevelUp, there is no way the user can ‘pause’ the 
 
 Ideally, the user should not be penalised within the app for taking time off of the app. A way to prevent uncompleted tasks causing hitpoint loss should therefore be implemented in a future release. 
 ### Delete task confirmation
-Currently, a task is deleted as soon as a user clicks the ‘Delete Task’ button on the task detail pages. It would probably be better practice to have the user go to a delete confirmation page first, this would guard against misclicks or mistakes.
+Currently, a task is deleted as soon as a user clicks the ‘Delete Task’ button on the task detail pages. It would probably be better practice to have the user go to a delete confirmation page first; this would guard against misclicks or mistakes.
 ### Custom donation amount
 Currently, LevelUp only accepts donations of 5 USD from users. This feature could be expanded to accommodate a donation of any amount, and could also be tailored to match the user’s own currency. Further configuration of Stripe would be necessary in order for this to be implanted.
 ## 5. How Existing Features Fulfil User Requirements
 This section details how the features implemented in the current release of the project meet the requirements of users discussed in the UX section.
 ### See a clearly organised and easy to decipher task page.
-The user is able to see their list of tasks on tasks.html, reachable from the main nav. Each task is contained within a Materialize ‘card’, which adds some styling to distinguish each task from the next. The difficulty for each task is represented by an icon of some bars, with more bars being filled for more difficulty tasks. The icons provide a visual indicator of the difficulty of the task without cluttering up each task card with too much text. In addition, it is clear to see which tasks the user has currently completed, with a ‘tick’ icon used to represent a task as being done.
+The user is able to see their list of tasks on tasks.html, reachable from the main nav. Each task is contained within a Materialize ‘card’, which adds some styling to distinguish each task from the next. The difficulty for each task is represented by an icon of some bars. The bars icon has more bars filled in the more difficult the task is. The icons provide a visual indicator of the difficulty of the task without cluttering up each task card with too much text. In addition, it is clear to see which tasks the user has currently completed, with a ‘tick’ icon used to represent a task as being done.
 ### An easy way to add tasks
 There is a link to the add task form positioned in a prominent place above the task list. The add task form contains instructions and guidance on how to add a task and how to pick a task difficulty. 
 ### ‘At a glance’ overview of the user’s current stats (hitpoints and experience points)
-These are positioned towards the top of the tasks page in a prominent location. Colourful Material icons are used to represent hitpoints (red) and experience (yellow), and these aid in making these elements stand out from the rest of the page. 
+This information is positioned towards the top of the tasks page in a prominent location. Colourful Material icons are used to represent hitpoints (red) and experience (yellow), and these aid in making these elements stand out from the rest of the page. 
 ### Information explaining the mechanics of the app to the user
-The core philosophy behind the app is explained in the ‘About’ section of the app, reachable from the main nav as well as the ‘Get Started’ link which shows on index.html. In addition, there is text towards the top of both the tasks page and the add task page which explain those areas of functionality to the user.
+The core philosophy behind the app is explained in the ‘About’ section of the app, reachable from the main nav, the footer, as well as the ‘Get Started’ link which shows on index.html. In addition, there is text towards the top of both the tasks page and the add task page which explain the functionality of those two pages to the user.
 ## 6. Technologies Used
 Here can be found a list of the main packages, languages, frameworks and services that constitute LevelUp.
 ### [HTML5](https://www.w3.org/standards/webdesign/htmlcss)
@@ -175,15 +175,15 @@ Materialize is a front-end framework based on Google’s philosophy of “materi
 ### [Material Icons](https://material.io/tools/icons/?style=baseline)
 Included as part of the Materialize framework. Provides a useful set of icons that can be used to represent actions and items.
 ### [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-The project does not rely heavily on JavaScript, although there is some JavaScript scattered throughout the project. Its primary purpose is to enable the use of jQuery, but there are some examples of pure JavaScript found within the app (e.g. the copyright date script found at the bottom of base.html).
+The project does not rely heavily on JavaScript, although there is some JavaScript scattered throughout the project. Its primary purpose is to enable the use of jQuery, but there are some examples of pure JavaScript found within the app (e.g. the copyright date script found at the bottom of base.html and the Internet Explorer detection script found in ms-ie.js).
 ### [jQuery 3.2.1](https://jquery.com)
 jQuery is utilised by the project for a number of areas of functionality:
 
 1. Materialize depends on jQuery for its JavaScript components (e.g. the sidenav).
 2. The library chain_fade.js, used for the text fade in effect on index.html
-3. The custom written script that hides Django messages when the user clicks on the close button, using the slideUp animation.
+3. The script that hides Django messages when the user clicks on the close button, which uses the slideUp animation.
 ### [Django 2.0](https://docs.djangoproject.com/en/2.0/)
-Django is the main engine that powers LevelUp, providing user authentication, templating system and administration among other tasks.
+Django is the main engine that powers LevelUp, providing user authentication, the templating system, and app administration, among other tasks.
 ### [Amazon S3](https://aws.amazon.com/s3/)
 Amazon’s object storage service is used to store user-uploaded profile pictures.
 ### [Boto 3 1.9.146](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
@@ -192,11 +192,11 @@ The SDK provided by Amazon for Python. Used by LevelUp to configure S3.
 Used to simplify the process of rendering Django forms.
 ### [Crispy Forms Materialize 0.2](https://pypi.org/project/crispy-forms-materialize/)
 Allows compatibility between the Materialize framework and Django Crispy Forms.
-### [Django Database URL](https://github.com/kennethreitz/dj-database-url)
+### [Django Database URL 0.5.0](https://github.com/kennethreitz/dj-database-url)
 Allows Django to parse database URLs.
-### [Pillow](https://pillow.readthedocs.io/en/stable/)
+### [Pillow 5.4.1](https://pillow.readthedocs.io/en/stable/)
 Pillow is a PIL fork that allows Python to be used to manipulate image files.
-### [Psycopg2](https://pypi.org/project/psycopg2/)
+### [Psycopg2 2.8.1](https://pypi.org/project/psycopg2/)
 Allows Python to communicate with LevelUp’s production PostgreSQL database.
 ### [Whitenoise 4.1.2](http://whitenoise.evans.io/en/stable/)
 Used to integrate the app’s static files, which eases the process of deploying the app on Heroku.
@@ -206,7 +206,7 @@ Stripe is a payment processor, used by LevelUp to facilitate users being able to
 Used for version control
 ### [GitHub](https://github.com/)
 Used as the online hosting service for the git repository.
-###[Travis CI](https://travis-ci.org/)
+### [Travis CI](https://travis-ci.org/)
 Continuous Integration is probably more useful when working in a team. However, I find that being able to essentially push and test code in one command is useful. In addition, I like the ‘build passing’ seal of approval that Travis provides upon successful passing of all automated tests.
 ### [Heroku](https://dashboard.heroku.com/login)
 Used to deploy the app on the web.
