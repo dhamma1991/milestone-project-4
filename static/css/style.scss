@@ -1,13 +1,9 @@
-/* Default Materialize theme styles */
+/*
 
-/* Custom Stylesheet */
-/**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
- */
- 
+Imports
+
+*/
+
 @import "helpers/variables.scss";
 @import "helpers/mixins.scss";
 @import "helpers/helper-classes.scss";
@@ -19,20 +15,4 @@
 @import "components/stats.scss";
 @import "components/about.scss";
 
-.icon-block {
-    padding: 0 15px;
-  
-    .material-icons {
-        font-size: inherit;
-        }
-}
-
-body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-}
-
-main {
-    flex: 1 auto;
-}
+@import "components/ms-ie";

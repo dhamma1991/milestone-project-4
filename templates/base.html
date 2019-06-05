@@ -31,6 +31,18 @@
     <!-- /Stylesheets -->
 </head>
 <body>
+    <!-- Internet Explorer Fallback Display -->
+    <div id="ms-ie-display">
+        <div>
+            <h1>LEVELUP</h1>
+            
+            <p><span>You are currently using an old browser!</span></p>
+            
+            <p>Please update your browser to view the app.</p>
+        </div>
+    </div>
+    <!-- /Internet Explorer Fallback Display -->
+    
     <!-- User Dropdown Contents -->
     <ul id="user-dropdown" class="dropdown-content">
         <li><a href="{% url 'profile' %}">Your Profile</a></li>
@@ -238,7 +250,12 @@
     
     <!-- Django Messages Close Button -->
     <script src="{% static 'js/messageClose.js' %}"></script>
-    <!-- Django Messages Close Button -->
+    <!-- /Django Messages Close Button -->
+    
+    <!-- Detect IE Script -->
+    <script src="{% static 'js/ms-ie.js' %}"></script>
+    <!-- /Detect IE Script -->
+    
     <!-- /Scripts -->
 </body>
 </html>
