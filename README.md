@@ -300,7 +300,7 @@ Through writing a test that tested the expected behaviour outlined above, I foun
 
 In order to pass this test, I had to make modifications to the toggle_done_status view, mainly by ensuring that the ‘leftover’ variable used within the view is calculated correctly.
 
-I continued to write more tests, with the end number of tests for the current release of the app numbering 32. All tests currently pass.
+I continued to write more tests, with the end number of tests for the current release of the app numbering 33. All tests currently pass.
 ### 7.5. Browser and Responsiveness Testing
 The app was primarily tested on Google Chrome version 74.0.3729.169 on a Windows PC with a default maximised screen size of 1936px. 
 
