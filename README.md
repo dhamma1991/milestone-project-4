@@ -82,7 +82,7 @@ The typical user will need to be able to:
 
 3. See a clearly organised and easy to decipher task page.
 
-4. Have ‘at a glance’ overview of the user’s current stats (hitpoints and experience points).
+4. Have an ‘at a glance’ overview of the user’s current stats (hitpoints and experience points).
 
 5. See information explaining the mechanics of the app to the user. This could be in the form of a dedicated tutorial page for the app, text elements explaining various features spread throughout the app, or a combination of both these features.
 
@@ -216,7 +216,6 @@ Postgres is used to manage the database. Heroku Postgres provides a way to manag
 This tool was used to construct favicons for the project. How favicons are rendered is different depending on the browser or platform used, and this tool simplifies the process by providing the appropriate markup and icon for each platform.
 ### [BeFunky](https://www.befunky.com/)
 Used for adjustment of the app’s images.
-Used for adjustment of the app’s images.
 ## 7. Testing
 ### 7.1. Code Validation
 The W3C code validators for [HTML](https://validator.w3.org/) and [CSS](https://jigsaw.w3.org/css-validator/) were used to check markup validity.
@@ -237,30 +236,31 @@ Upon landing on the homepage, I am able to find the link to create a new account
 
 I then logout of my account, go back to the login page, and pretend I have forgotten my password. I click the forgot password link and I am taken to the password reset form. I enter in my email and go to check my emails. I have received a password reset email. I open the email and follow the link it provides, which takes me to a new password form. I enter a new password and I am taken once again to the login page. I login with my new password and I am able to access the app with my new credentials.
 
-**2. An easy way to add tasks.**
+**2. Have an easy way to add tasks.**
 
 After logging in to the app with the new account that I previously created above, I can see that I currently have no tasks. I click the ‘Add Task’ link and I am taken to a form. I am able to read the text that accompanies the form, and decide that the task I will add is ‘Write in journal’ which has a task difficulty of medium. I enter in those details and click ‘Save’. I am taken back to the tasks page, and can see that my previously empty task list now contains the task I just created.
 
-At this point I realised however that the app does not give any feedback or message when a task is added. This is probably fine when the user has zero or just a few tasks, as a new task being added to their task list will be obvious, and in any case the new task is added to the top of their task list. However, I decided it would be better if the app gave specific indication when a new task is created .
+At this point I realised however that the app does not give any feedback or message when a task is added. This is probably fine when the user has zero or just a few tasks, as a new task being added to their task list will be obvious, and in any case the new task is added to the top of their task list. However, I decided it would be better if the app gave visual feedback when a new task is created .
 
 I decided to fix this by getting Django to pass a message.success through upon the successful creation of a new task through modifying the create_task view. The message will indicate to the user that a task was created successfully.
 
 Once the fix was added, I tested it by returning to the add task form and adding a new task. When I submitted the add task form, I can see a ‘Task created!’ message at the top of the tasks page, along with the created task appearing in my task list.
 
 **3. See a clearly organised and easy to decipher task page.**
-Continuing on from the tests above, I can see the two tasks I have added in my task list. Each task looks separate from the other through the use of Materialize’s card styles. The interface for each task looks straight forward enough, although I realise that the icon representing task difficulty might be at first confusing to users. There is a tooltip that appears over the icon if the user hovers over it, and I test this tooltip appears on hover, which it does.
 
-**4. ‘At a glance’ overview of the user’s current stats (hitpoints and experience points).**
+Continuing on from the tests above, I can see the two tasks I have added in my task list. Each task looks separate from the other through the use of Materialize’s card styles. The interface for each task looks straight forward enough, although I realise that the icon representing task difficulty might be at first confusing to users. There is a tooltip that appears over the icon if the user hovers over it, and I test this tooltip appears when I hover my cursor, which it does.
+
+**4. Have an ‘at a glance’ overview of the user’s current stats (hitpoints and experience points).**
 
 Further continuing on from the testing scenario above, I can see some information at the top of the tasks page. I see my username, my current level, as well as my hitpoints and current experience.
 
 Both the hitpoints and experience use abbreviations (‘hp’ for hitpoints and ‘xp’ for experience). These abbreviations are commonly found in RPG-type games. However, I realise that a person using the app who is unfamiliar with these types of games may not know what ‘hp’ and ‘xp’ stand for.
 
-I decided to add tooltips for both the hp and xp indicators. This is an easy addition, and I opt to just add title attributes to the containing divs for both the hp and xp indicators. Once this is done, I test the tooltips appear when I hover over the indicators, which they do.
+I decided to add tooltips for both the hp and xp indicators. I add title attributes to the containing divs for both the hp and xp indicators. Once this is done, I test the tooltips appear when I hover over the indicators, which they do.
 
-**5. Information explaining the mechanics of the app to the user. This could be in the form of a dedicated tutorial page for the app, tooltips scattered throughout the app, or a combination of both.**
+**5. See information explaining the mechanics of the app to the user.**
 
-Information regarding the app’s mechanics are spread throughout the app. In particular, the content on about.html, reachable from either the ‘About’ link in the main nav and footer or the ‘Get Started’ link on index.html, contains an article of text on the purpose of the app and the philosophy behind it.
+Information regarding the app’s mechanics are spread throughout the app. In particular, the content on about.html, reachable from either the ‘About’ link in the main nav and footer or the ‘Get Started’ link on index.html, contains an article of text explaining the purpose of the app and the philosophy behind it.
 
 I test to ensure the about.html page is reachable, and I also check that the instruction text on the tasks page and the add task page makes sense.
 
@@ -271,16 +271,16 @@ Upon landing on the home page, User X followed the ‘Get Started’ link that g
 
 I asked User X to create a new task. They managed to do this, and then they were able to mark the task as done. User X gained 20 experience, as the task they had created had a difficulty of medium. This is expected behaviour.
 
-Lastly, I asked User X to update the profile picture for their account, although I did not tell them how to do this. User X was able to quickly work out that the Profile page can be access from the dropdown menu that appears below the user’s name when they click on it. On the Profile page, the user was able to update their profile picture image without difficulty. This concluded the testing with User X
+Lastly, I asked User X to update the profile picture for their account, although I did not tell them how to do this. User X was able to quickly work out that the Profile page can be access from the dropdown menu that appears below the user’s username when they click on it. On the Profile page, the user was able to update their profile picture image without difficulty. This concluded the testing with User X
 
 User X commented that they liked the overall design of the app, and thought it looked sleek and modern. 
 
 ### 7.4. Automated Testing
-Automated testing was conducted using Django's built-in test framework (TestCase). Although an attempt was made to be as comprehensive as possible with automating testing, it was never a desired outcome to achieve 100% coverage. This was partly due to the app's reliance on external libraries (the built-in components of Django for example would be expected to be well-tested), and also due to my (previous) low familiarity with unit testing. I did not want to over-complicate things for myself by investing too much time learning how to test comprehensively, when that time could be spent on improving the app. My philosophy towards automating testing was therefore to ensure that the core areas of functionality (e.g. the tasks being marked as done/undone, xp gains/losses, the levelling system) were included within testing.
+Automated testing was conducted using Django's built-in test framework (TestCase). Although an attempt was made to be as comprehensive as possible with automating testing, it was never a desired outcome to achieve 100% coverage. This was partly due to the app's reliance on external libraries (the built-in components of Django for example would be expected to be well-tested), and also due to my (previously) low familiarity with unit testing. My philosophy towards automating testing was to ensure that the core areas of functionality (e.g. the tasks being marked as done/undone, experience gains/losses, the levelling system) were included within testing.
 
 I would consider that my development approach was semi-test driven. I built much of the core functionality of the app without testing, implemented testing maybe 75% of the way through the app's development, and then used the tests written to alert me to any problems with features breaking when new features were added.
 
-I found this approach worked for me. I was able to gain familiarity with Django prior to implementing testing. Then I was able to gain familiarity with testing as I was refining my knowledge of Django.
+I found this approach worked for me. I was able to gain familiarity with Django prior to implementing testing, and then I was able to gain familiarity with testing as I was refining my knowledge of Django.
 #### Automated Testing Process
 Sanity tests were conducted first, these can be found in levelup/tests.py. Simple assertion tests were used to check that the test framework was functioning correctly.
 
@@ -290,13 +290,13 @@ I then moved to testing authentication. I was not expecting any problems here, s
 
 I then moved to testing views. Much of the more custom functionality the app possesses can be found within the views, so I focused particularly on these tests during the testing process. These tests can be found in test_views.py.
 
-I first attempted a simple test just checking that the index page can be reached by using self.client.get("/"). At first, I got a Value Error stating: Missing staticfiles manifest entry for 'css/style.css'. After some googling, I followed the advice in [this stackoverflow thread](https://stackoverflow.com/questions/44160666/valueerror-missing-staticfiles-manifest-entry-for-favicon-ico) and managed to fix the error by running python manage.py collectstatic. This fixed the error, and the first simple test passed.
+I first attempted a simple test just checking that the index page can be reached by using self.client.get("/"). At first, I got a Value Error stating: Missing staticfiles manifest entry for 'css/style.css'. After some googling, I followed the advice in [this stackoverflow thread](https://stackoverflow.com/questions/44160666/valueerror-missing-staticfiles-manifest-entry-for-favicon-ico) and managed to fix the error by running the command ‘python manage.py collectstatic’. This fixed the error.
 
 I began using Django's test suite in order to conduct tests on views that require a login. I tested that a user can access both the tasks and profile pages, tests which passed without issue. 
 
 Additional testing involved ensuring the functionality involved within the views toggle_done_status and get_tasks (two large and important views) function correctly. It was here that I conducted tests which proved very useful, and showed me I had holes in my application.
 
-In one case, expected behaviour is that a user who marks a task as undone loses xp. If the user is higher than level 1, and their xp loss is enough to give them a negative xp amount, they should lose a level. An example of this working would be a level 2 user with 20 xp who marks an ambitious (40xp value) task as undone, should go back to level 1, but have 80 xp. This is because the xp_threshold for a level 1 user is 100. Note that if the user marks the ambitious task as done again, they should go back to the level they were before (in this case level 2) with the same xp as before (in this case, 20 xp).
+In one case, expected behaviour is that a user who marks a task as undone loses experience. If the user is higher than level 1, and their experience loss is enough to give them a negative experience amount, they should lose a level. An example of this working would be a level 2 user with 20 experience who marks an ambitious (40xp value) task as undone should go back to level 1, but have 80 experience. This is because the xp_threshold for a level 1 user is 100. Note that if the user marks the ambitious task as done again, they should go back to the level they were before (in this case level 2) with the same experience as before (in this case, 20).
 
 Through writing a test that tested the expected behaviour outlined above, I found that the expected behaviour does occur provided that the user does NOT have 0 xp when they mark a task as undone. So if the user has 20 xp at level 2, and marks an ambitious task as undone, they will indeed go to level 1 with 80 xp. However, if the user has 0 xp at level 2, and marks the same task as undone, they will not lose a level. In addition, the Django message framework passed through messages saying that the user had both lost and gained a level (at the same time) This was of course not desired functionality, and I was not aware of this bug until I had conducted the appropriate test.
 
@@ -308,17 +308,17 @@ The app was primarily tested on Google Chrome version 74.0.3729.169 on a Windows
 
 In addition to Google Chrome's developer tools where mobile devices can be simulated, an iPhone 7 running iOS v11.3 was used to test the app with its native Safari browser. The website was also tested on Firefox v66.0.3, Safari v12.1.1 (on a MacBook Pro 15-inch Retina) and Edge v42.17134.1.0.
 
-The app was developed mobile first. I tend to always work on projects with the browser set to simulate a mobile device. I build the app from there, and when it looks right on the smaller viewports I make any changes it needs to work on the larger viewports.
+The app was developed mobile first. I tend to always work on projects with the browser set to simulate a mobile device. I build the app from there, and when it looks right on the smaller viewports I make any changes it needs to work on the larger viewports, using the wireframes as a reference.
 
 No issues were detected on any of the tested browsers in terms of either layout or functionality, with the exception of a minor issue with the Safari browser; this related to the position of the close button for Django messages, which was in the wrong place, overlapping with the nav element. Some slight adjustment of the css was required in order to fix this issue.
 
 In addition to modern browser testing, the app was tested on IE version 11.0.9600.19130. It was found that there were a number of issues with IE, including broken image size and position for the app’s logo and checkmark icons for tasks, as well as the Profile page failing to load after the user updates their profile picture, which is an issue not apparent with other browsers.
 
-Due to IE being a legacy browser, and with Windows 10 (and Edge) becoming more and more common, I opted to not support IE in any of its incarnations. To this effect, a user trying to view the app on IE will see a page asking them to upgrade their browser. This is implemented through some JavaScript that can be found in the ms-ie.js file, which works with some css in order to render the message.
+Due to IE being a legacy browser, and with Windows 10 (and Edge) becoming more and more common, I opted to not support IE in any of its incarnations. To this effect, a user trying to view the app on IE will see a page asking them to upgrade their browser. This is implemented through some JavaScript that can be found in the ms-ie.js file, which works alongside some css in order to render the message only for IE and not for other browsers.
 ### 7.6. Known Issues
 There are several issues with the app that were not tackled in the current release, mainly because of the time it would have taken to implement fixes.
 #### User email is not unique
-The default Django User model utilised in the app does not require the user to sign up with a unique email, just a unique username. This has the potential to cause problems for the password reset functionality; if more than one username is associated with the same email address, two emails will be send to that email address when that email is used in the password reset process, with the ability to reset both user accounts from the same email.
+The default Django User model utilised in the app does not require the user to sign up with a unique email, just a unique username. This has the potential to cause problems for the password reset functionality; if more than one username is associated with the same email address, two emails will be sent to that email address when that email is used in the password reset process, with the ability to reset both user accounts from the same email.
 
 This could cause a user confusion if a malicious user, or simply someone who made a mistake, entered someone else’s email during the sign-up process and then triggered the password reset process. The person with legitimate access to that email would then get two password reset emails.
 
@@ -326,14 +326,13 @@ Although this would look bad, it doesn’t really pose a security concern for th
 ### No custom task refresh time
 Currently, the app will check for tasks that are not done, apply any hitpoint loss, and set all tasks to not done ready for a new day, at 0:00 UTC. The user currently has no way of customising this, which makes internationalization of the app less than optimal; a user in San Francisco, for example, would find their daily tasks refresh at either 5pm or 6pm (depending on daylight saving), which is probably not an ideal time for a user to start their daily tasks.
 
-A way around this would be to allow the user to submit their current time zone, and then either program the app to refresh their tasks based on what their midnight is, or allow them to set their own custom time which is convenient for them. Both solutions would require an overhaul of the get_tasks view as it stands currently, and with this functionality envisioned to require far more code than the current implementation, it would probably require a dedicated view. The User or Profile models would also have to be adjusted to accommodate the user’s selected time zone.
+A way around this would be to allow the user to submit their current time zone, and then either program the app to refresh their tasks based on what their midnight is, or allow them to set their own custom time which is convenient for them. Both solutions would require an overhaul of the get_tasks view as it stands currently, and with this functionality envisioned to require far more code than the current implementation, it would probably require a dedicated view. The User or Profile models would also have to be adjusted to accommodate the user’s time zone data.
 ## 8. Deployment
 The project is deployed on Heroku, available [here](https://levelup-productivity.herokuapp.com/). The deployment process was (thankfully) mostly headache free. Upon creating the heroku deployment, the first thing that was done was setting the environment variables, which are mostly the same values as the variables used in development. 
 
 Two variables that had to be added to Heroku that were not present in development are the DISABLE_COLLECTSTATIC variable, which I found was necessary in order to avoid issues with static files, and the DATABASE_URL variable, which links to the Heroku Postgres database. LevelUp makes use of a separate, SQLite database in development, with the Heroku Postgres used in production only.  In addition, a variable called DEVELOPMENT, which exists in the development environment and activates Django’s debug mode, is not set in Heroku, where debug mode is not desirable.
 
 Anyone wishing to run the app locally would need to account for the following env variables:
-
 #### DEVELOPMENT
 Normally set to ‘1’ (when in development). This just enables Django’s debug mode.
 #### DJANGO_SECRET_KEY
@@ -341,7 +340,7 @@ Anyone wishing to run LevelUp locally will have to generate a Django secret key 
 #### EMAIL_USER and EMAIL_PASSWORD
 The password reset functionality makes use of a Gmail account I created for the app. Anyone wishing to run the app locally and make use of the password reset functionality would need to configure an email account to work with the app.
 #### STRIPE_SEC_KEY
-This is used by Stripe in order to facilitate the donations system on the app. A local deployment would need to set up a Stripe account and configure the app to that account.
+This is used by Stripe in order to facilitate the donations system on the app. A local deployment would need to set up a Stripe account and configure the local deployment to that account.
 #### AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME
 These variables are used in order to order to configure AWS to work with the app. AWS is primarily used for S3, which is where user uploaded images are stored. A local deployment will either have to modify settings.py in order to accommodate a different file storage system, or use a different AWS account in order to serve the files. 
 ## 9. Credits
