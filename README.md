@@ -10,35 +10,11 @@
 
 [2. UX](#2-ux)
 
-[2.1. Wireframes](#22-wireframes)
+[2.1. Wireframes](#21-wireframes)
 
 ----------
 
 [3. Features](#3-features)
-
-[3.1. Navbar](#31-navbar)
-
-[3.2. Homepage (index.html)](#32-homepage-indexhtml)
-
-[3.3. Charts (tracks.html](#33-charts-trackshtml)
-
-[3.4. ‘Like’ System](#34-like-system)
-
-[3.5. Track Detail](#35-track-detail)
-
-[3.6. Edit Functionality](#36-edit-functionality)
-
-[3.7. Delete Functionality](#37-delete-functionality)
-
-[3.8. Track Submission](#38-track-submission)
-
-[3.9. And and Edit Track Forms](#39-add-and-edit-track-forms)
-
-[3.10. Add Genre](#310-add-genre)
-
-[3.11. Database Stats](#311-database-stats)
-
-[3.12. About Page](#312-about-page)
 
 ----------
 
@@ -93,7 +69,7 @@
 ## 1. Introduction
 This project is a ‘gamifed’ productivity task manager app called LevelUp. The purpose of this app is to serve as a task manager that a user can use to track completion of daily tasks in their personal life that they wish to perform. The ‘gamified’ element is borrowed from RPG-type games, allowing the user to gain experience points within the app through completing their real-life tasks. Upon gaining enough experience points, the user gains levels within the app, with higher levels becoming progressively harder to obtain. Failing to complete tasks on a daily basis leads to the user losing ‘hitpoints’, and once the user reaches 0 hitpoints they lose a level.
 
-LevelUp borrows many concepts from real-world apps such as [Habitica](https://habitica.com/) and LifeRPG(https://www.reddit.com/r/LifeRPG/). I have been a personal user of Habitica for many years, and LevelUp could be considered to be a minimal, stripped-down version of Habitica without the fantasy-RPG elements.
+LevelUp borrows many concepts from real-world apps such as [Habitica](https://habitica.com/) and [LifeRPG](https://www.reddit.com/r/LifeRPG/). I have been a personal user of Habitica for many years, and LevelUp could be considered to be a minimal, stripped-down version of Habitica without the fantasy-RPG elements.
 ## 2. UX
 LevelUp is aimed at productivity-minded people. The expected type of user would be someone who has used more than one productivity app, perhaps including other task managers and scheduler apps. The expected type of user is expected to be someone high-achieving (or someone who aims to become high-achieving) in their personal goals, or simply someone who wants to try a novel way of motivating themselves to do daily tasks. 
 
