@@ -100,11 +100,18 @@ h2 {
 // }
 /* /Anchor Links */
 
-/* Main Content */
+/* Body and Main */
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
 main {
     margin-bottom: 60px!important;
+    flex: 1 auto;
 }
-/* /Main Content */
+/* /Body and Main */
 
 /* Footer */
 .page-footer {

@@ -140,11 +140,17 @@ h2 {
 /* /Site Buttons */
 /* Anchor Links */
 /* /Anchor Links */
-/* Main Content */
-main {
-  margin-bottom: 60px !important; }
+/* Body and Main */
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column; }
 
-/* /Main Content */
+main {
+  margin-bottom: 60px !important;
+  flex: 1 auto; }
+
+/* /Body and Main */
 /* Footer */
 .page-footer {
   padding-top: 0; }
