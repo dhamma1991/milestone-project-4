@@ -134,6 +134,8 @@ Implementing such a system would, at the minimum, require an overhaul of the fro
 Currently, the user signs in to the app using the username they created when they signed up. I personally dislike this system; usernames, which may be app specific, may be much easier to forget than email addresses. I would suspect most internet users possess maybe 2 or 3 personal emails at most, and the majority will possess only one email address that they use frequently.
 
 Currently, the app is able to help users who have forgotten their username through them clicking the ‘Forgot Username or Password?’ link on the login page. The password reset email sent contains the username associated with the email. However, an email login system is still the preferred option in my mind and I consider it to be more user friendly. 
+### Password update
+If the user wishes to update their password, they currently have no way to do so other than through requesting a password reset email. The current Profile page on the app, where the user is able to update their username, email, and profile picture, could be updated to allow the user to also change their password.
 ### Keep the scroll of the page when a user marks a task as done/not done
 Currently, when a user marks a task as done or not done, the tasks page will reload, but with the scroll set to the top of the page. A user with many tasks, who marks a task as done or not done which is towards the bottom of the list, will then lose their scroll position within the page and have to scroll back down to view the task that they just marked as done/not done when the page reloads.
 
