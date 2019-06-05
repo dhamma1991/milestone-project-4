@@ -240,16 +240,13 @@ These styles relate to the html content found in the tasks app templates
       color: #f5c116; }
   .tasks-main .tasks-ul li {
     margin-top: 20px;
-    /* Target all but the last task 
-        Increase the height*/
+    padding: 10px;
     /* Task Difficulty Image */
     /* /Task Difficulty Image */
     /* Task Done Button */
     /* /Task Done Button */
     /* Checkbox */
     /* /Checkbox */ }
-    .tasks-main .tasks-ul li:not(:last-child) {
-      padding: 10px; }
     .tasks-main .tasks-ul li img {
       /* Scale the img size with the viewport */
       /* This mixin used for media queries, using responsive design principles of mobile first */
