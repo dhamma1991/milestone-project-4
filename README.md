@@ -127,13 +127,13 @@ I’m not sure how this functionality could be implemented at present, but it wo
 ### A mechanic for hitpoint recovery other than levelling up
 Currently, a user on less than 100 hitpoints has no way to recover their hitpoints other than by gaining enough experience to gain a level. With the increases in the experience threshold required by users in order to gain higher levels, this has the potential to make the app overly difficulty to make progress in without some system way of being able to regain hitpoints without levelling up.
 
-A potential solution to this would be to implement a system of ‘gold’, as found in Habitica. The user could use this in-app currency to purchase ‘healing potions’ (again to borrow from Habitica) which would allow the user to recover Hitpoints.
+A potential solution to this would be to implement a system of ‘gold’, as found in Habitica. The user could use this in-app currency to purchase ‘healing potions’ (again to borrow from Habitica) which would allow the user to recover hitpoints.
 
 Implementing such a system would, at the minimum, require an overhaul of the front-end to provide a visual indicator of the amount of in-game currency the user has, as well as somewhere that they can buy and use the healing mechanic. In addition, there would need to be modifications to the Profile model, associating these healing mechanic items with the user’s profile. New views would need to be written handing how the hitpoints are gained.
 ### Email authentication
 Currently, the user signs in to the app using the username they created when they signed up. I personally dislike this system; usernames, which may be app specific, may be much easier to forget than email addresses. I would suspect most internet users possess maybe 2 or 3 personal emails at most, and the majority will possess only one email address that they use frequently.
 
-Currently, the app is able to help users who have forgotten their username through them clicking the ‘Forgot Username or Password?’ link on the login page. The password reset email sent contains the username associated with the email. However, an email login system is still the preferred option in my mind and I consider it to be more user friendly 
+Currently, the app is able to help users who have forgotten their username through them clicking the ‘Forgot Username or Password?’ link on the login page. The password reset email sent contains the username associated with the email. However, an email login system is still the preferred option in my mind and I consider it to be more user friendly. 
 ### Keep the scroll of the page when a user marks a task as done/not done
 Currently, when a user marks a task as done or not done, the tasks page will reload, but with the scroll set to the top of the page. A user with many tasks, who marks a task as done or not done which is towards the bottom of the list, will then lose their scroll position within the page and have to scroll back down to view the task that they just marked as done/not done when the page reloads.
 
