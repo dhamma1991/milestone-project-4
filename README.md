@@ -310,9 +310,9 @@ The app was developed mobile first. I tend to always work on projects with the b
 
 No issues were detected on any of the tested browsers in terms of either layout or functionality, with the exception of a minor issue with the Safari browser; this related to the position of the close button for Django messages, which was in the wrong place, overlapping with the nav element. Some slight adjustment of the css was required in order to fix this issue.
 
-In addition to modern browser testing, the app was tested on IE version 11.0.9600.19130. On this browser, none of the charts were rendered. After some searching, I found that DC.js is tested in IE but that [mine wasn’t the only issue] https://stackoverflow.com/questions/50047687/dc-js-im-facing-issues-rendering-the-dc-js-dashboards-in-ie-11) and that issues relating to DC.js working with IE [have been documented](https://github.com/dc-js/dc.js/issues/1334).
+In addition to modern browser testing, the app was tested on IE version 11.0.9600.19130. It was found that there were a number of issues with IE, including broken image size and position for the app’s logo and checkmark icons for tasks, as well as the Profile page failing to load after the user updates their profile picture, which is an issue not apparent with other browsers.
 
-Due to IE being a legacy browser, and with Windows 10 (and Edge) becoming more and more common, I adopted to not support IE in any of its incarnations. To this effect, a user trying to view the app on IE will see a page similar to the no-js functionality, asking them to upgrade their browser.
+Due to IE being a legacy browser, and with Windows 10 (and Edge) becoming more and more common, I opted to not support IE in any of its incarnations. To this effect, a user trying to view the app on IE will see a page asking them to upgrade their browser. This is implemented through some JavaScript that can be found in the ms-ie.js file, which works with some css in order to render the message.
 ### 7.6. Known Issues
 There are several issues with the app that were not tackled in the current release, mainly because of the time it would have taken to implement fixes.
 #### User email is not unique
@@ -354,13 +354,3 @@ https://www.canva.com/media/MAAWVMkQET8
 I received inspiration for this project mainly from [Habitica] https://habitica.com/).
 #### Code Acknowledgements
 Other developer’s code that I have reused is indicated within the code itself by comments.
-
-
-
-
-
-
-
-
-
-
