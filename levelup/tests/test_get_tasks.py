@@ -232,6 +232,46 @@ class TestGetTasksRequestFactory(TestCase):
         """ Assert that the done medium task is now not done since a new day has begun """
         self.assertEqual(medium_task.done_status, False)
         
+    def test_user_with_all_tasks_completed_does_not_lose_hp(self):
+        """
+        A user with all tasks completed should not lose hp
+        """
+        # Create an easy task marked as done
+        easy_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task EA', task_difficulty = 'EA', done_status = True)
+        # Create a medium task marked as done
+        medium_task = Task.objects.create(user_id = self.user.id, task_name = 'Test Task ME', task_difficulty = 'ME', done_status = True)
+        
+        # Make a request
+        request = self.factory.get('/tasks/')
+        
+        # Set the user
+        request.user = self.user
+        
+        # Adding session
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        
+        # Adding messages
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+        
+        # Run the view
+        response = get_tasks(request)
+        
+        # Ensure the updated instance of user is available
+        request.user.refresh_from_db()
+        
+        # Ensure that the updated instance of medium_task is available
+        medium_task.refresh_from_db()
+        
+        """ Assert that the user has 100hp """
+        self.assertEqual(request.user.profile.hitpoints, 100)
+        
+        """ Assert that the done medium task and easy tak are now not done since a new day has begun """
+        self.assertEqual(medium_task.done_status, False)
+        self.assertEqual(easy_task.done_status, False)
+        
     def test_user_who_goes_below_0_hp_loses_a_level_who_is_above_level_1(self):
         """
         Test that a level 2 or above user loses a level if they go below
