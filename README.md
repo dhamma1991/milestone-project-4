@@ -16,6 +16,16 @@
 
 [3. Features](#3-features)
 
+[3.1. Authentication System](#31-an-authentication-system)
+
+[3.2. User Profile System](#32-user-profile-system)
+
+[3.3. Tasks](#33-tasks)
+
+[3.4. Add and Edit Task Forms](#34-add-and-edit-task-forms)
+
+[3.5. Integration with Stripe](#35-integration-with-stripe)
+
 ----------
 
 [4. Features Left to Implement](#4-features-left-to-implement)
@@ -93,10 +103,11 @@ The wireframes are not a complete picture of how the app in its finished form lo
 Along with designs for the visual layout of the app itself, within the wireframes directory you may find sketches of the schemas for the various models.
 ## 3. Features
 As previously mentioned in the [introduction](#1-introduction), LevelUp is a gamified productivity task manager app. The features included in the current release of the app are:
+### 3.1. Authentication System 
+The user is able to create an account with a unique username. Within the app, the user is able to update their details and add a profile picture. There is functioning password reset functionality, so that a user who chooses to reset their password will get a password reset email sent to their inbox.
 
-1. An authentication system. The user is able to create an account with a unique username. Within the app, the user is able to update their details and add a profile picture. There is functioning password reset functionality, so that a user who chooses to reset their password will get a password reset email sent to their inbox.
-
-2. A user profile system. This profile system uses a one-to-one relationship with Django’s built in model User in order to add functionality that is required by LevelUp, in particular the hitpoints and experience system. 
+### 3.2. User Profile System
+This profile system uses a one-to-one relationship with Django’s built in model User in order to add functionality that is required by LevelUp, in particular the hitpoints and experience system. 
 
 Hitpoints range from 0 to 100. If users fail to complete tasks by the end of the day (currently 0:00 UTC), then the difficulty of the task determines how many hitpoints they will lose, with more difficult tasks causing the user to lose more hitpoints. If the user reaches 0 hitpoints, they will lose a level (with the exception of if they are level 1; level 0 or below do not exist on the app). Once a user gains a new level, any lost hitpoints will be regained.
 
@@ -104,13 +115,16 @@ Hitpoints range from 0 to 100. If users fail to complete tasks by the end of the
 
 Experience is gained through completing tasks. The amount of experience gained depends on the difficulty of the tasks, with more difficult tasks granting more experience. At every level, users must reach a certain experience threshold in order to gain the next level. The experience threshold gradually gets higher as the user gains levels, with the experience threshold for level 1 being 100, level 2 being 200, level 3 being 300 and so on. Once the user reaches a new level, their experience is reset to 0 and their hitpoints are restored to 100.
 
-3. A tasks page containing daily tasks that the user creates, that the user can mark as done. At a specified point in time (currently 0:00 UTC) the user’s tasks ‘refresh’, and are marked as not done ready for the start of a new day. Any tasks not done mean the user loses hitpoints. 
+### 3.3. Tasks
+The tasks page contains daily tasks that the user creates that the user can mark as done. At a specified point in time (currently 0:00 UTC) the user’s tasks ‘refresh’, and are marked as not done ready for the start of a new day. Any tasks not done mean the user loses hitpoints. 
 
 It should be noted that the task refresh system is only active on the days that the user is. For example, if the user does not log in to the app for 3 days, this does not mean that they lose 3 days’ worth of hitpoints. This was implemented to ensure that the user is not punished too much if they are unable or unwilling to log in to the app for a sustained period of time.
 
-4. Forms to both edit and add new daily tasks. Users are able to give the task a name, some optional tasks notes, and a difficulty. The task difficulty can be picked by the user from 4 options; easy, medium, hard and ambitious, representing 10, 20, 30, and 40 xp gain and hp loss respectively. Tasks can be edited at any time and the difficulty adjusted with no limitations or penalties.
+### 3.4. Add and Edit Task Forms
+Users are able to use forms within the app to both add and edit tasks. Users can give tasks a name, some optional tasks notes, and a difficulty. The task difficulty can be picked by the user from 4 options; easy, medium, hard and ambitious, representing 10, 20, 30, and 40 xp gain and hp loss respectively. Tasks can be edited at any time and the difficulty adjusted with no limitations or penalties.
 
-5. Integration with Stripe payment processing. This integration is fairly basic, and consists of the user being able to donate a pre-defined amount (5 USD) to the developers of the app as a thank you for their hard work. Users who donate have their username added to a thank you list that is displayed on donate.html.
+### 3.5. Integration with Stripe
+Stripe payment processing is used to facilitate payment processing within the app. This integration is fairly basic, and consists of the user being able to donate a pre-defined amount (5 USD) to the developers of the app as a thank you for their hard work. Users who donate have their username added to a thank you list that is displayed on donate.html.
 
 ## 4. Features Left to Implement
 Some features are left open to the idea of implementation but were not featured in this release.
