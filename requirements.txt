@@ -7,7 +7,7 @@ colorama==0.3.9
 coverage==4.5.3
 crispy-forms-materialize==0.2
 dj-database-url==0.5.0
-Django==2.0.13
+Django==2.2.24
 django-crispy-forms==1.7.2
 django-heroku==0.3.1
 django-storages==1.7.1
